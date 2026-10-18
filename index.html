@@ -366,7 +366,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.30</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.31</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -440,7 +440,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.30</span>
+        <span class="beta big">BETA 0.31</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -764,7 +764,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.30';
+const KEY='flappysqualo.beta1';const BETA='0.31';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1512,18 +1512,18 @@ const BEASTS={
  jelly:{name:'Medusa',grp:'jelly',rw:3,col:'#f0d0e4',where:'Vive nella Barriera corallina.',does:'Galleggia su e giù. Se la tocchi di lato o da sotto ti punge.',kill:'Cadile addosso <b>da sopra</b> mentre stai scendendo: la schiacci e rimbalzi in alto.'},
  glow:{name:'Medusa abissale',grp:'jelly',rw:3,col:'#9ff4ff',where:'Brilla nel buio della Fossa abissale.',does:'Come la medusa, ma luminosa. Punge chi la tocca di lato o da sotto.',kill:'Schiacciala <b>da sopra</b> mentre scendi.'},
  lion:{name:'Medusa criniera di leone',grp:'jelly',rw:3,col:'#f0a070',where:'Abita i Ghiacci artici.',does:'La medusa più grande del mondo, con tentacoli lunghissimi.',kill:'Schiacciala <b>da sopra</b> mentre scendi.'},
- crab:{name:'Granchio',rw:4,col:'#ef6a45',where:'Cammina sul fondale della Barriera e del Kelp.',does:'Sta sul fondale. Se passi basso vicino a lui, ti salta addosso.',kill:'Schiaccialo <b>da sopra</b>, anche quando è in pieno salto.'},
+ crab:{name:'Granchio',rw:4,col:'#ef6a45',where:'Cammina sui coralli della Barriera e del Kelp.',does:'Sta sopra i coralli, sul bordo del varco: quando ci passi ti salta addosso.',kill:'Schiaccialo <b>da sopra</b>, anche quando è in pieno salto.'},
  puffer:{name:'Pesce palla',rw:3,col:'#f5d05a',where:'Nuota fra i coralli della Barriera.',does:'Quando ti avvicini si gonfia di spine. Dopo un po\' si sgonfia per riprendere fiato.',kill:'Mordilo <b>quando è sgonfio</b> (brilla di giallo).'},
  moray:{name:'Murena',rw:5,col:'#8fae4a',where:'Si nasconde nei coralli del Kelp e del Relitto.',does:'Si nasconde nel corallo: quando vedi il segnale rosso sta per scattare fuori a morderti.',kill:'Lascia passare lo scatto e mordila <b>mentre torna nella tana</b> (brilla di giallo).'},
  sword:{name:'Pesce spada',rw:6,col:'#9cc4e8',where:'Caccia nel Kelp e nei Ghiacci artici.',does:'Ti avvisa con un segnale rosso, poi carica velocissimo alla tua altezza.',kill:'Colpiscilo <b>da sopra o da sotto</b>, sul corpo. Mai di fronte alla spada!'},
  squid:{name:'Calamaro',rw:4,col:'#f5a0b8',where:'Nuota nel Porto, nel Relitto e nell\'Abisso.',does:'Ti spruzza palle d\'inchiostro che ti oscurano la vista per qualche secondo.',kill:'Mordilo e basta, ma <b>schiva l\'inchiostro</b>.'},
- urchin:{name:'Riccio di mare',rw:0,col:'#a080c0',where:'Sul fondale e sopra i coralli.',does:'Sta fermo sul fondale o sopra i coralli. Le spine sono velenose.',kill:'<b>Non si mangia!</b> Evitalo, oppure distruggilo con un\'abilità.'},
+ urchin:{name:'Riccio di mare',rw:0,col:'#a080c0',where:'Sui bordi dei coralli.',does:'Sta attaccato al bordo del varco, sopra o sotto, e lo restringe. Le spine sono velenose.',kill:'<b>Non si mangia!</b> Evitalo, oppure distruggilo con un\'abilità.'},
  eel:{name:'Anguilla elettrica',rw:5,col:'#ffe066',where:'Si aggira nel Relitto e nell\'Abisso.',does:'A intervalli si carica di elettricità: quando scintilla, la scarica ti colpisce anche da lontano.',kill:'Mordila <b>quando è scarica</b> (brilla di giallo).'},
  manta:{name:'Manta',rw:7,col:'#b8d0f0',where:'Plana nel Kelp e nei Ghiacci artici.',does:'Plana larga in mezzo all\'acqua. La coda punge chi la tocca saltando.',kill:'<b>Tieni premuto</b> per planare e falle addosso mentre stai planando.'},
  b_trawler:{boss:true,name:'Peschereccio',where:'Boss: arriva ogni 50 ostacoli.',does:'Lancia arpioni e cala reti dalla superficie.',kill:'Butta in acqua dei <b>barili esplosivi</b> con il cerchio dorato: toccali e glieli rispedisci contro.'},
  b_squid:{boss:true,name:'Calamaro gigante',where:'Boss: arriva ogni 50 ostacoli.',does:'Frusta i tentacoli lungo la linea rossa e spruzza nubi d\'inchiostro.',kill:'Tocca le <b>bombe d\'inchiostro</b> col cerchio dorato per rimandargliele nell\'occhio.'},
  b_moray:{boss:true,name:'Murena gigante',where:'Boss: arriva ogni 50 ostacoli.',does:'Scatta in avanti con tutto il corpo lungo la linea rossa.',kill:'Sputa <b>pesci palla</b> col cerchio dorato: toccali e tornano a colpirla in testa.'},
- b_crab:{boss:true,name:'Granchio reale',where:'Boss: arriva ogni 50 ostacoli.',does:'Fa cadere massi dall\'alto e spazza il fondale con la chela.',kill:'Lancia <b>sassi</b> col cerchio dorato: toccali e glieli rispedisci.'},
+ b_crab:{boss:true,name:'Granchio reale',where:'Boss: arriva ogni 50 ostacoli.',does:'Fa cadere massi davanti a te che poi rotolano sul fondale (stai più in alto!) e spazza il fondo con la chela.',kill:'Lancia <b>sassi</b> col cerchio dorato: toccali e glieli rispedisci.'},
 };
 const BORDER=['jelly','glow','lion','crab','puffer','moray','sword','squid','urchin','eel','manta','b_trawler','b_squid','b_moray','b_crab'];
 const BOSSN={trawler:'Peschereccio',squid:'Calamaro gigante',moray:'Murena gigante',crab:'Granchio reale'};
@@ -1532,8 +1532,8 @@ let holding=false,holdT=0;
 
 function mkHaz(type,px,cx,a,gy,gap){const hy=clamp(a+(gy-a)*.5+(Math.random()-.5)*90,70,GROUND-60);
   const z={type,x:px+22+SPACING*.5,y:hy,by:hy,ph:Math.random()*6,dead:false,st:'idle',tm:0,inf:0,ext:0};
-  if(type==='crab'){z.y=z.by=GROUND-7}
-  if(type==='urchin'){if(Math.random()<.5){z.x=cx+22;z.y=z.by=gy+gap/2-5}else z.y=z.by=GROUND-5}
+  if(type==='crab'){z.x=cx+22+(Math.random()-.5)*14;z.y=z.by=gy+gap/2-7}
+  if(type==='urchin'){z.x=cx+22;if(Math.random()<.5){z.y=z.by=gy+gap/2-5}else{z.y=z.by=gy-gap/2+5}}
   if(type==='moray'){z.x=cx+22;z.dir=Math.random()<.5?-1:1;z.by=z.dir<0?gy+gap/2:gy-gap/2;z.y=z.by;z.st='hide'}
   if(type==='eel'){z.tm=Math.random()*1.5;z.on=false}
   if(type==='squid'){z.tm=1+Math.random()}
@@ -1541,7 +1541,7 @@ function mkHaz(type,px,cx,a,gy,gap){const hy=clamp(a+(gy-a)*.5+(Math.random()-.5
 
 function updBeast(z,dt){const T=z.type;
   if(T==='crab'){if(z.st==='jump'){z.vy+=700*dt;z.y+=z.vy*dt;if(z.y>=z.by){z.y=z.by;z.st='idle';z.tm=1.2}}
-    else{z.tm-=dt;const dx=z.x-shark.x;if(z.tm<=0&&dx<62&&dx>-6&&shark.y>GROUND-170){z.st='jump';z.vy=-Math.sqrt(2*700*Math.max(24,z.by-shark.y+6))}}}
+    else{z.tm-=dt;const dx=z.x-shark.x;if(z.tm<=0&&dx<62&&dx>-6&&shark.y>z.by-170){z.st='jump';z.vy=-Math.sqrt(2*700*Math.max(24,z.by-shark.y+6))}}}
   else if(T==='puffer'){z.ph+=dt;z.y=z.by+Math.sin(z.ph*1.1)*10;const d=Math.hypot(z.x-shark.x,z.y-shark.y);z.tm-=dt;
     if(z.st==='big'){if(z.tm<=0){z.st='tired';z.tm=1.3}}else if(z.st==='tired'){if(z.tm<=0)z.st='idle'}else if(d<64){z.st='big';z.tm=1.5}
     z.inf+=((z.st==='big'?1:0)-z.inf)*Math.min(1,dt*9)}
@@ -1692,7 +1692,7 @@ function drawRefl(a){const x=a.x,y=a.y;if(a.state==='in'){ctx.save();ctx.strokeS
   else glowAt(ctx,x,y,16,'#ffd23f',.55);
   ctx.save();ctx.translate(x,y);ctx.rotate(a.rot||0);if(a.sp==='trawler')dBarrel(ctx);else if(a.sp==='squid')dInkBomb(ctx,a.ph||0);else if(a.sp==='moray')dPuffer(ctx,0,0,.8,a.ph||0);else dRock(ctx,0,0,7,0);ctx.restore()}
 function drawRockAtt(a){if(a.state==='warn'){const k=.5+Math.sin(t*20)*.4;ctx.fillStyle=`rgba(255,90,70,${.12*k})`;ctx.fillRect(a.x-9,0,18,GROUND);ctx.fillStyle=`rgba(255,110,90,${.6+.3*k})`;ctx.beginPath();ctx.moveTo(a.x-6,4);ctx.lineTo(a.x+6,4);ctx.lineTo(a.x,13);ctx.closePath();ctx.fill()}
-  else dRock(ctx,a.x,a.y,9,a.y*.03)}
+  else dRock(ctx,a.x,a.y,9,a.rot||a.y*.03)}
 function drawBeast(z){const T=z.type;if(beastVuln(z))glowAt(ctx,z.x,z.y,17,'#ffe066',.45+Math.sin(t*10)*.15);
   if(T==='crab')dCrab(ctx,z.x,z.y,t,z.st==='jump');else if(T==='puffer')dPuffer(ctx,z.x,z.y,z.inf,z.ph);
   else if(T==='moray'){if(z.st==='warn'){const k=.5+Math.sin(t*20)*.4,y2=z.by+z.dir*40;ctx.fillStyle=`rgba(255,60,50,${.25+.3*k})`;ctx.fillRect(z.x-8,Math.min(z.by,y2),16,40);
@@ -1726,7 +1726,7 @@ function bossAttack(){const b=run.boss,ty=clamp(shark.y+(Math.random()-.5)*70,40
     else b.atts.push({kind:'harpoon',y:ty,state:'warn',t:0,x:W+20})}
   else if(b.type==='squid'){if(Math.random()<.2)b.atts.push({kind:'ink',state:'go',t:0});b.atts.push({kind:'tent',y:ty,th:20,state:'warn',t:0,tip:W+40})}
   else if(b.type==='moray')b.atts.push({kind:'tent',style:'moray',y:ty,th:24,state:'warn',t:0,tip:W+40});
-  else{if(Math.random()<.55)b.atts.push({kind:'rock',x:clamp(shark.x+30+Math.random()*130,30,W-40),y:-16,vy:0,state:'warn',t:0});
+  else{if(Math.random()<.55)b.atts.push({kind:'rock',x:clamp(shark.x+75+Math.random()*120,shark.x+75,W-30),y:-16,vy:0,state:'warn',t:0});
     else b.atts.push({kind:'tent',style:'claw',y:GROUND-18-Math.random()*70,th:18,state:'warn',t:0,tip:W+40})}}
 function bossHurt(b){const tp=bossTarget(b);b.hp--;b.hurt=.35;run.shake=.25;SFX.bossHit();pops.push({x:clamp(tp.x-20,30,W-30),y:clamp(tp.y+18,30,GROUND-20),txt:'COLPITO!',life:.9,c:'#ffb3a6',big:true});
   for(let i=0;i<18;i++)parts.push({x:tp.x,y:tp.y,vx:(Math.random()-.8)*200,vy:(Math.random()-.5)*200,life:.6,max:.6,c:'#ffe0a0',kind:'spark',r:1.4});
@@ -1742,8 +1742,9 @@ function updateBoss(dt){const b=run.boss;b.t+=dt;b.hurt=Math.max(0,b.hurt-dt);if
     if(a.kind==='tent'){if(a.state==='warn'&&a.t>1){a.state='go';a.t=0;SFX.warn()}
       if(a.state==='go'){a.tip=Math.max(-20,a.tip-700*dt);if(a.tip<=-20&&a.t>.75){a.state='back'}}if(a.state==='back'){a.tip+=500*dt;if(a.tip>W+40)a.done=true}
       if(a.state!=='warn'&&!a.spent&&ellRect(hb.cx,hb.cy,hb.rx,hb.ry,a.tip,a.y-a.th*.42,W+40,a.y+a.th*.42))hit({att:a})}
-    if(a.kind==='rock'){if(a.state==='warn'){if(a.t>.85){a.state='go';SFX.warn()}}else{a.vy+=650*dt;a.y+=a.vy*dt;a.x-=speed*.3*dt;
-      if(!a.spent&&ellCirc(hb.cx,hb.cy,hb.rx,hb.ry,a.x,a.y,9))hit({att:a});if(a.y>GROUND-4){a.done=true;run.shake=Math.max(run.shake,.08);for(let i=0;i<8;i++)parts.push({x:a.x,y:GROUND-2,vx:(Math.random()-.5)*120,vy:-Math.random()*100,life:.6,max:.6,c:'#8a8478',kind:'chip',r:1.3})}}}
+    if(a.kind==='rock'){if(a.state==='warn'){if(a.t>.85){a.state='go';SFX.warn()}}
+      else if(a.state==='go'){a.vy+=650*dt;a.y+=a.vy*dt;if(a.y>=GROUND-9){a.y=GROUND-9;a.vy=-300;a.state='roll';run.shake=Math.max(run.shake,.1);for(let i=0;i<8;i++)parts.push({x:a.x,y:GROUND-2,vx:(Math.random()-.5)*120,vy:-Math.random()*100,life:.6,max:.6,c:'#8a8478',kind:'chip',r:1.3})}}
+      else{a.x-=(speed+45)*dt;a.rot=(a.rot||0)-dt*7;a.vy+=650*dt;a.y+=a.vy*dt;if(a.y>=GROUND-9){a.y=GROUND-9;a.vy=-300;run.shake=Math.max(run.shake,.05)}if(!a.spent&&ellCirc(hb.cx,hb.cy,hb.rx,hb.ry,a.x,a.y,8.5))hit({att:a});if(a.x<-20)a.done=true}}
     if(a.kind==='refl'){a.ph+=dt;if(a.state==='in'){a.x+=a.vx*dt;a.cy+=(a.by-a.cy)*Math.min(1,dt*2.2);a.y=a.cy+Math.sin(a.ph*3)*6;
         if(state==='play'&&ellCirc(hb.cx,hb.cy,hb.rx,hb.ry,a.x,a.y,9)){a.state='back';SFX.refl();run.shake=.06;for(let i=0;i<6;i++)parts.push({x:a.x,y:a.y,vx:Math.random()*120,vy:(Math.random()-.5)*80,life:.4,max:.4,c:'#ffe98a',kind:'spark',r:1})}if(a.x<-20)a.done=true}
       else{const tp=bossTarget(b),dx=tp.x-a.x,dy=tp.y-a.y,d=Math.hypot(dx,dy);a.rot=(a.rot||0)+dt*14;if(d<14){a.done=true;bossHurt(b);if(run.boss!==b)return}else{const s=Math.min(d,480*dt);a.x+=dx/d*s;a.y+=dy/d*s}}}
