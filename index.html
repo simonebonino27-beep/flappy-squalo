@@ -295,7 +295,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button><button class="btn sm fbtop" data-act="feedback">Feedback</button>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><span class="beta">BETA 0.20</span>
+        <span class="l2">SQUALO</span><span class="beta">BETA 0.21</span>
         <span class="tag">Dalla barriera corallina ai ghiacci artici. Mangia pesci, caccia creature, sconfiggi i boss.</span>
       </header>
       <div class="mpanel">
@@ -363,7 +363,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.20</span>
+        <span class="beta big">BETA 0.21</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -648,7 +648,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.20';
+const KEY='flappysqualo.beta1';const BETA='0.21';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1828,6 +1828,7 @@ function migrate(){let ch=false;if(!S.mig)S.mig={};
     S.skins=S.skins.filter(k=>{const c=COB[k];if(c&&c.unlock&&c.unlock.t==='buy'){ref+=Math.round(c.unlock.cost/5);return false}return true});if(!S.skins.includes(S.skin))S.skin='naturale';
     for(const m of S.morphs){if(MOB[m])ref+=Math.round(MOB[m].cost/5)}S.morphs=[];S.morph={};
     if(ref>0){S.fish+=ref;setTimeout(()=>toast('Acquisti rimborsati',`+${ref.toLocaleString('it-IT')} pesciolini: i prezzi sono cambiati, ricompra quello che vuoi`),1800)}ch=true}
+  if(!S.mig.gift1){S.mig.gift1=1;S.fish+=200000;setTimeout(()=>toast('🎁 Regalo per i tester','+200.000 pesciolini! Grazie per i test 🦈'),2600);ch=true}
   if(ch)save()}
 function today(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function ensureDay(){const d=today();if(S.day&&S.day.date===d)return;const R=rngf(parseInt(d.replace(/-/g,''),10));const pool=[...MPOOL].sort(()=>R()-.5).slice(0,3);
