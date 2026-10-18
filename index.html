@@ -370,7 +370,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.34</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.35</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -445,7 +445,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.34</span>
+        <span class="beta big">BETA 0.35</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -812,7 +812,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.34';
+const KEY='flappysqualo.beta1';const BETA='0.35';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1581,7 +1581,7 @@ function die(){state='dead';shark.vy=-140;run.flash=1;run.shake=.3;SFX.hit();$('
 function abDef(){return SHB[S.sel].ab}
 function abReady(){return run.charge>=run.st.charge}
 function addCharge(n){if(!run||state!=='play')return;if(t<run.turboUntil||t<run.ghostUntil||t<run.roarUntil||t<run.devourUntil||t<run.podUntil)return;const was=abReady();run.charge=Math.min(run.st.charge,run.charge+n);updateAbHud();if(!was&&abReady()&&!S.abAuto&&!S.seen._abh){S.seen._abh=1;const a=$('#abil');a.classList.add('hint');setTimeout(()=>a.classList.remove('hint'),5000);run.slowUntil=t+1.5;run.slowF=.45}
-  if(!was&&abReady()){if(abDef().def||!S.abAuto)SFX.warn();if(!S.abAuto&&!run.readyTold){run.readyTold=true;pops.push({x:70,y:GROUND-70,txt:'Abilità pronta! Tocca il cerchio',life:2.2,c:'#ffd27a',big:true})}}}
+  if(!was&&abReady()){if(abDef().def||!S.abAuto)SFX.warn();if(!S.abAuto&&!run.readyTold){run.readyTold=true;pops.push({x:W/2,y:GROUND-70,txt:'Abilità pronta! Tocca il cerchio',life:2.2,c:'#ffd27a',big:true})}}}
 function clearHazards(){for(const z of hazards)if(!z.dead&&z.x<W+20)destroyHaz(z,3);if(run.boss)for(const a of run.boss.atts)if(a.state!=='warn'&&a.kind!=='refl')a.spent=true}
 function activate(){const ab=abDef();if(!abReady())return;run.charge=0;run.abUsed++;S.st.abil++;mission('abil',1);if(S.st.abil>=50)award('abil50');SFX.abil();
   const d=ab.dur||0;
@@ -2344,7 +2344,7 @@ function render(){
   if(run&&t<run.slowUntil){ctx.fillStyle='rgba(120,160,255,.06)';ctx.fillRect(0,0,W,H)}
   if(run&&t<run.inkUntil)drawInkOverlay();
   // pops
-  ctx.textAlign='center';for(const p of pops){ctx.font=`700 ${p.big?13:9}px "Barlow Condensed",sans-serif`;ctx.globalAlpha=Math.min(1,p.life*2.5);ctx.fillStyle='rgba(0,0,0,.6)';ctx.fillText(p.txt,p.x+.6,p.y+.6);ctx.fillStyle=p.c;ctx.fillText(p.txt,p.x,p.y)}ctx.globalAlpha=1;
+  ctx.textAlign='center';for(const p of pops){ctx.font=`700 ${p.big?13:9}px "Barlow Condensed",sans-serif`;ctx.globalAlpha=Math.min(1,p.life*2.5);const hw=ctx.measureText(p.txt).width/2,px=clamp(p.x,hw+4,W-hw-4);ctx.fillStyle='rgba(0,0,0,.6)';ctx.fillText(p.txt,px+.6,p.y+.6);ctx.fillStyle=p.c;ctx.fillText(p.txt,px,p.y)}ctx.globalAlpha=1;
   if(run&&run.flash>0){ctx.globalAlpha=run.flash*.5;ctx.fillStyle='#ffffff';ctx.fillRect(0,0,W,H);ctx.globalAlpha=1}
   ctx.restore();
   if(gfxHigh()&&FX.init()){FX.show(true);const fz=run&&(t<(run.frzUntil||0)||t<run.turboUntil)?1:0;fxFrz+=(fz-fxFrz)*.08;FX.draw({t,light:Math.max(.12,wc.light),scroll:scroll/W*1.4,dark:1-wc.light,frz:fxFrz,ground:GROUND/H})}else FX.show(false)}
