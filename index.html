@@ -366,7 +366,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.28</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.29</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -440,7 +440,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.28</span>
+        <span class="beta big">BETA 0.29</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -764,7 +764,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.28';
+const KEY='flappysqualo.beta1';const BETA='0.29';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1363,7 +1363,7 @@ function drawStreaks(){if(state!=='play'||!run)return;const k=clamp((speed-105)/
 
 /* ---- frenzy (gold rush) */
 function gainFrz(v){if(!run||state!=='play'||t<(run.frzUntil||0))return;run.frz=Math.min(1,(run.frz||0)+v);if(run.frz>=1){run.frz=0;run.frzUntil=t+6;run.frzOn=true;run.shake=.25;mission('frz',1);SFX.unlock();
-  pops.push({x:W/2,y:H*.36,txt:'FRENESIA!',life:1.6,c:'#ffd23f',big:true});pops.push({x:W/2,y:H*.36+16,txt:'invincibile · pesci ×3',life:1.6,c:'#fff3c4'});for(let i=0;i<30;i++)parts.push({x:shark.x,y:shark.y,vx:(Math.random()-.5)*260,vy:(Math.random()-.5)*260,life:.8,max:.8,c:i%2?'#ffd23f':'#fff',kind:'spark',r:1.5})}}
+  pops.push({x:W/2,y:H*.36,txt:'FRENESIA!',life:1.6,c:'#ffd23f',big:true});pops.push({x:W/2,y:H*.36+16,txt:'invincibile · più veloce · pesci ×3',life:1.6,c:'#fff3c4'});for(let i=0;i<30;i++)parts.push({x:shark.x,y:shark.y,vx:(Math.random()-.5)*260,vy:(Math.random()-.5)*260,life:.8,max:.8,c:i%2?'#ffd23f':'#fff',kind:'spark',r:1.5})}}
 function updFrz(){const el=$('#frzFill');if(!el||!run)return;const on=t<(run.frzUntil||0);run.frzOn=on;el.style.width=(on?(run.frzUntil-t)/6:run.frz||0)*100+'%';$('#frz').classList.toggle('on',on)}
 function drawFrz(){if(!run||!(t<(run.frzUntil||0)))return;const k=Math.min(1,(run.frzUntil-t)/.5);ctx.save();ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(shark.x,shark.y,10,shark.x,shark.y,W);g.addColorStop(0,`rgba(255,210,60,${.18*k})`);g.addColorStop(1,`rgba(255,180,40,${.08*k})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();glowAt(ctx,shark.x,shark.y,40,'#ffd23f',.35*k)}
 /* ---- seeded runs, daily challenge, friend challenge, share card */
@@ -1761,7 +1761,7 @@ const depthOf=s=>Math.round(3+s*2.4);
 
 function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop>0&&state==='play'){run.hitstop-=dt;return}t+=dt;
   const playing=state==='play';
-  const ws=playing?(t<run.slowUntil?run.slowF:1)*(t<run.turboUntil?1.9:1)*(t>=run.turboUntil&&t<(run.afterTurbo||0)?.5:1):1;
+  const ws=playing?(t<run.slowUntil?run.slowF:1)*(t<run.turboUntil?1.9:1)*(t>=run.turboUntil&&t<(run.afterTurbo||0)?.5:1)*(t<(run.frzUntil||0)?1.35:1):1;
   const spd=playing?speed*ws:state==='dead'?0:26;scroll+=spd*dt;
   animT+=dt*(state==='menu'?5:7+(run&&run.boost?run.boost*14:0));if(run&&run.boost)run.boost=Math.max(0,run.boost-dt*2.5);
   bgK=Math.min(1,bgK+dt*.4);
@@ -1834,6 +1834,7 @@ function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop
     if(t<run.podUntil){companions.forEach((cp,i)=>{const tx=shark.x+18+Math.sin(t*1.3+i*3)*10,ty=shark.y+(i?34:-34)+Math.sin(t*2+i)*6;cp.x+=(tx-cp.x)*Math.min(1,dt*3);cp.y+=(clamp(ty,30,GROUND-30)-cp.y)*Math.min(1,dt*3)})}else companions=[];
     // ability auto
     if(abReady()&&S.abAuto){const ab=abDef();if(!ab.def)activate();else if(predictHit())activate()}
+    if(t<(run.frzUntil||0)&&!run.boss&&Math.random()<dt*1.6){const y=clamp(shark.y+(Math.random()-.5)*110,50,GROUND-50);for(let i=0;i<4;i++)fishes.push(mkFish(W+20+i*14,y+Math.sin(i)*6,Math.random()<.25))}
     updFrz();run.inv=Math.max(0,run.inv-dt);
     if(Math.floor(t*4)!==Math.floor((t-dt)*4)){updateAbHud();updateEffects()}
   }else if(state==='dead'){
