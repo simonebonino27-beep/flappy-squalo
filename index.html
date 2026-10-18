@@ -126,8 +126,8 @@ img.fi{width:1.45em;height:auto;vertical-align:-.3em}
 .hbar h2{flex:1;margin:0;font-family:var(--fd);font-size:1.6em;font-weight:800;letter-spacing:.03em}
 .bal{font-family:var(--fd);font-weight:700;display:flex;align-items:center;gap:.3em;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:9px;padding:.2em .55em}
 .bal b{font-variant-numeric:tabular-nums;color:var(--amber2)}
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em;padding:.6em .85em 0}
-.tab{font-family:var(--fd);font-size:1em;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:9px;padding:.45em .3em;cursor:pointer}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:.3em;padding:.6em .85em 0}
+.tab{font-family:var(--fd);font-size:.9em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:9px;padding:.45em .3em;cursor:pointer}
 .tab[aria-selected="true"]{background:var(--text);border-color:var(--text);color:#06202a}
 .list{flex:1;overflow-y:auto;padding:.75em .85em 1.4em;display:flex;flex-direction:column;gap:.65em;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .list>*{flex-shrink:0}
@@ -180,7 +180,7 @@ canvas.pv{width:100%;height:auto;display:block}
 .tcard p{margin:.1em 0 0;font-size:.78em;color:#b8d0d8;line-height:1.35}
 .tcard .rw{font-size:.74em;color:var(--amber2);margin-top:.2em}
 [hidden]{display:none!important}
-.sfil{display:flex;gap:.4em}.chip{flex:1;font-family:var(--fd);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.9em;padding:.5em;border-radius:2em;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer}.chip.on{background:linear-gradient(180deg,var(--amber2),var(--amber));color:#2a1900;border-color:#ffe2a3}
+.sfil{display:flex;gap:.4em}.fchip{flex:1;font-family:var(--fd);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.9em;padding:.5em;border-radius:2em;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer}.fchip.on{background:linear-gradient(180deg,var(--amber2),var(--amber));color:#2a1900;border-color:#ffe2a3}
 .miss.wk{border-color:rgba(185,163,255,.45);background:linear-gradient(180deg,rgba(185,163,255,.10),rgba(255,255,255,.03))}.miss.wk .bar i{background:linear-gradient(90deg,var(--violet),#e0d4ff)}
 #menu .mpanel{gap:.45em;padding:.7em .75em}#menu .logo{margin-top:2.2em}#menu .l2{font-size:3em}.tile{padding:.38em .1em .35em}.tile .ti{font-size:1.35em}.mst{padding:.25em .4em}.dailyb{padding:.4em .6em}
 #hMode{margin-top:.35em;font-family:var(--fd);font-weight:700;font-size:.72em;letter-spacing:.14em;color:#2a1900;background:linear-gradient(180deg,var(--amber2),var(--amber));border-radius:6px;padding:.1em .5em}
@@ -242,6 +242,7 @@ canvas.pv{width:100%;height:auto;display:block}
 .tile small{font-size:.82em;color:var(--muted);font-weight:600;letter-spacing:0}
 .tile .badge{position:absolute;top:-.4em;right:-.3em;margin:0}
 #pauseBtn{position:absolute;top:.7em;right:.75em;width:2.3em;height:2.3em;border-radius:10px;background:var(--glass);border:1px solid var(--line2);color:#fff;display:flex;align-items:center;justify-content:center;gap:.28em;pointer-events:auto;cursor:pointer;padding:0;touch-action:manipulation}
+#cancelBtn{position:absolute;left:50%;transform:translateX(-50%);bottom:13%;z-index:5;pointer-events:auto;font-family:var(--fd);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.9em;padding:.55em 1.3em;border-radius:2em;background:var(--glass);border:1px solid var(--line2);color:#fff;cursor:pointer;touch-action:manipulation}
 #pauseBtn i{display:block;width:.32em;height:1em;background:#fff;border-radius:2px}
 #hShields{right:3.6em!important}
 #pause{align-items:center;justify-content:center;padding:1em;background:rgba(1,10,16,.6);z-index:9}
@@ -361,13 +362,14 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div id="effects"></div>
     </div>
     <div id="banner" hidden><small id="bnSub"></small><b id="bnName"></b></div>
+    <button id="cancelBtn" hidden>✕ Annulla</button>
     <div id="tapHint" hidden><b>TOCCA PER NUOTARE</b><span>Tocca per nuotare. Tieni premuto per planare dritto. L'abilità parte da sola (o tasto E).</span></div>
 
     <section id="menu" class="screen">
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.32</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.33</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -411,6 +413,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-tab="sharks" id="tabSharks">Squali</button>
         <button class="tab" role="tab" data-tab="ups" id="tabUps">Potenzia</button>
+        <button class="tab" role="tab" data-tab="bonus" id="tabBonus">Bonus</button>
         <button class="tab" role="tab" data-tab="skins" id="tabSkins">Skin</button>
       </div>
       <div class="list" id="shopList"></div>
@@ -441,7 +444,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.32</span>
+        <span class="beta big">BETA 0.33</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -490,7 +493,8 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
         <h2>PAUSA</h2>
         <div class="pst">Ostacoli <b id="pScore">0</b> · Record <b id="pBest">0</b></div>
         <button class="btn big" data-act="resume">RIPRENDI</button>
-        <button class="btn" data-act="quit">Termina partita</button>
+        <button class="btn" data-act="quit" id="pQuit">Abbandona partita</button>
+        <p class="note" id="pNote" style="text-align:center;margin:.2em 0 0"></p>
       </div>
       <div id="pauseCount" hidden>3</div>
     </section>
@@ -704,7 +708,26 @@ const UPS=[
  {id:'gold',name:"Fiuto per l'oro",desc:"Più pesci d'oro in giro. Un pesce d'oro vale 5 pesciolini normali.",costs:[750,1750,4000,8500,18000]},
  {id:'fins',name:'Pinne idrodinamiche',desc:'Corpo più compatto: −4% di ingombro a livello, passi meglio tra gli ostacoli.',costs:[1000,2500,5500,12000,25000]},
  {id:'charge',name:'Istinto del predatore',desc:'L\'abilità si carica prima: ogni livello toglie ostacoli alla ricarica (minimo 2). In automatico le abilità che ti salvano costano il 50% in più.',costs:[1250,3000,6500,14000]},
+ {id:'teeth',name:'Denti seghettati',desc:'Ogni animale che uccidi ti dà 2 pesciolini in più per livello.',costs:[1500,4000,9000,20000,45000]},
+ {id:'frenzy',name:'Furia famelica',desc:'La frenesia si carica più in fretta e dura 1 secondo in più per livello.',costs:[2000,5000,12000,25000,50000]},
+ {id:'combo',name:'Morso a catena',desc:'Arrivi prima ai moltiplicatori della combo (×2 e ×3).',costs:[3000,8000,18000,40000]},
+ {id:'power',name:'Sesto senso',desc:'Le bolle potenziamento durano il 20% in più e ne trovi di più in giro.',costs:[1500,4000,9000,20000,45000]},
+ {id:'glide',name:'Pinne pettorali',desc:'Puoi planare più a lungo: +25% di resistenza per livello.',costs:[800,2000,5000,11000]},
+ {id:'revive',name:'Seconda vita',desc:'Rinascere costa il 12% in meno per livello.',costs:[3000,8000,20000,45000,90000]},
+ {id:'boss',name:'Cacciatore di boss',desc:'I boss sconfitti ti pagano il 25% in più per livello.',costs:[2500,6000,15000,35000]},
+ {id:'xp',name:'Memoria del mare',desc:'+10% di esperienza a fine partita per livello: sali di livello più in fretta.',costs:[2500,6000,14000,30000,60000]},
 ];
+const INV=[
+ {id:'shield',ico:'🛡️',name:'Scudo extra',desc:'+1 scudo per tutta la partita.',cost:5000,use:()=>{run.shields++}},
+ {id:'mag',ico:'🧲',name:'Magnete iniziale',desc:'Magnete potente per i primi 30 secondi.',cost:4000,use:()=>{run.magUntil=t+30}},
+ {id:'x2',ico:'✖️',name:'Pesciolini ×2',desc:'Tutti i pesciolini valgono doppio per i primi 30 secondi.',cost:8000,use:()=>{run.x2Until=t+30}},
+ {id:'frz',ico:'🔥',name:'Partenza in frenesia',desc:'Parti subito in frenesia per 8 secondi.',cost:6000,use:()=>{run.frzUntil=t+8;run.frzOn=true}},
+ {id:'ab',ico:'⚡',name:'Abilità carica',desc:'Parti con l\'abilità già pronta.',cost:5000,use:()=>{run.charge=run.st.charge}},
+ {id:'armor',ico:'💎',name:'Corazza iniziale',desc:'Intoccabile per i primi 6 secondi.',cost:6000,use:()=>{run.ghostUntil=t+6}},
+ {id:'rv',ico:'🎟️',name:'Biglietto rinascita',desc:'Una rinascita gratis quando muori (non si consuma all\'inizio).',cost:15000},
+];
+function applyInv(){if(!S.inv)return;const used=[];for(const it of INV){if(!it.use||!(S.inv[it.id]>0)||S.invOff&&S.invOff[it.id])continue;S.inv[it.id]--;it.use();used.push(it.ico+' '+it.name)}
+  if(used.length){toast('Bonus attivati',used.join(' · '));save();updateHud();updateAbHud()}}
 
 const TROPHIES=[
  {id:'first',name:'Primo tuffo',desc:'Gioca la tua prima partita',reward:20},
@@ -787,8 +810,8 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.32';
-const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
+const KEY='flappysqualo.beta1';const BETA='0.33';
+const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
 function idbPut(v){idbOpen().then(db=>{const tx=db.transaction('s','readwrite');tx.objectStore('s').put(v,KEY)}).catch(()=>{})}
@@ -809,6 +832,7 @@ function curSpec(id=S.sel){const m=S.morph[id];return m&&MOB[m]?MOB[m].sp:SHB[id
 function stats(id=S.sel,up=S.up){const pk=SHB[id].perk;return{
   value:(1+up.value+(pk.add||0))*(pk.mult||1),magnet:MAG[up.magnet]+(pk.magnet||0),shields:up.shield+(pk.shield||0),
   gold:Math.min(.6,.03+.03*up.gold+(pk.gold||0)),hit:(pk.hit||1)*(1-.04*up.fins),grav:pk.grav||1,bonus10:pk.bonus10||0,
+  teeth:2*up.teeth,frz:6+up.frenzy,frzG:1+.15*up.frenzy,cb:[10-up.combo,25-2*up.combo],pow:1+.2*up.power,glide:1+.25*up.glide,rv:1-.12*up.revive,bossM:1+.25*up.boss,xpM:1+.1*up.xp,
   charge:Math.ceil(Math.max(2,SHB[id].ab.charge-up.charge*Math.max(1,Math.round(SHB[id].ab.charge*.12)))*(S.abAuto&&SHB[id].ab.def?1.5:1))}}
 function perkList(pk){const a=[];
   if(pk.mult)a.push(`×${pk.mult} valore pesciolini`);if(pk.add)a.push(`+${pk.add} per pesciolino`);if(pk.magnet)a.push(`magnete +${pk.magnet}`);
@@ -1355,13 +1379,13 @@ function spawnCoral(x){const n=spawned;if(n>0&&n%50===0&&!run.bossDone.includes(
   const px=x-SPACING,a=lastGap,haveHaz=n>2&&Math.random()<Math.min(.55,.12+n*.008);
   let hz=null;if(haveHaz){const b=BIOMES[bi],type=b.haz[(Math.random()*b.haz.length)|0];hz=mkHaz(type,px,x,a,gy,gap)}
   if(n>0){for(let i=1;i<=2;i++){const f=i/3,fx=px+22+SPACING*f,fy=a+(gy-a)*f-Math.sin(f*Math.PI)*14;if(hz&&Math.hypot(fx-hz.x,fy-hz.y)<22)continue;fishes.push(mkFish(fx,fy))}}
-  if(n>2&&Math.random()<.14){powers.push({x:x+22,y:gy,by:gy,type:['shield','magnet','x2','charge'][(Math.random()*4)|0],ph:Math.random()*6})}else if(Math.random()<.45)fishes.push(mkFish(x+22,gy));
+  if(n>2&&Math.random()<.14*(1+(run.st.pow-1)*.75)){const PT=['shield','magnet','x2','charge','gold','slow','ghost','bomb','fish'];powers.push({x:x+22,y:gy,by:gy,type:PT[(Math.random()*PT.length)|0],ph:Math.random()*6})}else if(Math.random()<.45)fishes.push(mkFish(x+22,gy));
   lastGap=gy;return true}
 
 let warmQ=[];
-function startReady(){['#login','#chal','#sharebox'].forEach(q=>$(q).hidden=true);const _ro=applyRunOpts();newRun();initRunMode(_ro);warmQ=[];for(const jl of [0,1])for(let i=0;i<NF;i++)warmQ.push([i,jl]);state='ready';showScreen(null);$('#hud').hidden=false;$('#tapHint').hidden=false;$('#bossBar').hidden=true;$('#tut').hidden=true;closeRevive();$('#pause').hidden=true;clearInterval(pauseCD);holding=false;updateAbHud();
+function startReady(){['#login','#chal','#sharebox'].forEach(q=>$(q).hidden=true);const _ro=applyRunOpts();newRun();initRunMode(_ro);warmQ=[];for(const jl of [0,1])for(let i=0;i<NF;i++)warmQ.push([i,jl]);state='ready';showScreen(null);$('#hud').hidden=false;$('#tapHint').hidden=false;$('#cancelBtn').hidden=false;$('#bossBar').hidden=true;$('#tut').hidden=true;closeRevive();$('#pause').hidden=true;clearInterval(pauseCD);holding=false;updateAbHud();
   void 0}
-function flap(){if(state==='ready'){state='play';$('#tapHint').hidden=true;showBanner(BIOMES[0].name,'3 METRI')}
+function flap(){if(state==='ready'){state='play';$('#tapHint').hidden=true;$('#cancelBtn').hidden=true;applyInv();showBanner(BIOMES[0].name,'3 METRI')}
   if(state!=='play')return;shark.vy=FLAP;run.boost=1;SFX.flap();
   for(let i=0;i<3;i++)parts.push({x:shark.x-8+Math.random()*4,y:shark.y+Math.random()*4-2,vx:-20-Math.random()*30,vy:-15-Math.random()*25,life:1.2+Math.random()*.6,max:1.8,kind:'bub',r:.8+Math.random()*1.2})}
 function input(){ac();if(reviveOpen)return;if(state==='ready'||state==='play')flap();else if(state==='dead'&&overShown)startReady()}
@@ -1371,14 +1395,14 @@ const rvCostN=n=>n<=0?100:n===1?500:1000*Math.pow(2,n-2);
 
 /* ---- pause */
 let pauseCD=null;
-function pauseGame(){if(state!=='play')return;state='pause';holding=false;clearInterval(pauseCD);$('#pauseCount').hidden=true;$('#pauseBox').hidden=false;$('#pause').hidden=false;$('#pBest').textContent=S.best;$('#pScore').textContent=run.score}
-function resumeGame(){if(state!=='pause')return;$('#pauseBox').hidden=true;const el=$('#pauseCount');el.hidden=false;let n=3;el.textContent=n;SFX.score();clearInterval(pauseCD);
+function pauseGame(){if(state!=='play'&&state!=='ready')return;run.fromReady=state==='ready';state='pause';$('#pQuit').textContent=run.fromReady||(run.score===0&&!run.fishVal)?'Annulla partita':'Abbandona partita';$('#pNote').textContent=run.fromReady||(run.score===0&&!run.fishVal)?'Torni al menu, la partita non viene contata.':'Torni al menu e tieni i pesciolini presi finora.';holding=false;clearInterval(pauseCD);$('#pauseCount').hidden=true;$('#pauseBox').hidden=false;$('#pause').hidden=false;$('#pBest').textContent=S.best;$('#pScore').textContent=run.score}
+function resumeGame(){if(state!=='pause')return;if(run.fromReady){run.fromReady=false;$('#pause').hidden=true;state='ready';return}$('#pauseBox').hidden=true;const el=$('#pauseCount');el.hidden=false;let n=3;el.textContent=n;SFX.score();clearInterval(pauseCD);
   pauseCD=setInterval(()=>{n--;if(n<=0){clearInterval(pauseCD);$('#pause').hidden=true;el.hidden=true;state='play';last=performance.now();SFX.flap()}else{el.textContent=n;SFX.score()}},1000)}
-function quitGame(){if(state!=='pause')return;clearInterval(pauseCD);$('#pause').hidden=true;state='dead';run.deadT=1;overShown=true;$('#hud').hidden=true;finishRun()}
+function quitGame(){if(state!=='pause')return;clearInterval(pauseCD);if(run.fromReady||(run.score===0&&!run.fishVal)){toMenu();return}$('#pause').hidden=true;state='dead';run.deadT=1;overShown=true;$('#hud').hidden=true;finishRun()}
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='play')pauseGame()});
 
 /* ---- feel: combo, near miss */
-const comboMult=()=>!run?1:run.combo>=25?3:run.combo>=10?2:1;
+const comboMult=()=>!run?1:run.combo>=run.st.cb[1]?3:run.combo>=run.st.cb[0]?2:1;
 function updCombo(){const c=run?run.combo||0:0,el=$('#hCombo');if(c<3){el.hidden=true;return}el.hidden=false;$('#hComboN').textContent=c;const m=comboMult();$('#hComboX').textContent='×'+m;$('#hComboX').hidden=m<2;el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
 function nearMiss(c){gainFrz(.08);mission('nm',1);const v=2*run.st.value*comboMult();run.fishVal+=v;run.nm=(run.nm||0)+1;addCharge(.3);
   pops.push({x:shark.x+18,y:shark.y-22,txt:'PER UN PELO! +'+v,life:1,c:'#7fffd4',big:true});tone(1200,.12,'triangle',.04,900);tone(1800,.1,'sine',.03,600,.05);
@@ -1387,9 +1411,9 @@ function drawStreaks(){if(state!=='play'||!run)return;const k=clamp((speed-105)/
   for(let i=0;i<12;i++){const y=20+((i*97+Math.floor(scroll*.01+i)*31)%(GROUND-40)),x=W+40-((scroll*1.7+i*123)%(W+120)),L=18+k*36;ctx.strokeStyle=`rgba(220,250,255,${.06+.1*Math.min(1,k)})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+L,y);ctx.stroke()}ctx.restore()}
 
 /* ---- frenzy (gold rush) */
-function gainFrz(v){if(!run||state!=='play'||t<(run.frzUntil||0))return;run.frz=Math.min(1,(run.frz||0)+v);if(run.frz>=1){run.frz=0;run.frzUntil=t+6;run.frzOn=true;run.shake=.25;mission('frz',1);SFX.unlock();
+function gainFrz(v){if(!run||state!=='play'||t<(run.frzUntil||0))return;run.frz=Math.min(1,(run.frz||0)+v*run.st.frzG);if(run.frz>=1){run.frz=0;run.frzUntil=t+run.st.frz;run.frzOn=true;run.shake=.25;mission('frz',1);SFX.unlock();
   pops.push({x:W/2,y:H*.36,txt:'FRENESIA!',life:1.6,c:'#ffd23f',big:true});pops.push({x:W/2,y:H*.36+16,txt:'invincibile · più veloce · pesci ×3',life:1.6,c:'#fff3c4'});for(let i=0;i<30;i++)parts.push({x:shark.x,y:shark.y,vx:(Math.random()-.5)*260,vy:(Math.random()-.5)*260,life:.8,max:.8,c:i%2?'#ffd23f':'#fff',kind:'spark',r:1.5})}}
-function updFrz(){const el=$('#frzFill');if(!el||!run)return;const on=t<(run.frzUntil||0);run.frzOn=on;el.style.width=(on?(run.frzUntil-t)/6:run.frz||0)*100+'%';$('#frz').classList.toggle('on',on)}
+function updFrz(){const el=$('#frzFill');if(!el||!run)return;const on=t<(run.frzUntil||0);run.frzOn=on;el.style.width=(on?Math.min(1,(run.frzUntil-t)/run.st.frz):run.frz||0)*100+'%';$('#frz').classList.toggle('on',on)}
 function drawFrz(){if(!run||!(t<(run.frzUntil||0)))return;const k=Math.min(1,(run.frzUntil-t)/.5);ctx.save();ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(shark.x,shark.y,10,shark.x,shark.y,W);g.addColorStop(0,`rgba(255,210,60,${.18*k})`);g.addColorStop(1,`rgba(255,180,40,${.08*k})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();glowAt(ctx,shark.x,shark.y,40,'#ffd23f',.35*k)}
 /* ---- seeded runs, daily challenge, friend challenge, share card */
 const GAME_URL='https://simonebonino27-beep.github.io/flappy-squalo/';
@@ -1467,10 +1491,10 @@ function ensureWeek(){const k=weekKey();if(S.week&&S.week.key===k)return;const R
 function weekLeft(){const sec=86400-romeParts().sec,d=new Date(romeParts().day+'T12:00:00Z'),wd=(d.getUTCDay()+6)%7,days=6-wd;return days>0?`${days} giorn${days===1?'o':'i'} e ${Math.floor(sec/3600)} ore`:`${Math.floor(sec/3600)} ore e ${Math.floor(sec%3600/60)} minuti`}
 function wmission(id,amount,isMax){if(!S.week)return;for(const m of S.week.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
   if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione settimanale completata',WPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
-const reviveCost=()=>rvCostN(run.respawns||0);
+const rvC=n=>Math.max(50,Math.round(rvCostN(n)*run.st.rv/50)*50);const reviveCost=()=>rvC(run.respawns||0);
 function offerRevive(){const c=reviveCost(),tk=S.rvTok>0;if(S.fish<c&&!tk){finishRun();return}
   reviveOpen=true;let left=5;$('#rvT').textContent=left;$('#rvBtn').innerHTML=tk?`RINASCI GRATIS · biglietto (${S.rvTok})`:`RINASCI · <img class="fi" src="${ICON}" alt=""> ${c.toLocaleString('it-IT')}`;
-  $('#rvInfo').textContent=`Hai ${S.fish.toLocaleString('it-IT')} pesciolini · la prossima volta costerà ${rvCostN((run.respawns||0)+1).toLocaleString('it-IT')}`;
+  $('#rvInfo').textContent=`Hai ${S.fish.toLocaleString('it-IT')} pesciolini · la prossima volta costerà ${rvC((run.respawns||0)+1).toLocaleString('it-IT')}`;
   $('#revive').hidden=false;SFX.warn();clearInterval(rvTimer);rvTimer=setInterval(()=>{left--;$('#rvT').textContent=Math.max(0,left);if(left<=0)declineRevive()},1000)}
 function closeRevive(){reviveOpen=false;clearInterval(rvTimer);$('#revive').hidden=true}
 function declineRevive(){if(!reviveOpen)return;closeRevive();finishRun()}
@@ -1636,7 +1660,7 @@ function contact(z,hb){const T=z.type,E=(x,y,r)=>ellCirc(hb.cx,hb.cy,hb.rx,hb.ry
     case 'angler':if(z.st==='open'&&E(z.x-5,z.y,14))return'hit';return E(z.x,z.y,10)?(z.st==='shut'?'kill':'hit'):null;
     case 'seal':if(z.st==='idle'||z.st==='warn')return null;return E(z.x,z.y,9)?(z.st==='up'?'kill':'hit'):null;
     default:return E(z.x,z.y,hazR(z))?'hit':null}}
-function killBeast(z,stomp){const B=BEASTS[z.type]||{},mult=(t<run.x2Until?2:1)*(t<run.abMultUntil?run.abMult:1)*comboMult()*(t<(run.frzUntil||0)?3:1),v=(B.rw||3)*mult,g=B.grp||z.type;
+function killBeast(z,stomp){const B=BEASTS[z.type]||{},mult=(t<run.x2Until?2:1)*(t<run.abMultUntil?run.abMult:1)*comboMult()*(t<(run.frzUntil||0)?3:1),v=((B.rw||3)+(B.rw?run.st.teeth:0))*mult,g=B.grp||z.type;
   z.dead=true;run.fishVal+=v;run.kills++;S.kills[g]=(S.kills[g]||0)+1;S.kills.all=(S.kills.all||0)+1;
   if(stomp){shark.vy=-290;run.boost=1;run.stomps=(run.stomps||0)+1;if(run.stomps>=10)award('sec2')}else run.chomp=.25;
   pops.push({x:z.x,y:z.y-12,txt:'+'+v,life:.9,c:'#ffd27a',big:true});
@@ -1968,7 +1992,7 @@ function updateBoss(dt){const b=run.boss;b.t+=dt;b.hurt=Math.max(0,b.hurt-dt);if
     if(a.kind==='ink'&&a.t>3)a.done=true}
   b.atts=b.atts.filter(a=>!a.done);
   if(b.flee>1.2&&b.atts.every(a=>a.kind==='refl'))endBoss(false)}
-function endBoss(won){const b=run.boss,rw=won?60*b.tier+40:25*b.tier;run.fishVal+=rw;run.bossesBeaten++;run.bossDone.push(spawned);run.boss=null;run.bossWait=false;$('#bossBar').hidden=true;
+function endBoss(won){const b=run.boss,rw=Math.round((won?60*b.tier+40:25*b.tier)*run.st.bossM);run.fishVal+=rw;run.bossesBeaten++;run.bossDone.push(spawned);run.boss=null;run.bossWait=false;$('#bossBar').hidden=true;
   if(won){award({trawler:'boss1',squid:'boss2',moray:'boss3',crab:'boss4',medusa:'boss5',sub:'boss6',leopard:'boss7',angler:'boss8'}[b.type]);S.kills['b_'+b.type]=(S.kills['b_'+b.type]||0)+1;run.bossWins=(run.bossWins||0)+1;if(run.bossWins>=3)award('boss3run');if(BOSSO.every(k=>S.kills['b_'+k]))award('bossall');if(BOSSO.reduce((a,k)=>a+(S.kills['b_'+k]||0),0)>=25)award('boss25');const tp=bossTarget(b);for(let i=0;i<40;i++)parts.push({x:tp.x,y:tp.y,vx:(Math.random()-.7)*260,vy:(Math.random()-.5)*260,life:1,max:1,c:i%2?'#ffd27a':'#ffffff',kind:'spark',r:1.6})}
   mission('boss',1);toast(won?`${b.name} sconfitto!`:`${b.name} è fuggito`,`+${rw} pesciolini`);pops.push({x:W/2,y:H*.4,txt:`+${rw}`,life:1.5,c:'#ffd27a',big:true});SFX.unlock();updateHud()}
 
@@ -1997,7 +2021,7 @@ function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop
     if(t<run.turboUntil){const c=corals.find(c=>!c.broken&&c.x+22+CHW>shark.x-12);const ty=clamp(c?c.gy:shark.y,40,GROUND-40);shark.vy=clamp((ty-shark.y)*7,-320,320);run.gliding=false;
       if(Math.random()<dt*30)parts.push({x:shark.x-16,y:shark.y+(Math.random()-.5)*8,vx:-200,vy:0,life:.3,max:.3,kind:'bub',r:.8})}
     else{if(holding)holdT+=dt;
-    if(holding&&holdT>.16&&run.stam>0&&!run.glideLock){run.gliding=true;run.glided=true;run.stam=Math.max(0,run.stam-dt/1.6);shark.vy+=(0-shark.vy)*Math.min(1,dt*12);if(run.stam<=0){run.glideLock=true;run.gliding=false}
+    if(holding&&holdT>.16&&run.stam>0&&!run.glideLock){run.gliding=true;run.glided=true;run.stam=Math.max(0,run.stam-dt/(1.6*run.st.glide));shark.vy+=(0-shark.vy)*Math.min(1,dt*12);if(run.stam<=0){run.glideLock=true;run.gliding=false}
       if(Math.random()<dt*20)parts.push({x:shark.x-14,y:shark.y+(Math.random()-.5)*6,vx:-60-Math.random()*40,vy:(Math.random()-.5)*10,life:.5,max:.5,kind:'bub',r:.6+Math.random()*.6})}
     else{run.gliding=false;shark.vy=Math.min(MAXFALL,shark.vy+GRAV*run.st.grav*dt);run.stam=Math.min(1,run.stam+dt/2.6)}
     if(!holding)run.glideLock=false}
@@ -2014,7 +2038,7 @@ function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop
       if(!c.scored&&c.x+22<shark.x){c.scored=true;run.score++;SFX.score();
         if(run.st.bonus10&&run.score%10===0){run.fishVal+=run.st.bonus10;pops.push({x:shark.x,y:shark.y-20,txt:`+${run.st.bonus10} colpo di coda`,life:1.2,c:'#ffd27a'})}
         if(t<run.turboUntil){run.fishVal+=2;pops.push({x:shark.x,y:shark.y-16,txt:'+2',life:.6,c:'#ffd27a'})}
-        addCharge(1);run.combo=(run.combo||0)+1;if(run.combo===10||run.combo===25){pops.push({x:W/2,y:H*.3,txt:`COMBO ×${comboMult()}!`,life:1.3,c:'#ffd27a',big:true});SFX.pow()}updCombo();checkScore();updateHud()}
+        addCharge(1);run.combo=(run.combo||0)+1;if(run.combo===run.st.cb[0]||run.combo===run.st.cb[1]){pops.push({x:W/2,y:H*.3,txt:`COMBO ×${comboMult()}!`,life:1.3,c:'#ffd27a',big:true});SFX.pow()}updCombo();checkScore();updateHud()}
       if(c.broken)continue;const x1=c.x+22-CHW,x2=c.x+22+CHW;
       if(state==='play'&&hb.cx+hb.rx>x1&&hb.cx-hb.rx<x2){const cl=Math.min((hb.cy-hb.ry)-(c.gy-c.gap/2),(c.gy+c.gap/2)-(hb.cy+hb.ry));c.mg=Math.min(c.mg??99,cl)}
       if(c.scored&&!c.nmDone&&x2<hb.cx-hb.rx){c.nmDone=1;if(c.mg!=null&&c.mg>=0&&c.mg<6&&state==='play'&&!invuln())nearMiss(c)}
@@ -2048,8 +2072,9 @@ function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop
         pops.push({x:f.x,y:f.y-6,txt:'+'+v,life:.7,c:f.gold?'#ffd27a':'#d8f6ff'});for(let i=0;i<5;i++)parts.push({x:f.x,y:f.y,vx:(Math.random()-.5)*80,vy:(Math.random()-.5)*80,life:.4,max:.4,c:f.gold?'#ffe98a':'#e8fbff',kind:'spark',r:.8});updateHud()}}
     for(const p of powers){if(p.taken)continue;const dx=mx-p.x,dy=my-p.y,d=Math.hypot(dx,dy);if(p.pull||(magAll&&d<run.magR)||(t<run.vacUntil&&d<run.vacR)){const k=Math.min(1,dt*7);p.x+=dx*k;p.by+=dy*k}p.y=p.by+Math.sin(t*2+p.ph)*3;
       if(d<14+hb.rx*.4){p.taken=true;run.pows++;mission('pow',1);SFX.pow();
-        if(p.type==='shield')run.shields++;if(p.type==='magnet')run.magUntil=t+8;if(p.type==='x2')run.x2Until=t+10;if(p.type==='charge')run.charge=run.st.charge;
-        pops.push({x:p.x,y:p.y-10,txt:{shield:'+1 scudo',magnet:'Magnete',x2:'Pesci ×2',charge:'Abilità carica'}[p.type],life:1,c:'#bff4ff'});updateHud();updateAbHud()}}
+        const PK=run.st.pow;if(p.type==='shield')run.shields++;if(p.type==='magnet')run.magUntil=t+8*PK;if(p.type==='x2')run.x2Until=t+10*PK;if(p.type==='charge')run.charge=run.st.charge;
+        if(p.type==='gold')run.goldUntil=t+8*PK;if(p.type==='slow'){run.slowUntil=t+5*PK;run.slowF=.6}if(p.type==='ghost')run.ghostUntil=Math.max(run.ghostUntil,t+4*PK);if(p.type==='bomb'){clearHazards();run.shake=.35;for(let i=0;i<30;i++)parts.push({x:shark.x+40,y:shark.y,vx:(Math.random()-.3)*300,vy:(Math.random()-.5)*300,life:.7,max:.7,c:i%2?'#ffb050':'#fff0c0',kind:'spark',r:1.6})}if(p.type==='fish'){const y0=clamp(shark.y,60,GROUND-60);for(let i=0;i<12;i++)fishes.push(mkFish(W+10+i*13,y0+Math.sin(i*.8)*14,i%4===0))}
+        pops.push({x:p.x,y:p.y-10,txt:{shield:'+1 scudo',magnet:'Magnete',x2:'Pesci ×2',charge:'Abilità carica',gold:'Pioggia d\'oro',slow:'Rallentatore',ghost:'Intoccabile',bomb:'Bomba!',fish:'Banco di pesci'}[p.type],life:1,c:'#bff4ff'});updateHud();updateAbHud()}}
     // companions
     if(t<run.podUntil){companions.forEach((cp,i)=>{const tx=shark.x+18+Math.sin(t*1.3+i*3)*10,ty=shark.y+(i?34:-34)+Math.sin(t*2+i)*6;cp.x+=(tx-cp.x)*Math.min(1,dt*3);cp.y+=(clamp(ty,30,GROUND-30)-cp.y)*Math.min(1,dt*3)})}else companions=[];
     // ability auto
@@ -2096,6 +2121,11 @@ function drawPower(p){const x=p.x,y=p.y,r=9;const g=ctx.createRadialGradient(x-3
   ctx.save();ctx.translate(x,y);if(p.type==='shield'){ctx.fillStyle='#7fe0ff';ctx.beginPath();ctx.moveTo(0,-4.5);ctx.lineTo(4,-3);ctx.lineTo(3.5,1.5);ctx.lineTo(0,4.5);ctx.lineTo(-3.5,1.5);ctx.lineTo(-4,-3);ctx.closePath();ctx.fill()}
   if(p.type==='magnet'){ctx.strokeStyle='#e04a3a';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,3,Math.PI,0,true);ctx.stroke();ctx.fillStyle='#d8dde0';ctx.fillRect(-4,-.5,2,2.5);ctx.fillRect(2,-.5,2,2.5)}
   if(p.type==='x2'){ctx.font='800 9px "Barlow Condensed",sans-serif';ctx.textAlign='center';ctx.fillStyle='#ffd27a';ctx.fillText('×2',0,3)}
+  if(p.type==='gold'){ctx.fillStyle='#ffd23f';ctx.strokeStyle='#8a5a00';ctx.lineWidth=.6;ctx.beginPath();ctx.ellipse(-.5,0,3.6,2.2,0,0,7);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(2.8,0);ctx.lineTo(5,-2.2);ctx.lineTo(5,2.2);ctx.closePath();ctx.fill();ctx.stroke()}
+  if(p.type==='slow'){ctx.strokeStyle='#bff4ff';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(0,0,4,0,7);ctx.stroke();ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-2.8);ctx.moveTo(0,0);ctx.lineTo(2,1);ctx.stroke()}
+  if(p.type==='ghost'){ctx.fillStyle='rgba(255,255,255,.9)';ctx.beginPath();ctx.arc(0,-1,3.6,Math.PI,0);ctx.lineTo(3.6,4);ctx.lineTo(1.8,2.8);ctx.lineTo(0,4);ctx.lineTo(-1.8,2.8);ctx.lineTo(-3.6,4);ctx.closePath();ctx.fill();ctx.fillStyle='#14394a';ell(ctx,-1.3,-1.2,.7,.9);ell(ctx,1.3,-1.2,.7,.9)}
+  if(p.type==='bomb'){ctx.fillStyle='#1a1a1a';ell(ctx,0,1,3.8,3.8);ctx.strokeStyle='#c8a060';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(1.5,-2.2);ctx.quadraticCurveTo(3,-4.5,4,-4);ctx.stroke();ctx.fillStyle=Math.sin(t*20)>0?'#ffd23f':'#ff6030';ell(ctx,4.2,-4.2,1,1)}
+  if(p.type==='fish'){ctx.fillStyle='#d8f6ff';for(let i=0;i<3;i++){ctx.beginPath();ctx.ellipse(-2+i*2,-2.5+i*2.5,2,1.1,0,0,7);ctx.fill()}}
   if(p.type==='charge'){ctx.fillStyle='#ffd27a';ctx.beginPath();ctx.moveTo(1,-5);ctx.lineTo(-3,1);ctx.lineTo(0,1);ctx.lineTo(-1,5);ctx.lineTo(3,-1);ctx.lineTo(0,-1);ctx.closePath();ctx.fill()}ctx.restore()}
 function drawTentacle(a){const x0=a.tip,y=a.y,th=a.th,st=a.style;const C=st==='jelly'?['#c070b0','#f0a8dc','#ffe0f4']:st==='leo'?['#4a5058','#8a929a','#c8d0d8']:st==='lure'?['#1a1410','#4a3a2a','#7a6248']:st==='moray'?['#2e3d14','#5f7a2e','#9cbc52']:st==='claw'?['#6a1a0e','#c8482a','#f08a5a']:['#5a1f1c','#a8483e','#d0806e'];
   const gr=ctx.createLinearGradient(0,y-th/2,0,y+th/2);gr.addColorStop(0,C[0]);gr.addColorStop(.5,C[1]);gr.addColorStop(1,C[2]);ctx.fillStyle=gr;
@@ -2364,7 +2394,7 @@ const DEATH_TITLES=['Fine dell\'immersione','Pinna ammaccata','Squalo arenato','
 function finishRun(){const r=run;finishMode(r);lastRunInfo={score:r.score,seed:r.seed,mode:r.mode,from:r.from,target:r.target};S.fish+=r.fishVal;S.totalFish+=r.fishVal;S.st.runs++;S.st.gold+=r.gold;mission('fish',r.fishVal);mission('runs',1);
   const rec=r.score>S.best;if(rec)S.best=r.score;if(r.score===0)S.st.zero++;else S.st.zero=0;
   award('first');if(r.fishVal>=150)award('run150');if(S.st.zero>=10)award('goblin');mission('obs',r.score);S.st.obs=(S.st.obs||0)+r.score;if(S.st.obs>=1000)award('p25');checkGlobal();
-  const xp=r.score*10+r.fishCount*2+r.bossesBeaten*100;addXp(xp,r.unl);S.hist.unshift({t:Date.now(),score:r.score,fish:r.fishVal,n:r.fishCount,sh:S.sel,bi:biomeIdx(r.score),boss:r.bossesBeaten,ab:r.abUsed,k:r.kills});S.hist=S.hist.slice(0,30);save();
+  const xp=Math.round((r.score*10+r.fishCount*2+r.bossesBeaten*100)*r.st.xpM);addXp(xp,r.unl);S.hist.unshift({t:Date.now(),score:r.score,fish:r.fishVal,n:r.fishCount,sh:S.sel,bi:biomeIdx(r.score),boss:r.bossesBeaten,ab:r.abUsed,k:r.kills});S.hist=S.hist.slice(0,30);save();
   $('#oTitle').textContent=DEATH_TITLES[(Math.random()*DEATH_TITLES.length)|0];$('#oScore').textContent=r.score;$('#oBest').textContent=S.best;$('#oNew').hidden=!rec;
   $('#oDepth').textContent=`${depthOf(r.score)} m di profondità`;$('#oBiome').textContent=BIOMES[biomeIdx(r.score)].name;
   $('#oFish').textContent=r.fishVal;$('#oFishD').textContent=r.fishCount?`${r.fishCount} pesci mangiati${r.gold?`, ${r.gold} d'oro`:''} · valore base ${r.st.value} · ${r.abUsed} abilità usate`:'Nessun pesciolino questa volta';
@@ -2379,7 +2409,7 @@ function showScreen(n){for(const k in screens)screens[k].hidden=k!==n;if(n==='me
 function anyFull(){return['shop','missions','trophies','levels','history','audio','bestiary','wheel','feedback','welcome'].some(k=>!screens[k].hidden)}
 function openFull(n,tab){back=!screens.over.hidden?'over':'menu';if(tab)shopTab=tab;showScreen(n);({shop:renderShop,missions:renderMissions,trophies:renderTrophies,levels:renderLevels,history:renderHistory,audio:renderAudio,bestiary:renderBestiary,wheel:renderWheel,feedback:renderFeedback,welcome:()=>{}})[n]()}
 function closeFull(){showScreen(back)}
-function toMenu(){state='menu';run=null;corals=[];fishes=[];hazards=[];powers=[];parts=[];pops=[];companions=[];bgFrom=bgTo=0;bgK=1;$('#hud').hidden=true;$('#tapHint').hidden=true;$('#banner').hidden=true;showScreen('menu')}
+function toMenu(){state='menu';run=null;corals=[];fishes=[];hazards=[];powers=[];parts=[];pops=[];companions=[];bgFrom=bgTo=0;bgK=1;$('#hud').hidden=true;$('#tapHint').hidden=true;$('#cancelBtn').hidden=true;$('#pause').hidden=true;$('#banner').hidden=true;showScreen('menu')}
 function updateHud(){if(!run)return;$('#hScore').textContent=run.score;$('#hFish').textContent=run.fishVal;$('#hVal').textContent=`×${run.st.value}`;
   $('#hDepth').textContent=`${depthOf(run.score)} M · ${BIOMES[biomeIdx(run.score)].name.toUpperCase()}`;
   const sh=$('#hShields');if(sh.children.length!==run.shields){sh.innerHTML='';for(let i=0;i<run.shields;i++){const d=document.createElement('div');d.className='shd';sh.appendChild(d)}}}
@@ -2414,13 +2444,13 @@ function unlockLabel(u){if(u.t==='buy')return'<span class="tagpill buy">Negozio<
 const fishBtn=(act,id,cost)=>`<button class="btn buy sm" data-act="${act}" data-id="${id}" ${S.fish>=cost?'':'disabled'}><img class="fi" src="${ICON}" alt=""> ${cost.toLocaleString('it-IT')}</button>`;
 
 let sharkFilter='all';
-function renderShop(){balances();['sharks','ups','skins'].forEach(k=>$('#tab'+k[0].toUpperCase()+k.slice(1)).setAttribute('aria-selected',shopTab===k));
+function renderShop(){balances();['sharks','ups','bonus','skins'].forEach(k=>$('#tab'+k[0].toUpperCase()+k.slice(1)).setAttribute('aria-selected',shopTab===k));
   const L=$('#shopList');L.innerHTML='';L.scrollTop=0;
   if(shopTab==='sharks'){
     const order=['start','buy','level','trophy'];const list=[...SHARKS].sort((a,b)=>{const oa=order.indexOf(a.unlock.t),ob=order.indexOf(b.unlock.t);if(oa!==ob)return oa-ob;
       if(a.unlock.t==='buy')return a.unlock.cost-b.unlock.cost;if(a.unlock.t==='level')return a.unlock.lv-b.unlock.lv;return(TRB[a.unlock.id].hidden?1:0)-(TRB[b.unlock.id].hidden?1:0)});
     L.insertAdjacentHTML('beforeend',`<div class="sec">Creature ${S.owned.length}/${SHARKS.length}</div><p class="note">Ogni creatura ha un'abilità che si carica superando ostacoli: quando è pronta tocca il cerchio in basso a sinistra (o tasto E), oppure mettila automatica dal menu. Più costa, più è forte.</p>`);
-    L.insertAdjacentHTML('beforeend',`<div class="sfil"><button class="chip${sharkFilter==='mine'?' on':''}" data-act="sfilter" data-id="mine">I miei (${S.owned.length})</button><button class="chip${sharkFilter!=='mine'?' on':''}" data-act="sfilter" data-id="all">Tutti (${SHARKS.length})</button></div>`);
+    L.insertAdjacentHTML('beforeend',`<div class="sfil"><button class="fchip${sharkFilter==='mine'?' on':''}" data-act="sfilter" data-id="mine">I miei (${S.owned.length})</button><button class="fchip${sharkFilter!=='mine'?' on':''}" data-act="sfilter" data-id="all">Tutti (${SHARKS.length})</button></div>`);
     list.filter(s=>sharkFilter!=='mine'||S.owned.includes(s.id)).forEach(s=>{const own=S.owned.includes(s.id),u=s.unlock,hid=u.t==='trophy'&&TRB[u.id].hidden&&!own;
       const card=document.createElement('div');card.className='scard'+(S.sel===s.id?' sel':'');const box=document.createElement('div');box.className='pvbox';box.appendChild(pv(own?curSpec(s.id):s.sp,own?S.skin:'naturale',hid));card.appendChild(box);
       let act='';
@@ -2434,10 +2464,14 @@ function renderShop(){balances();['sharks','ups','skins'].forEach(k=>$('#tab'+k[
   else if(shopTab==='ups'){const st=stats();
     L.insertAdjacentHTML('beforeend',`<div class="summary">Con <b>${SHB[S.sel].name}</b>: ogni pesciolino vale <b>${st.value}</b> · magnete <b>${st.magnet||'nessuno'}</b> · scudi <b>${st.shields}</b> · pesci d'oro <b>${Math.round(st.gold*100)}%</b> · ingombro <b>${Math.round(st.hit*100)}%</b> · abilità ogni <b>${st.charge}</b> ostacoli</div>`);
     UPS.forEach(u=>{const lv=S.up[u.id],max=u.costs.length,cost=u.costs[lv];const nu=Object.assign({},S.up,{[u.id]:Math.min(max,lv+1)}),a=stats(S.sel,S.up),b=stats(S.sel,nu);
-      const fmt={value:s=>`${s.value} a pesciolino`,magnet:s=>s.magnet?`raggio ${s.magnet}`:'nessun magnete',shield:s=>`${s.shields} scud${s.shields===1?'o':'i'} a partita`,gold:s=>`${Math.round(s.gold*100)}% d'oro`,fins:s=>`ingombro ${Math.round(s.hit*100)}%`,charge:s=>`abilità ogni ${s.charge} ostacoli`}[u.id];
+      const fmt={value:s=>`${s.value} a pesciolino`,magnet:s=>s.magnet?`raggio ${s.magnet}`:'nessun magnete',shield:s=>`${s.shields} scud${s.shields===1?'o':'i'} a partita`,gold:s=>`${Math.round(s.gold*100)}% d'oro`,fins:s=>`ingombro ${Math.round(s.hit*100)}%`,charge:s=>`abilità ogni ${s.charge} ostacoli`,teeth:s=>`+${s.teeth} a uccisione`,frenzy:s=>`frenesia ${s.frz}s`,combo:s=>`×2 a ${s.cb[0]} · ×3 a ${s.cb[1]}`,power:s=>`bolle +${Math.round((s.pow-1)*100)}%`,glide:s=>`planata +${Math.round((s.glide-1)*100)}%`,revive:s=>`rinascita −${Math.round((1-s.rv)*100)}%`,boss:s=>`premio boss +${Math.round((s.bossM-1)*100)}%`,xp:s=>`esperienza +${Math.round((s.xpM-1)*100)}%`}[u.id];
       L.insertAdjacentHTML('beforeend',`<div class="ucard"><div class="uhead"><b>${u.name}</b><span class="small">Liv. ${lv}/${max}</span></div><p class="udesc">${u.desc}</p>
         <div class="pips">${Array.from({length:max},(_,i)=>`<i class="${i<lv?'on':''}"></i>`).join('')}</div>
         <div class="act"><span class="unow">${lv>=max?`${fmt(a)} · <em>MAX</em>`:`${fmt(a)} → <em>${fmt(b)}</em>`}</span>${lv>=max?'':fishBtn('buyUp',u.id,cost)}</div></div>`)})}
+  else if(shopTab==='bonus'){S.inv=S.inv||{};S.invOff=S.invOff||{};
+    L.insertAdjacentHTML('beforeend',`<div class="sec">Bonus per la partita</div><p class="note">Si comprano qui e si attivano da soli quando inizi a nuotare (uno di ogni tipo per partita). Puoi metterli in pausa se vuoi conservarli. Massimo 10 per tipo.</p>`);
+    INV.forEach(it=>{const n=S.inv[it.id]||0,off=!!S.invOff[it.id];L.insertAdjacentHTML('beforeend',`<div class="ucard"><div class="uhead"><b>${it.ico} ${it.name}</b><span class="small">Ne hai ${it.id==='rv'?(S.rvTok||0):n}</span></div><p class="udesc">${it.desc}</p>
+      <div class="act"><span class="unow">${it.use&&n?`<button class="btn sm" data-act="invTog" data-id="${it.id}">${off?'In pausa ▶︎ attiva':'Attivo ⏸ metti in pausa'}</button>`:''}</span>${(it.id==='rv'?(S.rvTok||0):n)>=10?'<button class="btn sm" disabled>Pieno</button>':fishBtn('buyInv',it.id,it.cost)}</div></div>`)})}
   else{const base=SHB[S.sel],ms=MORPHS.filter(m=>m.base===S.sel);
     L.insertAdjacentHTML('beforeend',`<div class="sec">Trasformazioni · ${base.name}</div><p class="note">Cambiano proprio l'aspetto con una specie imparentata o simile. Le statistiche e l'abilità restano quelle di ${base.name}.</p>`);
     if(!ms.length)L.insertAdjacentHTML('beforeend','<p class="note">Per questa specie non esiste un abbinamento credibile, quindi niente trasformazione.</p>');
@@ -2487,6 +2521,7 @@ function xpTo(lv){let tot=0;for(let i=1;i<lv;i++)tot+=need(i);return Math.max(0,
 const frameEl=$('#frame');
 frameEl.addEventListener('pointerdown',e=>{if(e.target.closest('button,.full,#over,.mpanel,#tut,#abil,#revive,#pause,#pauseBtn'))return;if(state==='menu')return;e.preventDefault();holding=true;holdT=0;input()});
 $('#pauseBtn').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();pauseGame()});
+$('#cancelBtn').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();if(state==='ready')toMenu()});
 $('#abil').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();ac();if(state==='play'&&run&&abReady())activate()});
 frameEl.addEventListener('contextmenu',e=>{if(!e.target.closest('input,textarea'))e.preventDefault()});
 frameEl.addEventListener('touchstart',e=>{if(e.target.closest('button,input,textarea,select,a,.full,#over,.mpanel,#tut,#revive,#abil,.list'))return;e.preventDefault()},{passive:false});
@@ -2516,6 +2551,8 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'music':S.music=!S.music;save();renderMute();if(S.music)musicStart();else musicStop();break;
     case 'selShark':S.sel=id;save();SFX.buy();renderShop();break;
     case 'buyShark':{const c=SHB[id].unlock.cost;if(S.fish>=c&&!S.owned.includes(id)){S.fish-=c;S.owned.push(id);S.sel=id;SFX.buy();toast('Nuova creatura',SHB[id].name);save();checkGlobal()}renderShop();break}
+    case 'buyInv':{const it=INV.find(x=>x.id===id);S.inv=S.inv||{};const have=id==='rv'?(S.rvTok||0):(S.inv[id]||0);if(it&&have<10&&S.fish>=it.cost){S.fish-=it.cost;if(id==='rv')S.rvTok=(S.rvTok||0)+1;else S.inv[id]=have+1;SFX.buy();save()}renderShop();break}
+    case 'invTog':S.invOff=S.invOff||{};S.invOff[id]=!S.invOff[id];save();renderShop();break;
     case 'buyUp':{const u=UPS.find(x=>x.id===id),lv=S.up[id];if(lv<u.costs.length&&S.fish>=u.costs[lv]){S.fish-=u.costs[lv];S.up[id]++;SFX.buy();save();checkGlobal()}renderShop();break}
     case 'buySkin':{const c=COB[id].unlock.cost;if(S.fish>=c&&!S.skins.includes(id)){S.fish-=c;S.skins.push(id);S.skin=id;SFX.buy();save()}renderShop();break}
     case 'selSkin':S.skin=id;save();SFX.buy();renderShop();break;
