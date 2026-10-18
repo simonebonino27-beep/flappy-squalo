@@ -2059,16 +2059,16 @@ function addXp(n,unl){const before=lvInfo(S.xp).lv;S.xp+=n;const after=lvInfo(S.
 
 /* ---- daily missions */
 const MPOOL=[
- {id:'score',txt:n=>`Supera ${n} ostacoli in una partita`,vals:[15,25,35],rw:[600,1000,1600],max:true},
- {id:'fish',txt:n=>`Guadagna ${n} pesciolini`,vals:[150,300,600],rw:[500,900,1500]},
- {id:'abil',txt:n=>`Usa ${n} abilità`,vals:[3,5,8],rw:[600,900,1300]},
- {id:'pow',txt:n=>`Raccogli ${n} power-up`,vals:[2,4,6],rw:[500,800,1200]},
- {id:'gold',txt:n=>`Mangia ${n} pesci d'oro`,vals:[4,8,12],rw:[600,1000,1400]},
- {id:'runs',txt:n=>`Gioca ${n} partite`,vals:[3,5,8],rw:[400,650,1000]},
- {id:'haz',txt:n=>`Distruggi ${n} pericoli`,vals:[2,4,7],rw:[700,1100,1600]},
- {id:'kill',txt:n=>`Uccidi ${n} animali`,vals:[3,6,10],rw:[600,1000,1600]},
- {id:'biome',txt:n=>`Raggiungi: ${BIOMES[n/20].name}`,vals:[20,40],rw:[750,1500],max:true},
- {id:'boss',txt:()=>'Affronta un boss',vals:[1],rw:[2000]},
+ {id:'score',txt:n=>`Supera ${n} ostacoli in una partita`,vals:[15,25,35],rw:[120,200,320],max:true},
+ {id:'fish',txt:n=>`Guadagna ${n} pesciolini`,vals:[150,300,600],rw:[100,180,300]},
+ {id:'abil',txt:n=>`Usa ${n} abilità`,vals:[3,5,8],rw:[120,180,260]},
+ {id:'pow',txt:n=>`Raccogli ${n} power-up`,vals:[2,4,6],rw:[100,160,240]},
+ {id:'gold',txt:n=>`Mangia ${n} pesci d'oro`,vals:[4,8,12],rw:[120,200,280]},
+ {id:'runs',txt:n=>`Gioca ${n} partite`,vals:[3,5,8],rw:[80,130,200]},
+ {id:'haz',txt:n=>`Distruggi ${n} pericoli`,vals:[2,4,7],rw:[140,220,320]},
+ {id:'kill',txt:n=>`Uccidi ${n} animali`,vals:[3,6,10],rw:[120,200,320]},
+ {id:'biome',txt:n=>`Raggiungi: ${BIOMES[n/20].name}`,vals:[20,40],rw:[150,300],max:true},
+ {id:'boss',txt:()=>'Affronta un boss',vals:[1],rw:[400]},
 ];
 const BETA_RESET=true;
 
@@ -2127,8 +2127,8 @@ function migrate(){let ch=false;if(!S.mig)S.mig={};
   if(!S.mig.gift1){S.mig.gift1=1;S.fish+=200000;setTimeout(()=>toast('🎁 Regalo per i tester','+200.000 pesciolini! Grazie per i test 🦈'),2600);ch=true}
   if(ch)save()}
 function today(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d)return;const R=rngf(parseInt(d.replace(/-/g,''),10));const pool=[...MPOOL].sort(()=>R()-.5).slice(0,3);
-  S.day={date:d,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
+function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d&&S.day.v===2)return;const R=rngf(daySeed('md'+d)),k=Math.round(Date.parse(d+'T12:00:00Z')/864e5),P=[3,7,0,9,5,1,8,2,6,4].map(i=>MPOOL[i%MPOOL.length]);const pool=[0,1,2].map(j=>P[(3*k+j)%P.length]);
+  S.day={date:d,v:2,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
 function mission(id,amount,isMax){wmission(id,amount,isMax);if(!S.day)return;for(const m of S.day.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
   if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione completata',MPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
 function missionsReady(){return(S.day?S.day.list.filter(m=>m.done&&!m.claimed).length:0)+(S.week?S.week.list.filter(m=>m.done&&!m.claimed).length:0)}
