@@ -366,7 +366,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.26</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.27</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -440,7 +440,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.26</span>
+        <span class="beta big">BETA 0.27</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -607,7 +607,7 @@ const SHARKS=[
   perk:{},unlock:{t:'buy',cost:8000},ab:{name:"Stomaco d'acciaio",kind:'devour',dur:6,charge:9,tier:2,desc:'Per 6 secondi i pesciolini valgono doppio e divori meduse, ami e mine invece di farti male.'},
   fact:"Mangia davvero di tutto: nello stomaco di alcuni esemplari sono state trovate targhe, pneumatici e lattine."},
  {id:'mako',name:'Squalo mako',latin:'Isurus oxyrinchus',sp:SP({L:44,h:7.2,blunt:.05,noseY:-.15,so:.15,teeth:'some',eye:{r:.11},d1:{h:1.0},pec:{len:.2},tail:{u:.32,ua:1.05,l:.3,la:1},keel:true,col:{back:'#2b5aa4',belly:'#f3f7fb'}}),
-  perk:{hit:.82,add:1},unlock:{t:'buy',cost:15000},ab:{name:'Turbo',kind:'turbo',def:true,dur:2.5,charge:9,tier:3,desc:'2,5 secondi a velocità folle col pilota automatico: attraversi tutto e ogni ostacolo vale +2 pesciolini. Poi il tempo rallenta per farti riprendere il controllo.'},
+  perk:{hit:.82,add:1},unlock:{t:'buy',cost:15000},ab:{name:'Turbo',kind:'turbo',def:true,dur:2.5,charge:12,tier:3,desc:'2,5 secondi a velocità folle col pilota automatico: attraversi tutto e ogni ostacolo vale +2 pesciolini. Poi il tempo rallenta per farti riprendere il controllo.'},
   fact:"È lo squalo più veloce del mondo: negli scatti supera i 70 km/h e può saltare fuori dall'acqua per diversi metri."},
  {id:'bianco',name:'Grande squalo bianco',latin:'Carcharodon carcharias',sp:SP({L:50,h:9.8,blunt:.32,noseY:-.2,so:.2,jag:true,teeth:'some',pecTip:'#1a1d22',d1:{h:1.15,back:.06},pec:{len:.25,ang:.55},tail:{u:.33,ua:1.0,l:.29,la:.95},keel:true,col:{back:'#5e6976',belly:'#f4f4f1'}}),
   perk:{mult:2,shield:1},unlock:{t:'buy',cost:35000},ab:{name:'Breccia',kind:'breach',pw:3,wave:true,charge:11,tier:4,desc:'Distrugge i prossimi 3 ostacoli che tocchi e spazza via i pericoli sullo schermo.'},
@@ -702,7 +702,7 @@ const UPS=[
  {id:'shield',name:'Pelle corazzata',desc:'Ogni scudo assorbe un urto: l\'ostacolo si spezza e continui a nuotare.',costs:[2000,6000,15000]},
  {id:'gold',name:"Fiuto per l'oro",desc:"Più pesci d'oro in giro. Un pesce d'oro vale 5 pesciolini normali.",costs:[750,1750,4000,8500,18000]},
  {id:'fins',name:'Pinne idrodinamiche',desc:'Corpo più compatto: −4% di ingombro a livello, passi meglio tra gli ostacoli.',costs:[1000,2500,5500,12000,25000]},
- {id:'charge',name:'Istinto del predatore',desc:'L\'abilità si carica prima: ogni livello toglie ostacoli alla ricarica (di più per le abilità forti, minimo 2).',costs:[1250,3000,6500,14000]},
+ {id:'charge',name:'Istinto del predatore',desc:'L\'abilità si carica prima: ogni livello toglie ostacoli alla ricarica (minimo 2). In automatico le abilità che ti salvano costano il 50% in più.',costs:[1250,3000,6500,14000]},
 ];
 
 const TROPHIES=[
@@ -764,7 +764,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.26';
+const KEY='flappysqualo.beta1';const BETA='0.27';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -786,7 +786,7 @@ function curSpec(id=S.sel){const m=S.morph[id];return m&&MOB[m]?MOB[m].sp:SHB[id
 function stats(id=S.sel,up=S.up){const pk=SHB[id].perk;return{
   value:(1+up.value+(pk.add||0))*(pk.mult||1),magnet:MAG[up.magnet]+(pk.magnet||0),shields:up.shield+(pk.shield||0),
   gold:Math.min(.6,.03+.03*up.gold+(pk.gold||0)),hit:(pk.hit||1)*(1-.04*up.fins),grav:pk.grav||1,bonus10:pk.bonus10||0,
-  charge:Math.max(2,SHB[id].ab.charge-up.charge*Math.max(1,Math.round(SHB[id].ab.charge*.12)))}}
+  charge:Math.ceil(Math.max(2,SHB[id].ab.charge-up.charge*Math.max(1,Math.round(SHB[id].ab.charge*.12)))*(S.abAuto&&SHB[id].ab.def?1.5:1))}}
 function perkList(pk){const a=[];
   if(pk.mult)a.push(`×${pk.mult} valore pesciolini`);if(pk.add)a.push(`+${pk.add} per pesciolino`);if(pk.magnet)a.push(`magnete +${pk.magnet}`);
   if(pk.shield)a.push(`+${pk.shield} scud${pk.shield>1?'i':'o'}`);if(pk.gold)a.push(`+${Math.round(pk.gold*100)}% pesci d'oro`);
@@ -1477,7 +1477,7 @@ function die(){state='dead';shark.vy=-140;run.flash=1;run.shake=.3;SFX.hit();$('
 /* ---- abilities */
 function abDef(){return SHB[S.sel].ab}
 function abReady(){return run.charge>=run.st.charge}
-function addCharge(n){if(!run||state!=='play')return;const was=abReady();run.charge=Math.min(run.st.charge,run.charge+n);updateAbHud();if(!was&&abReady()&&!S.abAuto&&!S.seen._abh){S.seen._abh=1;const a=$('#abil');a.classList.add('hint');setTimeout(()=>a.classList.remove('hint'),5000);run.slowUntil=t+1.5;run.slowF=.45}
+function addCharge(n){if(!run||state!=='play')return;if(t<run.turboUntil||t<run.ghostUntil||t<run.roarUntil||t<run.devourUntil||t<run.podUntil)return;const was=abReady();run.charge=Math.min(run.st.charge,run.charge+n);updateAbHud();if(!was&&abReady()&&!S.abAuto&&!S.seen._abh){S.seen._abh=1;const a=$('#abil');a.classList.add('hint');setTimeout(()=>a.classList.remove('hint'),5000);run.slowUntil=t+1.5;run.slowF=.45}
   if(!was&&abReady()){if(abDef().def||!S.abAuto)SFX.warn();if(!S.abAuto&&!run.readyTold){run.readyTold=true;pops.push({x:70,y:GROUND-70,txt:'Abilità pronta! Tocca il cerchio',life:2.2,c:'#ffd27a',big:true})}}}
 function clearHazards(){for(const z of hazards)if(!z.dead&&z.x<W+20)destroyHaz(z,3);if(run.boss)for(const a of run.boss.atts)if(a.state!=='warn'&&a.kind!=='refl')a.spent=true}
 function activate(){const ab=abDef();if(!abReady())return;run.charge=0;run.abUsed++;S.st.abil++;mission('abil',1);if(S.st.abil>=50)award('abil50');SFX.abil();
