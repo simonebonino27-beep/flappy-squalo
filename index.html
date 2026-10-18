@@ -365,7 +365,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.24</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.25</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -439,7 +439,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.24</span>
+        <span class="beta big">BETA 0.25</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -701,7 +701,7 @@ const UPS=[
  {id:'shield',name:'Pelle corazzata',desc:'Ogni scudo assorbe un urto: l\'ostacolo si spezza e continui a nuotare.',costs:[2000,6000,15000]},
  {id:'gold',name:"Fiuto per l'oro",desc:"Più pesci d'oro in giro. Un pesce d'oro vale 5 pesciolini normali.",costs:[750,1750,4000,8500,18000]},
  {id:'fins',name:'Pinne idrodinamiche',desc:'Corpo più compatto: −4% di ingombro a livello, passi meglio tra gli ostacoli.',costs:[1000,2500,5500,12000,25000]},
- {id:'charge',name:'Istinto del predatore',desc:'L\'abilità si ricarica il 10% più in fretta a ogni livello.',costs:[1250,3000,6500,14000]},
+ {id:'charge',name:'Istinto del predatore',desc:'L\'abilità si carica prima: ogni livello toglie ostacoli alla ricarica (di più per le abilità forti, minimo 2).',costs:[1250,3000,6500,14000]},
 ];
 
 const TROPHIES=[
@@ -763,7 +763,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.24';
+const KEY='flappysqualo.beta1';const BETA='0.25';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -785,7 +785,7 @@ function curSpec(id=S.sel){const m=S.morph[id];return m&&MOB[m]?MOB[m].sp:SHB[id
 function stats(id=S.sel,up=S.up){const pk=SHB[id].perk;return{
   value:(1+up.value+(pk.add||0))*(pk.mult||1),magnet:MAG[up.magnet]+(pk.magnet||0),shields:up.shield+(pk.shield||0),
   gold:Math.min(.6,.03+.03*up.gold+(pk.gold||0)),hit:(pk.hit||1)*(1-.04*up.fins),grav:pk.grav||1,bonus10:pk.bonus10||0,
-  charge:Math.max(6,Math.round(SHB[id].ab.charge*(1-.1*up.charge)))}}
+  charge:Math.max(2,SHB[id].ab.charge-up.charge*Math.max(1,Math.round(SHB[id].ab.charge*.12)))}}
 function perkList(pk){const a=[];
   if(pk.mult)a.push(`×${pk.mult} valore pesciolini`);if(pk.add)a.push(`+${pk.add} per pesciolino`);if(pk.magnet)a.push(`magnete +${pk.magnet}`);
   if(pk.shield)a.push(`+${pk.shield} scud${pk.shield>1?'i':'o'}`);if(pk.gold)a.push(`+${Math.round(pk.gold*100)}% pesci d'oro`);
@@ -2140,7 +2140,7 @@ function updateAbHud(){if(!run)return;const ab=abDef(),ring=$('#abRing');$('#abN
   const act=[run.ghostUntil,run.magAllUntil,run.devourUntil,run.turboUntil,run.podUntil,run.slowUntil,run.goldUntil,run.roarUntil].some(x=>t<x);
   const pct=Math.round(run.charge/run.st.charge*100);ring.style.setProperty('--p',pct);ring.classList.toggle('ready',pct>=100&&!act);ring.classList.toggle('active',act);
   $('#abPct').textContent=run.breaks>0?`×${run.breaks}`:pct>=100?'OK':pct+'%';
-  $('#abState').textContent=act?'Attiva':run.breaks>0?'Armata: sfonda gli ostacoli':pct>=100?(!S.abAuto?'Pronta! Tocca qui (o E)':ab.def?'Pronta: parte quando serve':'Pronta'):'Si carica superando ostacoli'}
+  $('#abState').textContent=act?'Attiva':run.breaks>0?'Armata: sfonda gli ostacoli':pct>=100?(!S.abAuto?'Pronta! Tocca qui (o E)':ab.def?'Pronta: parte quando serve':'Pronta'):`Ancora ${Math.max(1,Math.ceil(run.st.charge-run.charge))} ostacol${Math.ceil(run.st.charge-run.charge)<=1?'o':'i'} (su ${run.st.charge})`}
 function updateEffects(){if(!run)return;const e=[];const L=(u,n)=>{if(t<u)e.push(`${n} ${Math.ceil(u-t)}s`)};L(run.x2Until,'×2');L(run.magUntil,'Magnete');L(run.abMultUntil,`×${run.abMult}`);L(run.slowUntil,'Rallentatore');L(run.ghostUntil,'Intoccabile');L(run.roarUntil,'Gigante');L(run.podUntil,'Branco');L(run.goldUntil,'Oro');L(run.turboUntil,'Turbo');if(t>=run.turboUntil)L(run.afterTurbo||0,'Rallentatore');L(run.vacUntil,'Risucchio');
   $('#effects').innerHTML=e.map(x=>`<span>${x}</span>`).join('')}
 function balances(){document.querySelectorAll('.balv').forEach(b=>b.textContent=S.fish)}
@@ -2171,7 +2171,7 @@ function renderShop(){balances();['sharks','ups','skins'].forEach(k=>$('#tab'+k[
   if(shopTab==='sharks'){
     const order=['start','buy','level','trophy'];const list=[...SHARKS].sort((a,b)=>{const oa=order.indexOf(a.unlock.t),ob=order.indexOf(b.unlock.t);if(oa!==ob)return oa-ob;
       if(a.unlock.t==='buy')return a.unlock.cost-b.unlock.cost;if(a.unlock.t==='level')return a.unlock.lv-b.unlock.lv;return(TRB[a.unlock.id].hidden?1:0)-(TRB[b.unlock.id].hidden?1:0)});
-    L.insertAdjacentHTML('beforeend',`<div class="sec">Creature ${S.owned.length}/${SHARKS.length}</div><p class="note">Ogni creatura ha un'abilità che si carica superando ostacoli e parte da sola nel momento giusto (su PC anche col tasto E). Più costa, più è forte.</p>`);
+    L.insertAdjacentHTML('beforeend',`<div class="sec">Creature ${S.owned.length}/${SHARKS.length}</div><p class="note">Ogni creatura ha un'abilità che si carica superando ostacoli: quando è pronta tocca il cerchio in basso a sinistra (o tasto E), oppure mettila automatica dal menu. Più costa, più è forte.</p>`);
     list.forEach(s=>{const own=S.owned.includes(s.id),u=s.unlock,hid=u.t==='trophy'&&TRB[u.id].hidden&&!own;
       const card=document.createElement('div');card.className='scard'+(S.sel===s.id?' sel':'');const box=document.createElement('div');box.className='pvbox';box.appendChild(pv(own?curSpec(s.id):s.sp,own?S.skin:'naturale',hid));card.appendChild(box);
       let act='';
