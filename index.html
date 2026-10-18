@@ -180,6 +180,15 @@ canvas.pv{width:100%;height:auto;display:block}
 .tcard p{margin:.1em 0 0;font-size:.78em;color:#b8d0d8;line-height:1.35}
 .tcard .rw{font-size:.74em;color:var(--amber2);margin-top:.2em}
 [hidden]{display:none!important}
+#pauseBtn{position:absolute;top:.7em;right:.75em;width:2.3em;height:2.3em;border-radius:10px;background:var(--glass);border:1px solid var(--line2);color:#fff;display:flex;align-items:center;justify-content:center;gap:.28em;pointer-events:auto;cursor:pointer;padding:0;touch-action:manipulation}
+#pauseBtn i{display:block;width:.32em;height:1em;background:#fff;border-radius:2px}
+#hShields{right:3.6em!important}
+#pause{align-items:center;justify-content:center;padding:1em;background:rgba(1,10,16,.6);z-index:9}
+#pause .ocard{align-items:center;text-align:center;gap:.6em;max-width:17em}
+#pause h2{margin:0;font-family:var(--fd);font-size:2em;letter-spacing:.08em}
+#pause .pst{font-size:.85em;color:var(--muted)}#pause .pst b{color:#fff}
+#pause .btn{width:100%}
+#pauseCount{font-family:var(--fd);font-weight:800;font-size:5em;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.6);animation:pop .3s ease}
 #wheel .wbody{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7em;padding:1em;overflow-y:auto}
 .wwrap{position:relative;width:min(80vw,16em);aspect-ratio:1}
 #wCanvas{width:100%;height:100%;display:block;filter:drop-shadow(0 8px 20px rgba(0,0,0,.45))}
@@ -284,6 +293,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="hud-l"><img class="fi" alt=""><b id="hFish">0</b><span id="hVal"></span></div>
       <div class="hud-c"><div id="hScore">0</div><div id="hDepth"></div></div>
       <div id="hShields"></div>
+      <button id="pauseBtn" aria-label="Pausa"><i></i><i></i></button>
       <div id="bossBar" hidden><span id="bossName"></span><div class="bar"><i id="bossFill"></i></div></div>
       <div id="abil"><div class="ring" id="abRing"><span id="abPct">0%</span></div><div class="abtxt"><b id="abName"></b><small id="abState"></small></div></div>
       <div id="effects"></div>
@@ -295,7 +305,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button><button class="btn sm fbtop" data-act="feedback">Feedback</button>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><span class="beta">BETA 0.21</span>
+        <span class="l2">SQUALO</span><span class="beta">BETA 0.22</span>
         <span class="tag">Dalla barriera corallina ai ghiacci artici. Mangia pesci, caccia creature, sconfiggi i boss.</span>
       </header>
       <div class="mpanel">
@@ -363,7 +373,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.21</span>
+        <span class="beta big">BETA 0.22</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -376,6 +386,16 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
         <p class="note">Quando trovi qualcosa premi <b>Feedback</b> nel menu o "Segnala" a fine partita: ti prepara un messaggio WhatsApp con i tuoi dati di gioco.</p>
         <button class="btn big" data-act="welcomeok">INIZIA</button>
       </div>
+    </section>
+
+    <section id="pause" class="screen" hidden>
+      <div class="ocard" id="pauseBox">
+        <h2>PAUSA</h2>
+        <div class="pst">Ostacoli <b id="pScore">0</b> · Record <b id="pBest">0</b></div>
+        <button class="btn big" data-act="resume">RIPRENDI</button>
+        <button class="btn" data-act="quit">Termina partita</button>
+      </div>
+      <div id="pauseCount" hidden>3</div>
     </section>
 
     <section id="revive" class="screen" hidden>
@@ -648,7 +668,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.21';
+const KEY='flappysqualo.beta1';const BETA='0.22';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1214,7 +1234,7 @@ function spawnCoral(x){const n=spawned;if(n>0&&n%50===0&&!run.bossDone.includes(
   lastGap=gy;return true}
 
 let warmQ=[];
-function startReady(){newRun();warmQ=[];for(const jl of [0,1])for(let i=0;i<NF;i++)warmQ.push([i,jl]);state='ready';showScreen(null);$('#hud').hidden=false;$('#tapHint').hidden=false;$('#bossBar').hidden=true;$('#tut').hidden=true;closeRevive();holding=false;updateAbHud();
+function startReady(){newRun();warmQ=[];for(const jl of [0,1])for(let i=0;i<NF;i++)warmQ.push([i,jl]);state='ready';showScreen(null);$('#hud').hidden=false;$('#tapHint').hidden=false;$('#bossBar').hidden=true;$('#tut').hidden=true;closeRevive();$('#pause').hidden=true;clearInterval(pauseCD);holding=false;updateAbHud();
   void 0}
 function flap(){if(state==='ready'){state='play';$('#tapHint').hidden=true;showBanner(BIOMES[0].name,'3 METRI')}
   if(state!=='play')return;shark.vy=FLAP;run.boost=1;SFX.flap();
@@ -1223,6 +1243,14 @@ function input(){ac();if(reviveOpen)return;if(state==='ready'||state==='play')fl
 /* ---- revive (pay to continue, cost doubles each time in the same run) */
 let reviveOpen=false,rvTimer=null;
 const rvCostN=n=>n<=0?100:n===1?500:1000*Math.pow(2,n-2);
+
+/* ---- pause */
+let pauseCD=null;
+function pauseGame(){if(state!=='play')return;state='pause';holding=false;clearInterval(pauseCD);$('#pauseCount').hidden=true;$('#pauseBox').hidden=false;$('#pause').hidden=false;$('#pBest').textContent=S.best;$('#pScore').textContent=run.score}
+function resumeGame(){if(state!=='pause')return;$('#pauseBox').hidden=true;const el=$('#pauseCount');el.hidden=false;let n=3;el.textContent=n;SFX.score();clearInterval(pauseCD);
+  pauseCD=setInterval(()=>{n--;if(n<=0){clearInterval(pauseCD);$('#pause').hidden=true;el.hidden=true;state='play';last=performance.now();SFX.flap()}else{el.textContent=n;SFX.score()}},650)}
+function quitGame(){if(state!=='pause')return;clearInterval(pauseCD);$('#pause').hidden=true;state='dead';run.deadT=1;overShown=true;$('#hud').hidden=true;finishRun()}
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='play')pauseGame()});
 const reviveCost=()=>rvCostN(run.respawns||0);
 function offerRevive(){const c=reviveCost(),tk=S.rvTok>0;if(S.fish<c&&!tk){finishRun();return}
   reviveOpen=true;let left=5;$('#rvT').textContent=left;$('#rvBtn').innerHTML=tk?`RINASCI GRATIS · biglietto (${S.rvTok})`:`RINASCI · <img class="fi" src="${ICON}" alt=""> ${c.toLocaleString('it-IT')}`;
@@ -1539,7 +1567,7 @@ function checkScore(){const s=run.score;if(s>=10)award('p10');if(s>=80&&run.abUs
   const bi=biomeIdx(s);if(s%20===0&&s>0){bgFrom=bgTo;bgTo=bi;bgK=0;showBanner(BIOMES[bi].name,`${depthOf(s)} METRI`);if(BIOMES[bi].id==='abyss')award('abyss');if(BIOMES[bi].id==='ice')award('ice');run.maxBiome=Math.max(run.maxBiome,Math.floor(s/20))}}
 const depthOf=s=>Math.round(3+s*2.4);
 
-function update(dt){if(state==='tut')return;t+=dt;
+function update(dt){if(state==='tut'||state==='pause')return;t+=dt;
   const playing=state==='play';
   const ws=playing?(t<run.slowUntil?run.slowF:1)*(t<run.turboUntil?1.9:1)*(t>=run.turboUntil&&t<(run.afterTurbo||0)?.5:1):1;
   const spd=playing?speed*ws:state==='dead'?0:26;scroll+=spd*dt;
@@ -1957,7 +1985,8 @@ function xpTo(lv){let tot=0;for(let i=1;i<lv;i++)tot+=need(i);return Math.max(0,
 
 /* =============================================== EVENTS */
 const frameEl=$('#frame');
-frameEl.addEventListener('pointerdown',e=>{if(e.target.closest('button,.full,#over,.mpanel,#tut,#abil,#revive'))return;if(state==='menu')return;e.preventDefault();holding=true;holdT=0;input()});
+frameEl.addEventListener('pointerdown',e=>{if(e.target.closest('button,.full,#over,.mpanel,#tut,#abil,#revive,#pause,#pauseBtn'))return;if(state==='menu')return;e.preventDefault();holding=true;holdT=0;input()});
+$('#pauseBtn').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();pauseGame()});
 $('#abil').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();ac();if(state==='play'&&run&&abReady())activate()});
 frameEl.addEventListener('contextmenu',e=>{if(!e.target.closest('input,textarea'))e.preventDefault()});
 frameEl.addEventListener('touchstart',e=>{if(e.target.closest('button,input,textarea,select,a,.full,#over,.mpanel,#tut,#revive,#abil,.list'))return;e.preventDefault()},{passive:false});
@@ -1982,7 +2011,7 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'bkLoad':{const j=readCode($('#bkCode').value);if(!j){$('#bkMsg').textContent='Codice non valido: controlla di averlo copiato tutto.';break}const o=JSON.parse(j);const b=$('#bkLoadBtn');
       if(!b.dataset.arm){b.dataset.arm='1';b.textContent='Tocca di nuovo per confermare';$('#bkMsg').textContent=`Codice valido: ${(o.fish||0).toLocaleString('it-IT')} pesciolini, record ${o.best||0}, ${o.xp||0} XP. Tocca di nuovo per sostituire i progressi attuali.`;setTimeout(()=>{delete b.dataset.arm;b.textContent='Ripristina'},8000);break}
       delete b.dataset.arm;b.textContent='Ripristino...';try{localStorage.setItem(KEY,j)}catch(e){}IDB_WAIT=false;idbPut(j);$('#bkMsg').textContent='Progressi ripristinati! Ricarico...';setTimeout(()=>location.reload(),600);break}
-    case 'abmode':S.abAuto=!S.abAuto;save();renderAudio();if(!screens.menu.hidden)renderMenu();toast('Abilità: '+(S.abAuto?'automatica':'manuale'),S.abAuto?'Parte da sola quando serve':'Toccala tu: cerchio in basso a sinistra o tasto E');break;case 'bestiary':openFull('bestiary');break;case 'tutok':closeTut();break;case 'wheel':openFull('wheel');break;case 'spin':spinWheel();break;case 'revive':doRevive();break;case 'noRevive':declineRevive();break;
+    case 'abmode':S.abAuto=!S.abAuto;save();renderAudio();if(!screens.menu.hidden)renderMenu();toast('Abilità: '+(S.abAuto?'automatica':'manuale'),S.abAuto?'Parte da sola quando serve':'Toccala tu: cerchio in basso a sinistra o tasto E');break;case 'bestiary':openFull('bestiary');break;case 'tutok':closeTut();break;case 'resume':resumeGame();break;case 'quit':quitGame();break;case 'wheel':openFull('wheel');break;case 'spin':spinWheel();break;case 'revive':doRevive();break;case 'noRevive':declineRevive();break;
     case 'mute':S.mute=!S.mute;save();renderMute();if(S.mute)musicStop();else musicStart();break;
     case 'music':S.music=!S.music;save();renderMute();if(S.music)musicStart();else musicStop();break;
     case 'selShark':S.sel=id;save();SFX.buy();renderShop();break;
@@ -1995,7 +2024,9 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'unmorph':delete S.morph[S.sel];save();renderShop();break;
     case 'claim':{const m=S.day.list[+id];if(m&&m.done&&!m.claimed){m.claimed=true;S.fish+=m.rw;S.st.claimed++;SFX.buy();save();checkGlobal()}renderMissions();break}
   }});
-window.addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('textarea,input'))return;if(reviveOpen){e.preventDefault();if(!e.repeat){if(e.code==='Space'||e.code==='Enter')doRevive();if(e.code==='Escape')declineRevive()}return}
+window.addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('textarea,input'))return;if((e.code==='Escape'||e.code==='KeyP')&&!e.repeat&&(state==='play'||state==='pause')){e.preventDefault();if(state==='play')pauseGame();else if(!$('#pauseBox').hidden)resumeGame();return}
+  if(state==='pause'){if((e.code==='Space'||e.code==='Enter')&&!e.repeat&&!$('#pauseBox').hidden){e.preventDefault();resumeGame()}return}
+  if(reviveOpen){e.preventDefault();if(!e.repeat){if(e.code==='Space'||e.code==='Enter')doRevive();if(e.code==='Escape')declineRevive()}return}
   if(state==='tut'&&(e.code==='Space'||e.code==='Enter')){e.preventDefault();if(!e.repeat)closeTut();return}
   if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW'){if(e.repeat){e.preventDefault();return}holding=true;holdT=0;if(e.target.closest&&e.target.closest('button')&&e.code==='Space'&&state!=='play'&&state!=='ready')return;
     e.preventDefault();if(anyFull())return;if(state==='menu')startReady();else input()}
