@@ -366,7 +366,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.27</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.28</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -440,7 +440,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.27</span>
+        <span class="beta big">BETA 0.28</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -764,7 +764,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.27';
+const KEY='flappysqualo.beta1';const BETA='0.28';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1348,7 +1348,7 @@ const rvCostN=n=>n<=0?100:n===1?500:1000*Math.pow(2,n-2);
 let pauseCD=null;
 function pauseGame(){if(state!=='play')return;state='pause';holding=false;clearInterval(pauseCD);$('#pauseCount').hidden=true;$('#pauseBox').hidden=false;$('#pause').hidden=false;$('#pBest').textContent=S.best;$('#pScore').textContent=run.score}
 function resumeGame(){if(state!=='pause')return;$('#pauseBox').hidden=true;const el=$('#pauseCount');el.hidden=false;let n=3;el.textContent=n;SFX.score();clearInterval(pauseCD);
-  pauseCD=setInterval(()=>{n--;if(n<=0){clearInterval(pauseCD);$('#pause').hidden=true;el.hidden=true;state='play';last=performance.now();SFX.flap()}else{el.textContent=n;SFX.score()}},650)}
+  pauseCD=setInterval(()=>{n--;if(n<=0){clearInterval(pauseCD);$('#pause').hidden=true;el.hidden=true;state='play';last=performance.now();SFX.flap()}else{el.textContent=n;SFX.score()}},1000)}
 function quitGame(){if(state!=='pause')return;clearInterval(pauseCD);$('#pause').hidden=true;state='dead';run.deadT=1;overShown=true;$('#hud').hidden=true;finishRun()}
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='play')pauseGame()});
 
@@ -1584,7 +1584,7 @@ function openTut(k){const B=BEASTS[k];if(!B)return;state='tut';holding=false;
   $('#tutDoes').textContent=B.does;$('#tutKill').innerHTML=B.kill;$('#tutKillL').textContent=B.boss?'Come si sconfigge':'Come si uccide';
   $('#tutRw').textContent=B.boss?'Sconfiggilo per un bel bottino di pesciolini':B.rw?`+${B.rw} pesciolini per ogni uccisione`:'Nessuna ricompensa: stai alla larga';
   S.seen[k]=1;$('#tut').hidden=false;SFX.warn()}
-function closeTut(){if(state!=='tut')return;$('#tut').hidden=true;state='play';save();if(BORDER.every(k=>S.seen[k]))award('bestiary')}
+function closeTut(){if(state!=='tut')return;$('#tut').hidden=true;state='pause';$('#pause').hidden=false;resumeGame();save();if(BORDER.every(k=>S.seen[k]))award('bestiary')}
 const PORT={};
 function portrait(k,sil){const key=k+(sil?'_s':'');if(PORT[key])return PORT[key];const c=document.createElement('canvas');c.width=180;c.height=120;const g=c.getContext('2d');g.scale(3,3);
   try{drawBeastAt(g,k,30,21)}catch(e){}
