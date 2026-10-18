@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Flappy Squalo"><meta name="theme-color" content="#020b12"><title>Flappy Squalo</title><style>[hidden]{display:none!important}html,body{margin:0;height:100%}</style></head><body>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Flappy Squalo"><meta name="theme-color" content="#020b12"><style>[hidden]{display:none!important}html,body{margin:0;height:100%}</style></head><body>
 <title>Flappy Squalo Beta</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -188,6 +188,7 @@ canvas.pv{width:100%;height:auto;display:block}
 #wRes{font-family:var(--fd);font-weight:800;font-size:1.25em;color:var(--amber2);min-height:1.3em;text-align:center}
 #bkCode{width:100%;box-sizing:border-box;font:inherit;font-size:.72em;font-family:ui-monospace,monospace;background:rgba(0,0,0,.3);color:#d6eef2;border:1px solid var(--line);border-radius:8px;padding:.5em;resize:vertical;word-break:break-all}
 #bkMsg{color:var(--amber2)}
+#bkWa{text-align:center;text-decoration:none;background:#1f8f4e;border-color:#2fbf6a;color:#fff}
 #wInfo{font-size:.78em;color:var(--muted);text-align:center;line-height:1.4}
 #wLegend{display:grid;grid-template-columns:1fr 1fr;gap:.25em .8em;font-size:.72em;color:#c8dde4;width:100%;max-width:22em}#wLegend span{display:flex;align-items:center;gap:.35em}#wLegend b{margin-left:auto;color:var(--amber2)}#wLegend i{width:.75em;height:.75em;border-radius:3px;flex:none}
 #wRes.r1{color:#5ab4ff}#wRes.r2{color:#c38bff}#wRes.r3{color:#ffcf4a;text-shadow:0 0 12px rgba(255,207,74,.7)}
@@ -294,7 +295,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button><button class="btn sm fbtop" data-act="feedback">Feedback</button>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><span class="beta">BETA 0.19</span>
+        <span class="l2">SQUALO</span><span class="beta">BETA 0.20</span>
         <span class="tag">Dalla barriera corallina ai ghiacci artici. Mangia pesci, caccia creature, sconfiggi i boss.</span>
       </header>
       <div class="mpanel">
@@ -362,7 +363,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.19</span>
+        <span class="beta big">BETA 0.20</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -421,7 +422,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="list" id="audList">
         <div class="vrow"><div class="vtop"><b>Attivazione abilit&agrave;</b><span id="abModeTxt">Manuale</span></div><button class="btn" data-act="abmode" id="abModeBtn">Passa ad automatica</button><small>Manuale: la attivi tu quando vuoi toccando il cerchio in basso a sinistra (o tasto E). Automatica: parte da sola.</small></div>
         <div class="sec">Salvataggio</div>
-        <div class="vrow"><div class="vtop"><b>Codice dei progressi</b></div><small>Copialo e tienilo da parte (WhatsApp, Note). Se il telefono cancella i dati del gioco, incollalo qui e premi Ripristina.</small><textarea id="bkCode" rows="3" placeholder="Incolla qui il codice SQ1-..." spellcheck="false"></textarea><div class="grid2"><button class="btn" data-act="bkCopy">Copia codice</button><button class="btn" data-act="bkLoad">Ripristina</button></div><small id="bkMsg"></small></div>
+        <div class="vrow"><div class="vtop"><b>Codice dei progressi</b></div><small>Copialo e tienilo da parte (WhatsApp, Note). Se il telefono cancella i dati del gioco, incollalo qui e premi Ripristina.</small><textarea id="bkCode" rows="3" placeholder="Incolla qui il codice SQ1-..." spellcheck="false"></textarea><div class="grid2"><button class="btn" data-act="bkCopy">Copia codice</button><button class="btn" data-act="bkLoad" id="bkLoadBtn">Ripristina</button></div><a class="btn" id="bkWa" target="_blank" rel="noopener" hidden>Invia su WhatsApp</a><small id="bkMsg"></small></div>
         <div class="sec">Audio</div>
         <div class="vrow"><div class="vtop"><b>Salto dello squalo</b><span id="vv-jump">50%</span></div><input type="range" min="0" max="100" step="5" data-vol="jump"></div>
         <div class="vrow"><div class="vtop"><b>Musica</b><span id="vv-music">50%</span></div><input type="range" min="0" max="100" step="5" data-vol="music"></div>
@@ -647,14 +648,14 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.19';
+const KEY='flappysqualo.beta1';const BETA='0.20';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
 function idbPut(v){idbOpen().then(db=>{const tx=db.transaction('s','readwrite');tx.objectStore('s').put(v,KEY)}).catch(()=>{})}
 function idbGet(){return idbOpen().then(db=>new Promise(res=>{const q=db.transaction('s').objectStore('s').get(KEY);q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})).catch(()=>null)}
 function sqHash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(36)}
-function saveCode(){const j=JSON.stringify(S);return'SQ1-'+sqHash('squalo:'+j)+'-'+btoa(unescape(encodeURIComponent(j)))}
+function saveCode(){const o=Object.assign({},S);o.hist=(S.hist||[]).slice(0,10);const j=JSON.stringify(o);return'SQ1-'+sqHash('squalo:'+j)+'-'+btoa(unescape(encodeURIComponent(j)))}
 function readCode(c){c=(c||'').trim().replace(/\s+/g,'');const m=c.match(/^SQ1-([0-9a-z]+)-(.+)$/);if(!m)return null;try{const j=decodeURIComponent(escape(atob(m[2])));if(sqHash('squalo:'+j)!==m[1])return null;const o=JSON.parse(j);return o&&typeof o==='object'?j:null}catch(e){return null}}
 let S=JSON.parse(JSON.stringify(DEF));let LS_EMPTY=false,IDB_WAIT=false;
 try{let raw=localStorage.getItem(KEY),o=raw?JSON.parse(raw):null;if(!raw){LS_EMPTY=true;IDB_WAIT=true}
@@ -1973,8 +1974,13 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'fbcopy':{const txt=fbMessage();const done=()=>{$('#fbNote').textContent='Testo copiato: incollalo nella chat con Simone.'};
       if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done).catch(()=>{$('#fbAuto').parentElement.open=true;$('#fbNote').textContent='Copia non riuscita: seleziona il testo qui sopra e copialo a mano.'});else $('#fbNote').textContent='Copia non disponibile: seleziona il testo qui sopra e copialo a mano.';break}
     case 'back':closeFull();break;case 'menu':toMenu();break;
-    case 'audio':openFull('audio');break;case 'bkCopy':{const c=saveCode();const ta=$('#bkCode');ta.value=c;ta.select();const ok=()=>{$('#bkMsg').textContent='Codice copiato! Incollalo in una chat o nelle Note.'};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(c).then(ok,()=>{try{document.execCommand('copy');ok()}catch(e){$('#bkMsg').textContent='Copia il codice qui sopra a mano.'}});else{try{document.execCommand('copy');ok()}catch(e){$('#bkMsg').textContent='Copia il codice qui sopra a mano.'}}break}
-    case 'bkLoad':{const j=readCode($('#bkCode').value);if(!j){$('#bkMsg').textContent='Codice non valido: controlla di averlo copiato tutto.';break}const o=JSON.parse(j);if(!confirm(`Ripristinare i progressi? Livello XP ${o.xp||0}, ${(o.fish||0).toLocaleString('it-IT')} pesciolini, record ${o.best||0}. Quelli attuali verranno sostituiti.`))break;try{localStorage.setItem(KEY,j)}catch(e){}idbPut(j);setTimeout(()=>location.reload(),300);break}
+    case 'audio':openFull('audio');break;case 'bkCopy':{const c=saveCode();const ta=$('#bkCode');ta.value=c;$('#bkWa').href='https://wa.me/?text='+encodeURIComponent(c);$('#bkWa').hidden=false;
+      let ok=false;try{ta.focus();ta.select();ta.setSelectionRange(0,c.length);ok=document.execCommand('copy')}catch(e){}
+      if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(c).then(()=>{$('#bkMsg').textContent='Codice copiato! Incollalo in una chat o nelle Note.'},()=>{});
+      $('#bkMsg').textContent=ok?'Codice copiato! Incollalo in una chat o nelle Note.':'Se non si è copiato: usa "Invia su WhatsApp" qui sotto, oppure tieni premuto sul codice e copialo.';break}
+    case 'bkLoad':{const j=readCode($('#bkCode').value);if(!j){$('#bkMsg').textContent='Codice non valido: controlla di averlo copiato tutto.';break}const o=JSON.parse(j);const b=$('#bkLoadBtn');
+      if(!b.dataset.arm){b.dataset.arm='1';b.textContent='Tocca di nuovo per confermare';$('#bkMsg').textContent=`Codice valido: ${(o.fish||0).toLocaleString('it-IT')} pesciolini, record ${o.best||0}, ${o.xp||0} XP. Tocca di nuovo per sostituire i progressi attuali.`;setTimeout(()=>{delete b.dataset.arm;b.textContent='Ripristina'},8000);break}
+      delete b.dataset.arm;b.textContent='Ripristino...';try{localStorage.setItem(KEY,j)}catch(e){}IDB_WAIT=false;idbPut(j);$('#bkMsg').textContent='Progressi ripristinati! Ricarico...';setTimeout(()=>location.reload(),600);break}
     case 'abmode':S.abAuto=!S.abAuto;save();renderAudio();if(!screens.menu.hidden)renderMenu();toast('Abilità: '+(S.abAuto?'automatica':'manuale'),S.abAuto?'Parte da sola quando serve':'Toccala tu: cerchio in basso a sinistra o tasto E');break;case 'bestiary':openFull('bestiary');break;case 'tutok':closeTut();break;case 'wheel':openFull('wheel');break;case 'spin':spinWheel();break;case 'revive':doRevive();break;case 'noRevive':declineRevive();break;
     case 'mute':S.mute=!S.mute;save();renderMute();if(S.mute)musicStop();else musicStart();break;
     case 'music':S.music=!S.music;save();renderMute();if(S.music)musicStart();else musicStop();break;
