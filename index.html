@@ -180,6 +180,7 @@ canvas.pv{width:100%;height:auto;display:block}
 .tcard p{margin:.1em 0 0;font-size:.78em;color:#b8d0d8;line-height:1.35}
 .tcard .rw{font-size:.74em;color:var(--amber2);margin-top:.2em}
 [hidden]{display:none!important}
+.miss.wk{border-color:rgba(185,163,255,.45);background:linear-gradient(180deg,rgba(185,163,255,.10),rgba(255,255,255,.03))}.miss.wk .bar i{background:linear-gradient(90deg,var(--violet),#e0d4ff)}
 #menu .mpanel{gap:.45em;padding:.7em .75em}#menu .logo{margin-top:2.2em}#menu .l2{font-size:3em}.tile{padding:.38em .1em .35em}.tile .ti{font-size:1.35em}.mst{padding:.25em .4em}.dailyb{padding:.4em .6em}
 #hMode{margin-top:.35em;font-family:var(--fd);font-weight:700;font-size:.72em;letter-spacing:.14em;color:#2a1900;background:linear-gradient(180deg,var(--amber2),var(--amber));border-radius:6px;padding:.1em .5em}
 #frz{position:absolute;top:3.1em;left:.75em;width:6.4em;height:.9em;border-radius:1em;background:rgba(0,0,0,.4);border:1px solid rgba(255,210,122,.5);overflow:hidden}
@@ -365,7 +366,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.25</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.26</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -415,7 +416,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
     </section>
 
     <section id="missions" class="screen full" hidden>
-      <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Missioni di oggi</h2><span class="bal"><img class="fi" alt=""><b class="balv">0</b></span></div>
+      <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Missioni</h2><span class="bal"><img class="fi" alt=""><b class="balv">0</b></span></div>
       <div class="list" id="missList"></div>
     </section>
 
@@ -439,7 +440,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.25</span>
+        <span class="beta big">BETA 0.26</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -763,7 +764,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.25';
+const KEY='flappysqualo.beta1';const BETA='0.26';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1354,14 +1355,14 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='p
 /* ---- feel: combo, near miss */
 const comboMult=()=>!run?1:run.combo>=25?3:run.combo>=10?2:1;
 function updCombo(){const c=run?run.combo||0:0,el=$('#hCombo');if(c<3){el.hidden=true;return}el.hidden=false;$('#hComboN').textContent=c;const m=comboMult();$('#hComboX').textContent='×'+m;$('#hComboX').hidden=m<2;el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
-function nearMiss(c){gainFrz(.08);const v=2*run.st.value*comboMult();run.fishVal+=v;run.nm=(run.nm||0)+1;addCharge(.3);
+function nearMiss(c){gainFrz(.08);mission('nm',1);const v=2*run.st.value*comboMult();run.fishVal+=v;run.nm=(run.nm||0)+1;addCharge(.3);
   pops.push({x:shark.x+18,y:shark.y-22,txt:'PER UN PELO! +'+v,life:1,c:'#7fffd4',big:true});tone(1200,.12,'triangle',.04,900);tone(1800,.1,'sine',.03,600,.05);
   for(let i=0;i<8;i++)parts.push({x:shark.x,y:shark.y+(Math.random()-.5)*10,vx:-80-Math.random()*80,vy:(Math.random()-.5)*60,life:.45,max:.45,c:'#bfffee',kind:'spark',r:1});updateHud()}
 function drawStreaks(){if(state!=='play'||!run)return;const k=clamp((speed-105)/55,0,1)+(t<run.turboUntil?1:0);if(k<=0)return;ctx.save();ctx.lineCap='round';
   for(let i=0;i<12;i++){const y=20+((i*97+Math.floor(scroll*.01+i)*31)%(GROUND-40)),x=W+40-((scroll*1.7+i*123)%(W+120)),L=18+k*36;ctx.strokeStyle=`rgba(220,250,255,${.06+.1*Math.min(1,k)})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+L,y);ctx.stroke()}ctx.restore()}
 
 /* ---- frenzy (gold rush) */
-function gainFrz(v){if(!run||state!=='play'||t<(run.frzUntil||0))return;run.frz=Math.min(1,(run.frz||0)+v);if(run.frz>=1){run.frz=0;run.frzUntil=t+6;run.frzOn=true;run.shake=.25;SFX.unlock();
+function gainFrz(v){if(!run||state!=='play'||t<(run.frzUntil||0))return;run.frz=Math.min(1,(run.frz||0)+v);if(run.frz>=1){run.frz=0;run.frzUntil=t+6;run.frzOn=true;run.shake=.25;mission('frz',1);SFX.unlock();
   pops.push({x:W/2,y:H*.36,txt:'FRENESIA!',life:1.6,c:'#ffd23f',big:true});pops.push({x:W/2,y:H*.36+16,txt:'invincibile · pesci ×3',life:1.6,c:'#fff3c4'});for(let i=0;i<30;i++)parts.push({x:shark.x,y:shark.y,vx:(Math.random()-.5)*260,vy:(Math.random()-.5)*260,life:.8,max:.8,c:i%2?'#ffd23f':'#fff',kind:'spark',r:1.5})}}
 function updFrz(){const el=$('#frzFill');if(!el||!run)return;const on=t<(run.frzUntil||0);run.frzOn=on;el.style.width=(on?(run.frzUntil-t)/6:run.frz||0)*100+'%';$('#frz').classList.toggle('on',on)}
 function drawFrz(){if(!run||!(t<(run.frzUntil||0)))return;const k=Math.min(1,(run.frzUntil-t)/.5);ctx.save();ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(shark.x,shark.y,10,shark.x,shark.y,W);g.addColorStop(0,`rgba(255,210,60,${.18*k})`);g.addColorStop(1,`rgba(255,180,40,${.08*k})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore();glowAt(ctx,shark.x,shark.y,40,'#ffd23f',.35*k)}
@@ -1379,7 +1380,7 @@ function initRunMode(o){run.mode=o.mode||'normal';run.seed=o.seed!=null?o.seed>>
   const el=$('#hMode');const l=runLabel();el.hidden=!l;el.textContent=l;if(run.mode==='daily'){const d=dailyState();d.tries++;save()}}
 function checkTarget(){if(run.mode==='friend'&&!run.beatTarget&&run.score>run.target){run.beatTarget=true;pops.push({x:W/2,y:H*.32,txt:`HAI BATTUTO ${(run.from||'L\'AMICO').toUpperCase()}!`,life:2,c:'#7fffd4',big:true});SFX.unlock()}}
 function finishMode(r){if(r.mode==='daily'){const d=dailyState();if(r.score>d.best){d.best=r.score;r.unl.push({txt:`Nuovo record nella sfida di oggi: ${r.score}`})}
-    if(!d.bonus&&r.score>=5){d.bonus=true;S.fish+=1000;r.unl.push({txt:'Sfida del giorno completata: +1.000 pesciolini'})}}
+    if(!d.bonus&&r.score>=5){d.bonus=true;mission('dailyc',1);S.fish+=1000;r.unl.push({txt:'Sfida del giorno completata: +1.000 pesciolini'})}}
   if(r.mode==='friend'&&r.score>r.target)r.unl.push({txt:`Hai battuto ${r.from||'il tuo amico'} (${r.target})!`})}
 function readChallenge(){try{const q=new URLSearchParams(location.search);const s=q.get('s');if(!s)return null;return{seed:(+s)>>>0,target:Math.max(0,+(q.get('r')||0)|0),from:(q.get('n')||'').slice(0,16)}}catch(e){return null}}
 function offerChallenge(){const c=readChallenge();if(!c||S.lastChal===c.seed+'-'+c.target)return;$('#chFrom').textContent=c.from||'Un amico';$('#chTarget').textContent=c.target;$('#chal').hidden=false;$('#chal').dataset.c=JSON.stringify(c)}
@@ -1422,6 +1423,25 @@ function openLogin(){if(!loginPending())return;const d=romeParts().day,L=S.login
 function claimLogin(){const st=+$('#login').dataset.st||1,v=LOGINRW[st-1];S.fish+=v;S.totalFish+=v;S.login={last:romeParts().day,streak:st};save();$('#login').hidden=true;toast(`Premio giornaliero · giorno ${st}`,`+${v.toLocaleString('it-IT')} pesciolini`);SFX.unlock();renderMenu()}
 function menuPopups(){if(state==='menu'&&!screens.menu.hidden&&$('#chal').hidden&&$('#sharebox').hidden&&(!$('#welcome')||$('#welcome').hidden)){if(readChallenge()&&!S._chalShown){S._chalShown=1;offerChallenge();if(!$('#chal').hidden)return}openLogin()}}
 
+
+/* ---- weekly missions (reset Monday 00:00 Italian time) */
+const WPOOL=[
+ {id:'runs',txt:n=>`Gioca ${n} partite`,vals:[20,30],rw:[3000,5000]},
+ {id:'obs',txt:n=>`Supera ${n} ostacoli in totale`,vals:[300,500],rw:[4000,7000]},
+ {id:'kill',txt:n=>`Uccidi ${n} animali`,vals:[60,100],rw:[4000,7000]},
+ {id:'gold',txt:n=>`Mangia ${n} pesci d'oro`,vals:[40,70],rw:[3500,6000]},
+ {id:'score',txt:n=>`Supera ${n} ostacoli in una sola partita`,vals:[60,80],rw:[5000,9000],max:true},
+ {id:'boss',txt:n=>`Affronta ${n} boss`,vals:[3,5],rw:[5000,9000]},
+ {id:'frz',txt:n=>`Attiva la Frenesia ${n} volte`,vals:[10,20],rw:[4000,7000]},
+ {id:'dailyc',txt:n=>`Completa la sfida del giorno in ${n} giorni diversi`,vals:[3,5],rw:[5000,9000]},
+ {id:'nm',txt:n=>`Fai ${n} "Per un pelo!"`,vals:[30,60],rw:[3500,6000]},
+];
+function weekKey(){const d=new Date(romeParts().day+'T12:00:00Z'),wd=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-wd);return d.toISOString().slice(0,10)}
+function ensureWeek(){const k=weekKey();if(S.week&&S.week.key===k)return;const R=rngf(daySeed('w'+k));const pool=[...WPOOL].sort(()=>R()-.5).slice(0,3);
+  S.week={key:k,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
+function weekLeft(){const sec=86400-romeParts().sec,d=new Date(romeParts().day+'T12:00:00Z'),wd=(d.getUTCDay()+6)%7,days=6-wd;return days>0?`${days} giorn${days===1?'o':'i'} e ${Math.floor(sec/3600)} ore`:`${Math.floor(sec/3600)} ore e ${Math.floor(sec%3600/60)} minuti`}
+function wmission(id,amount,isMax){if(!S.week)return;for(const m of S.week.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
+  if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione settimanale completata',WPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
 const reviveCost=()=>rvCostN(run.respawns||0);
 function offerRevive(){const c=reviveCost(),tk=S.rvTok>0;if(S.fish<c&&!tk){finishRun();return}
   reviveOpen=true;let left=5;$('#rvT').textContent=left;$('#rvBtn').innerHTML=tk?`RINASCI GRATIS · biglietto (${S.rvTok})`:`RINASCI · <img class="fi" src="${ICON}" alt=""> ${c.toLocaleString('it-IT')}`;
@@ -2039,16 +2059,16 @@ function addXp(n,unl){const before=lvInfo(S.xp).lv;S.xp+=n;const after=lvInfo(S.
 
 /* ---- daily missions */
 const MPOOL=[
- {id:'score',txt:n=>`Supera ${n} ostacoli in una partita`,vals:[15,25,35],rw:[120,200,320],max:true},
- {id:'fish',txt:n=>`Guadagna ${n} pesciolini`,vals:[150,300,600],rw:[100,180,300]},
- {id:'abil',txt:n=>`Usa ${n} abilità`,vals:[3,5,8],rw:[120,180,260]},
- {id:'pow',txt:n=>`Raccogli ${n} power-up`,vals:[2,4,6],rw:[100,160,240]},
- {id:'gold',txt:n=>`Mangia ${n} pesci d'oro`,vals:[4,8,12],rw:[120,200,280]},
- {id:'runs',txt:n=>`Gioca ${n} partite`,vals:[3,5,8],rw:[80,130,200]},
- {id:'haz',txt:n=>`Distruggi ${n} pericoli`,vals:[2,4,7],rw:[140,220,320]},
- {id:'kill',txt:n=>`Uccidi ${n} animali`,vals:[3,6,10],rw:[120,200,320]},
- {id:'biome',txt:n=>`Raggiungi: ${BIOMES[n/20].name}`,vals:[20,40],rw:[150,300],max:true},
- {id:'boss',txt:()=>'Affronta un boss',vals:[1],rw:[400]},
+ {id:'score',txt:n=>`Supera ${n} ostacoli in una partita`,vals:[15,25,35],rw:[600,1000,1600],max:true},
+ {id:'fish',txt:n=>`Guadagna ${n} pesciolini`,vals:[150,300,600],rw:[500,900,1500]},
+ {id:'abil',txt:n=>`Usa ${n} abilità`,vals:[3,5,8],rw:[600,900,1300]},
+ {id:'pow',txt:n=>`Raccogli ${n} power-up`,vals:[2,4,6],rw:[500,800,1200]},
+ {id:'gold',txt:n=>`Mangia ${n} pesci d'oro`,vals:[4,8,12],rw:[600,1000,1400]},
+ {id:'runs',txt:n=>`Gioca ${n} partite`,vals:[3,5,8],rw:[400,650,1000]},
+ {id:'haz',txt:n=>`Distruggi ${n} pericoli`,vals:[2,4,7],rw:[700,1100,1600]},
+ {id:'kill',txt:n=>`Uccidi ${n} animali`,vals:[3,6,10],rw:[600,1000,1600]},
+ {id:'biome',txt:n=>`Raggiungi: ${BIOMES[n/20].name}`,vals:[20,40],rw:[750,1500],max:true},
+ {id:'boss',txt:()=>'Affronta un boss',vals:[1],rw:[2000]},
 ];
 const BETA_RESET=true;
 
@@ -2107,16 +2127,16 @@ function migrate(){let ch=false;if(!S.mig)S.mig={};
   if(!S.mig.gift1){S.mig.gift1=1;S.fish+=200000;setTimeout(()=>toast('🎁 Regalo per i tester','+200.000 pesciolini! Grazie per i test 🦈'),2600);ch=true}
   if(ch)save()}
 function today(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-function ensureDay(){const d=today();if(S.day&&S.day.date===d)return;const R=rngf(parseInt(d.replace(/-/g,''),10));const pool=[...MPOOL].sort(()=>R()-.5).slice(0,3);
+function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d)return;const R=rngf(parseInt(d.replace(/-/g,''),10));const pool=[...MPOOL].sort(()=>R()-.5).slice(0,3);
   S.day={date:d,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
-function mission(id,amount,isMax){if(!S.day)return;for(const m of S.day.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
+function mission(id,amount,isMax){wmission(id,amount,isMax);if(!S.day)return;for(const m of S.day.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
   if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione completata',MPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
-function missionsReady(){return S.day?S.day.list.filter(m=>m.done&&!m.claimed).length:0}
+function missionsReady(){return(S.day?S.day.list.filter(m=>m.done&&!m.claimed).length:0)+(S.week?S.week.list.filter(m=>m.done&&!m.claimed).length:0)}
 
 const DEATH_TITLES=['Fine dell\'immersione','Pinna ammaccata','Squalo arenato','Morso il fondale','Risalita obbligata'];
 function finishRun(){const r=run;finishMode(r);lastRunInfo={score:r.score,seed:r.seed,mode:r.mode,from:r.from,target:r.target};S.fish+=r.fishVal;S.totalFish+=r.fishVal;S.st.runs++;S.st.gold+=r.gold;mission('fish',r.fishVal);mission('runs',1);
   const rec=r.score>S.best;if(rec)S.best=r.score;if(r.score===0)S.st.zero++;else S.st.zero=0;
-  award('first');if(r.fishVal>=150)award('run150');if(S.st.zero>=10)award('goblin');S.st.obs=(S.st.obs||0)+r.score;if(S.st.obs>=1000)award('p25');checkGlobal();
+  award('first');if(r.fishVal>=150)award('run150');if(S.st.zero>=10)award('goblin');mission('obs',r.score);S.st.obs=(S.st.obs||0)+r.score;if(S.st.obs>=1000)award('p25');checkGlobal();
   const xp=r.score*10+r.fishCount*2+r.bossesBeaten*100;addXp(xp,r.unl);S.hist.unshift({t:Date.now(),score:r.score,fish:r.fishVal,n:r.fishCount,sh:S.sel,bi:biomeIdx(r.score),boss:r.bossesBeaten,ab:r.abUsed,k:r.kills});S.hist=S.hist.slice(0,30);save();
   $('#oTitle').textContent=DEATH_TITLES[(Math.random()*DEATH_TITLES.length)|0];$('#oScore').textContent=r.score;$('#oBest').textContent=S.best;$('#oNew').hidden=!rec;
   $('#oDepth').textContent=`${depthOf(r.score)} m di profondità`;$('#oBiome').textContent=BIOMES[biomeIdx(r.score)].name;
@@ -2202,9 +2222,12 @@ function renderShop(){balances();['sharks','ups','skins'].forEach(k=>$('#tab'+k[
       let act;if(own)act=S.skin===k.id?'<button class="btn ok sm" disabled>In uso</button>':`<button class="btn sm" data-act="selSkin" data-id="${k.id}">Usa</button>`;else if(u.t==='buy')act=fishBtn('buySkin',k.id,u.cost);else act=`<button class="btn sm" disabled>Livello ${u.lv}</button>`;
       el.insertAdjacentHTML('beforeend',`<b>${k.name}</b>${act}`);grid.appendChild(el)});L.appendChild(grid)}}
 function renderMissions(){balances();ensureDay();const L=$('#missList');L.innerHTML='';
-  L.insertAdjacentHTML('beforeend','<p class="note">Tre sfide nuove ogni giorno a mezzanotte. Completale giocando e riscuoti il premio qui.</p>');
+  L.insertAdjacentHTML('beforeend',`<div class="sec">Giornaliere</div><p class="note">Tre sfide nuove ogni giorno a mezzanotte (ora italiana).</p>`);
   S.day.list.forEach((m,i)=>{const def=MPOOL.find(x=>x.id===m.id);L.insertAdjacentHTML('beforeend',`<div class="miss${m.done?' done':''}"><div class="mt"><b>${def.txt(m.n)}</b><span class="small">${m.prog}/${m.n}</span></div>
-    <div class="bar"><i style="width:${m.prog/m.n*100}%"></i></div><div class="act"><span class="lock"><img class="fi" src="${ICON}" alt=""> ${m.rw}</span>${m.claimed?'<button class="btn ok sm" disabled>Riscossa</button>':m.done?`<button class="btn buy sm" data-act="claim" data-id="${i}">Riscuoti</button>`:''}</div></div>`)})}
+    <div class="bar"><i style="width:${m.prog/m.n*100}%"></i></div><div class="act"><span class="lock"><img class="fi" src="${ICON}" alt=""> ${m.rw}</span>${m.claimed?'<button class="btn ok sm" disabled>Riscossa</button>':m.done?`<button class="btn buy sm" data-act="claim" data-id="${i}">Riscuoti</button>`:''}</div></div>`)});
+  L.insertAdjacentHTML('beforeend',`<div class="sec">Settimanali</div><p class="note">Tre sfide grosse ogni settimana, premi più ricchi. Si rinnovano tra ${weekLeft()} (lunedì a mezzanotte).</p>`);
+  S.week.list.forEach((m,i)=>{const def=WPOOL.find(x=>x.id===m.id);L.insertAdjacentHTML('beforeend',`<div class="miss wk${m.done?' done':''}"><div class="mt"><b>${def.txt(m.n)}</b><span class="small">${m.prog.toLocaleString('it-IT')}/${m.n.toLocaleString('it-IT')}</span></div>
+    <div class="bar"><i style="width:${m.prog/m.n*100}%"></i></div><div class="act"><span class="lock"><img class="fi" src="${ICON}" alt=""> ${m.rw.toLocaleString('it-IT')}</span>${m.claimed?'<button class="btn ok sm" disabled>Riscossa</button>':m.done?`<button class="btn buy sm" data-act="claimw" data-id="${i}">Riscuoti</button>`:''}</div></div>`)})}
 function renderTrophies(){const L=$('#troList');L.innerHTML='';$('#troCount').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;
   [['Trofei',TROPHIES.filter(t=>!t.hidden)],['Trofei nascosti',TROPHIES.filter(t=>t.hidden)]].forEach(([title,arr])=>{L.insertAdjacentHTML('beforeend',`<div class="sec">${title}</div>`);
     arr.forEach(tr=>{const done=!!S.tro[tr.id],hid=tr.hidden&&!done,rw=tr.shark?`Premio: ${hid?'una creatura misteriosa':SHB[tr.shark].name}`:`Premio: ${tr.reward} pesciolini`;
@@ -2270,6 +2293,7 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'buyMorph':{const m=MOB[id];if(S.fish>=m.cost&&!S.morphs.includes(id)){S.fish-=m.cost;S.morphs.push(id);S.morph[m.base]=id;SFX.buy();toast('Trasformazione sbloccata',m.name);save();checkGlobal()}renderShop();break}
     case 'selMorph':S.morph[MOB[id].base]=id;save();SFX.buy();renderShop();break;
     case 'unmorph':delete S.morph[S.sel];save();renderShop();break;
+    case 'claimw':{const m=S.week.list[+id];if(m&&m.done&&!m.claimed){m.claimed=true;S.fish+=m.rw;S.st.claimed++;SFX.buy();save();checkGlobal()}renderMissions();break}
     case 'claim':{const m=S.day.list[+id];if(m&&m.done&&!m.claimed){m.claimed=true;S.fish+=m.rw;S.st.claimed++;SFX.buy();save();checkGlobal()}renderMissions();break}
   }});
 window.addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('textarea,input'))return;if((e.code==='Escape'||e.code==='KeyP')&&!e.repeat&&(state==='play'||state==='pause')){e.preventDefault();if(state==='play')pauseGame();else if(!$('#pauseBox').hidden)resumeGame();return}
