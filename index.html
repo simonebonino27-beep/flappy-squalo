@@ -180,6 +180,32 @@ canvas.pv{width:100%;height:auto;display:block}
 .tcard p{margin:.1em 0 0;font-size:.78em;color:#b8d0d8;line-height:1.35}
 .tcard .rw{font-size:.74em;color:var(--amber2);margin-top:.2em}
 [hidden]{display:none!important}
+.mtop{position:absolute;top:.7em;left:.7em;right:.7em;display:flex;align-items:center;justify-content:space-between;gap:.5em;z-index:6;pointer-events:auto}
+.mtop .mute,.mtop .fbtop{position:static;width:auto}
+.mtop-r{display:flex;gap:.4em}
+.wallet{display:flex;align-items:center;gap:.4em;background:linear-gradient(180deg,rgba(255,210,122,.22),rgba(242,179,61,.12));border:1px solid rgba(255,210,122,.6);border-radius:2em;padding:.25em .8em .25em .45em;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.wallet img.fi{height:1.15em;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.wallet b{font-family:var(--fd);font-weight:800;font-size:1.35em;color:var(--amber2);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+#menu .logo{margin-top:2.4em}#menu .l2{font-size:3.4em}
+.sharkcard{display:flex;align-items:center;justify-content:space-between;gap:.6em}
+.sharkcard .scl{display:flex;flex-direction:column;min-width:0}
+.sharkcard .scl b{font-family:var(--fd);font-size:1.3em;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sharkcard .scl i{font-size:.74em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sharkcard .rar{align-self:flex-start;margin:0 0 .2em}
+.sharkcard .btn{width:auto;flex:none}
+.abline .stars{color:var(--amber2);letter-spacing:.05em;margin-left:.2em}
+.mstats{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:.4em}
+.mst{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:.35em .5em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15em;min-width:0}
+.mst .lbl{font-size:.62em}
+.mst>b{font-family:var(--fd);font-size:1.3em;font-weight:800;line-height:1}
+.mst.lv .lbl b{color:var(--violet);font-size:1.25em}
+.mst.lv .bar{width:100%;height:.4em;flex:none}.mst.lv .bar i{background:linear-gradient(90deg,var(--violet),#e0d4ff)}
+.mst small{font-size:.62em;color:var(--muted);font-variant-numeric:tabular-nums}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em}
+.tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15em;font-family:var(--fd);font-size:.74em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text);background:rgba(20,52,68,.85);border:1px solid var(--line2);border-radius:12px;padding:.5em .15em .45em;cursor:pointer;line-height:1.05;transition:background .15s,transform .1s}
+.tile:active{transform:scale(.96)}.tile .ti{font-size:1.6em;line-height:1}
+.tile small{font-size:.82em;color:var(--muted);font-weight:600;letter-spacing:0}
+.tile .badge{position:absolute;top:-.4em;right:-.3em;margin:0}
 #pauseBtn{position:absolute;top:.7em;right:.75em;width:2.3em;height:2.3em;border-radius:10px;background:var(--glass);border:1px solid var(--line2);color:#fff;display:flex;align-items:center;justify-content:center;gap:.28em;pointer-events:auto;cursor:pointer;padding:0;touch-action:manipulation}
 #pauseBtn i{display:block;width:.32em;height:1em;background:#fff;border-radius:2px}
 #hShields{right:3.6em!important}
@@ -302,25 +328,29 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
     <div id="tapHint" hidden><b>TOCCA PER NUOTARE</b><span>Tocca per nuotare. Tieni premuto per planare dritto. L'abilità parte da sola (o tasto E).</span></div>
 
     <section id="menu" class="screen">
-      <button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button><button class="btn sm fbtop" data-act="feedback">Feedback</button>
+      <div class="mtop"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><span class="beta">BETA 0.22</span>
-        <span class="tag">Dalla barriera corallina ai ghiacci artici. Mangia pesci, caccia creature, sconfiggi i boss.</span>
+        <span class="l2">SQUALO</span><span class="beta">BETA 0.23</span>
       </header>
       <div class="mpanel">
-        <div class="who"><div><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
+        <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
         <div class="abline" id="mAb"></div>
-        <div class="lvrow"><span class="lvbadge">LV <b id="mLv">1</b></span><div class="bar"><i id="mXp"></i></div><span id="mXpTxt" class="small"></span></div>
-        <div class="stats"><span class="gold"><img class="fi" alt="Pesciolini"> <b id="mFish">0</b></span><span>Record <b id="mBest">0</b></span><button class="btn sm" data-act="history">Ultime partite</button></div>
+        <div class="mstats">
+          <div class="mst"><span class="lbl">Record</span><b id="mBest">0</b></div>
+          <div class="mst lv"><span class="lbl">Livello <b id="mLv">1</b></span><div class="bar"><i id="mXp"></i></div><small id="mXpTxt"></small></div>
+          <div class="mst"><span class="lbl">Partite</span><b id="mRuns">0</b></div>
+        </div>
         <button class="btn big" data-act="play">NUOTA</button>
-        <div class="grid2">
-          <button class="btn" data-act="shop">Negozio</button>
-          <button class="btn" data-act="missions">Missioni<span class="badge" id="mBadge" hidden>0</span></button>
-          <button class="btn" data-act="trophies">Trofei</button>
-          <button class="btn" data-act="levels">Livelli</button>
-          <button class="btn" data-act="wheel">Ruota<span class="badge" id="wBadge" hidden>1</span></button>
-          <button class="btn" data-act="bestiary">Bestiario</button>
+        <div class="mgrid">
+          <button class="tile" data-act="shop" data-tab="ups"><span class="ti">🛒</span>Negozio</button>
+          <button class="tile" data-act="wheel"><span class="ti">🎡</span>Ruota<span class="badge" id="wBadge" hidden>1</span></button>
+          <button class="tile" data-act="missions"><span class="ti">📋</span>Missioni<span class="badge" id="mBadge" hidden>0</span></button>
+          <button class="tile" data-act="trophies"><span class="ti">🏆</span>Trofei<small id="mTro"></small></button>
+          <button class="tile" data-act="bestiary"><span class="ti">📖</span>Bestiario<small id="mBes"></small></button>
+          <button class="tile" data-act="levels"><span class="ti">⭐</span>Livelli</button>
+          <button class="tile" data-act="history"><span class="ti">🕘</span>Partite</button>
+          <button class="tile" data-act="shop" data-tab="skins"><span class="ti">🎨</span>Skin</button>
         </div>
       </div>
     </section>
@@ -373,7 +403,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.22</span>
+        <span class="beta big">BETA 0.23</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -668,7 +698,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.22';
+const KEY='flappysqualo.beta1';const BETA='0.23';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1578,7 +1608,7 @@ function update(dt){if(state==='tut'||state==='pause')return;t+=dt;
   for(const s of SNOW){s.y+=s.v*dt;s.x-=(spd*.06+2)*dt;if(s.y>H){s.y=-2;s.x=Math.random()*W}if(s.x<0)s.x+=W}
   if(!bigCreature&&Math.random()<dt*.04)bigCreature={bi:bgTo,x:W+120,y:110+Math.random()*180,s:.8+Math.random()*.5};
   if(bigCreature){bigCreature.x-=(14+spd*.12)*dt;if(bigCreature.x<-160)bigCreature=null}
-  if(state==='menu'){shark.y=200+Math.sin(t*1.6)*6;shark.rot=Math.sin(t*1.6+1)*.05}
+  if(state==='menu'){shark.y=168+Math.sin(t*1.6)*6;shark.rot=Math.sin(t*1.6+1)*.05}
   else if(state==='ready'){shark.y=225+Math.sin(t*2.4)*6;shark.rot=Math.sin(t*2.4+1)*.06}
   else if(playing){
     speed=Math.min(160,95+run.score*1.0);const wsp=speed*ws;
@@ -1742,7 +1772,7 @@ function render(){
   // shark
   const sp=curSpec(),pal=palette(sp,S.skin);
   if(state!=='menu'){const sh=clamp(1-(GROUND-shark.y)/200,0,1);if(sh>0){ctx.fillStyle=`rgba(0,0,0,${.25*sh})`;ell(ctx,shark.x,GROUND+3,sp.L*.5*sh,2*sh)}}
-  if(state==='menu')renderShark(135,shark.y,shark.rot,2.1,sp,S.skin,1,animT);
+  if(state==='menu')renderShark(135,shark.y,shark.rot,1.9,sp,S.skin,1,animT);
   else{const sc=run&&t<run.roarUntil?1.5:1,ghost=run&&t<run.ghostUntil,blink=run&&run.inv>0&&Math.floor(t*14)%2===0;
     for(const cp of companions)renderShark(cp.x,cp.y,0,.55,ORCA_SP,'naturale',1,animT+cp.o*2);
     if(ghost){for(let k=1;k<=2;k++)renderShark(shark.x-k*7,shark.y,shark.rot,sc,sp,S.skin,.15,animT-k*.3)}
@@ -1904,9 +1934,9 @@ document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.vol
 function perksHTML(pk){const a=perkList(pk);return a.length?a.map(x=>`<li>${x}</li>`).join(''):'<li class="neutral">Nessun bonus passivo</li>'}
 function stars(n){return`<span class="stars">${'★'.repeat(n)}<i>${'★'.repeat(5-n)}</i></span>`}
 function renderMenu(){ensureDay();$('#wBadge').hidden=!wheelFree();const s=SHB[S.sel],m=S.morph[S.sel];$('#mName').textContent=m?MOB[m].name:s.name;$('#mLatin').textContent=(m?MOB[m].latin:s.latin)+(S.skin!=='naturale'?` · ${COB[S.skin].name}`:'');
-  $('#mAb').innerHTML=`Abilità: <b>${s.ab.name}</b> · ${stats().value} per pesciolino<button class="abmode" data-act="abmode" title="Cambia attivazione abilità">${S.abAuto?'⚙️ Automatica':'👆 Manuale'} ⇄</button>`;
+  $('#mAb').innerHTML=`Abilità: <b>${s.ab.name}</b><span class="stars">${'★'.repeat(s.ab.tier||1)}</span> · ${stats().value} per pesciolino<button class="abmode" data-act="abmode" title="Cambia attivazione abilità">${S.abAuto?'⚙️ Automatica':'👆 Manuale'} ⇄</button>`;
   const li=lvInfo(S.xp);$('#mLv').textContent=li.lv;$('#mXp').style.width=(li.rem/li.need*100)+'%';$('#mXpTxt').textContent=`${li.rem}/${li.need} XP`;
-  $('#mFish').textContent=S.fish;$('#mBest').textContent=S.best;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
+  $('#mFish').textContent=S.fish.toLocaleString('it-IT');$('#mBest').textContent=S.best;$('#mRuns').textContent=(S.st.runs||0).toLocaleString('it-IT');{const rr=RAR[S.sel]||0,e=$('#mRar');e.textContent=RARN[rr];e.style.color=RARC[rr]}$('#mTro').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;$('#mBes').textContent=`${BORDER.filter(k=>S.seen[k]).length}/${BORDER.length}`;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
 const PVC={};
 function pv(sp,skin,sil,w=300,h=120){const c=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1);c.width=w*dpr;c.height=h*dpr;c.className='pv';const g=c.getContext('2d');g.scale(dpr,dpr);
   const bg=g.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#2a8ea6');bg.addColorStop(1,'#0b3a52');g.fillStyle=bg;g.fillRect(0,0,w,h);
