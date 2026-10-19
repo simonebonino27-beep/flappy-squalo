@@ -253,6 +253,10 @@ canvas.pv{width:100%;height:auto;display:block}
 #guide .gbox{position:absolute;left:4%;right:4%;display:flex;align-items:flex-end;gap:.35em;pointer-events:none}#guide .pinna{width:5.4em;flex:none;animation:hbob .8s ease-in-out infinite alternate;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}#guide .gbub{background:#fff;color:#123;border-radius:16px;padding:.7em .85em;font-size:.95em;line-height:1.35;box-shadow:0 6px 20px rgba(0,0,0,.45);position:relative;flex:1}#guide .gbub p{margin:0}#guide .gbub b{color:#1a5f8f}#guide .gbub small{display:block;margin-top:.35em;color:#5a7a8a;font-size:.78em}#guide .gbub::before{content:'';position:absolute;left:-8px;bottom:16px;border:8px solid transparent;border-right-color:#fff;border-left:0}
 #guide .gfinger{position:absolute;font-size:1.9em;pointer-events:none;animation:hbob .45s ease-in-out infinite alternate;z-index:2}#guide .gskip{position:absolute;right:.8em;top:.8em;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:2em;padding:.45em .9em;color:#e8f6fb;font-size:.82em;font-weight:700;cursor:pointer}
 .inboxb{position:relative;font-size:1.05em;padding-left:.55em;padding-right:.55em}.ibm{display:flex;gap:.6em;align-items:center;padding:.65em .7em;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.05)}.ibm.done{opacity:.55}.ibi{font-size:1.6em}.ibt{flex:1;min-width:0}.ibt b{font-family:var(--fd);font-size:1.05em}.ibt p{margin:.15em 0 0;font-size:.82em;color:var(--muted)}.ibg{display:inline-block;margin-top:.3em;font-size:.8em;font-weight:700;color:#ffd27a}
+.lbbtn{display:flex;flex-direction:column;align-items:center;gap:.15em;padding:.4em .6em;background:linear-gradient(180deg,rgba(255,210,122,.18),rgba(150,100,30,.22));border-color:rgba(255,210,122,.55);position:relative}.lbbtn small{font-size:.72em;opacity:.8;text-transform:none;letter-spacing:0;font-family:system-ui}
+.lbme{font-size:.9em}.lbadd{display:flex;gap:.4em}.lbadd input,#nbIn{flex:1;font:inherit;padding:.6em .7em;border-radius:10px;border:1px solid var(--line2);background:rgba(0,0,0,.3);color:#fff}#nbIn{width:100%;box-sizing:border-box;margin:.4em 0}.nberr{display:block;min-height:1.2em;color:#ff9a8a;margin-bottom:.4em}
+.lbrow{display:flex;align-items:center;gap:.6em;width:100%;padding:.6em .7em;margin-bottom:.4em;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:#fff;font:inherit;text-align:left;cursor:pointer}.lbrow.me{border-color:#ffd27a;background:rgba(255,210,122,.12)}.lbpos{width:1.8em;text-align:center;font-weight:800}.lbn{flex:1;display:flex;flex-direction:column}.lbn small{color:var(--muted);font-size:.78em}.lbrow b{font-family:var(--fd);font-size:1.3em}
+.modal{position:absolute;inset:0;z-index:80;background:rgba(2,10,16,.7);display:flex;align-items:center;justify-content:center;padding:1em}.modal .ocard{width:100%}.upst{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em;text-align:center}.upst b{display:block;font-family:var(--fd);font-size:1.3em}.upsh{display:flex;flex-wrap:wrap;gap:.3em;margin:.4em 0 .8em}.upsh span{font-size:.75em;border:1px solid;border-radius:1em;padding:.15em .55em}
 #pauseBtn i{display:block;width:.32em;height:1em;background:#fff;border-radius:2px}
 #hShields{right:3.6em!important}
 #pause{align-items:center;justify-content:center;padding:1em;background:rgba(1,10,16,.6);z-index:9}
@@ -380,7 +384,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.49</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.50</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -392,6 +396,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
         </div>
         <button class="btn big" data-act="play">NUOTA</button>
         <button class="btn dailyb" data-act="daily" data-feat="daily"><span>🏁 Sfida del giorno</span><small id="mDaily"></small><em class="lk"></em></button>
+        <button class="btn lbbtn" data-act="board" data-feat="board"><span>🏅 Classifica amici</span><small>Chi fa più ostacoli questa settimana?</small><em class="lk"></em></button>
         <div class="mgrid">
           <button class="tile" data-act="shop" data-tab="ups" data-feat="shop"><span class="ti">🛒</span>Negozio<em class="lk"></em></button>
           <button class="tile" data-act="wheel" data-feat="wheel"><span class="ti">🎡</span>Ruota<em class="lk"></em><span class="badge" id="wBadge" hidden>1</span></button>
@@ -437,6 +442,13 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <div id="guide" hidden><div class="ghole"></div><span class="gfinger">👆</span><div class="gbox"><svg class="pinna" viewBox="0 0 120 84" aria-hidden="true"><path d="M14 46 L2 30 Q10 44 4 60 Z" fill="#3f78a6" stroke="#0e2a3d" stroke-width="2.2" stroke-linejoin="round"/><path d="M70 24 Q62 6 44 5 Q53 14 50 26 Z" fill="#3f78a6" stroke="#0e2a3d" stroke-width="2.2" stroke-linejoin="round"/><ellipse cx="62" cy="46" rx="48" ry="24" fill="#5b9bcc" stroke="#0e2a3d" stroke-width="2.2"/><path d="M22 52 Q60 74 106 50 Q92 66 62 68 Q36 68 22 52Z" fill="#eef7fb"/><path d="M54 60 Q46 74 36 76 Q46 64 46 58Z" fill="#3f78a6" stroke="#0e2a3d" stroke-width="2" stroke-linejoin="round"/><path d="M70 34 L72 40 M75 33 L77 39" stroke="#2a5f87" stroke-width="1.6" stroke-linecap="round"/><circle cx="88" cy="38" r="9" fill="#fff" stroke="#0e2a3d" stroke-width="2"/><circle cx="90" cy="39" r="5" fill="#0e2a3d"/><circle cx="92" cy="36.5" r="1.8" fill="#fff"/><path d="M92 54 Q100 56 106 50" fill="none" stroke="#0e2a3d" stroke-width="2.2" stroke-linecap="round"/><ellipse cx="81" cy="52" rx="4" ry="2.4" fill="#ff9aa8" opacity=".75"/></svg><div class="gbub"><p></p><small>Tocca il punto illuminato per aprirlo, o ovunque per andare avanti</small></div></div><button class="gskip">Gioco già, salta la guida ✕</button></div>
 
+    <section id="board" class="screen full" hidden>
+      <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Classifica amici</h2></div>
+      <div class="list" id="lbList"></div>
+    </section>
+    <div id="userpop" class="modal" hidden><div class="ocard"><h2 id="upName"></h2><div id="upBody"></div><button class="btn" data-act="upClose">Chiudi</button></div></div>
+    <div id="namebox" class="modal" hidden><div class="ocard"><span class="lbl">Prima di tuffarti</span><h2>Come ti chiami, squalo?</h2><p class="note">È il nome che vedranno i tuoi amici in classifica.</p><input id="nbIn" type="text" maxlength="14" autocapitalize="off" autocomplete="off" placeholder="Es. SqualoBianco27"><small id="nbErr" class="nberr"></small><button class="btn big" data-act="nameOk">CONFERMA</button></div></div>
+
     <section id="missions" class="screen full" hidden>
       <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Missioni</h2><span class="bal"><img class="fi" alt=""><b class="balv">0</b></span></div>
       <div class="list" id="missList"></div>
@@ -462,7 +474,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.49</span>
+        <span class="beta big">BETA 0.50</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -848,7 +860,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.49';
+const KEY='flappysqualo.beta1';const BETA='0.50';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -2263,7 +2275,7 @@ async function adInit(){const A=admobP();if(A)try{await A.initialize({})}catch(e
 let iapDone=false;const iapGo=()=>{if(iapDone||!window.CdvPurchase)return;iapDone=true;iapInit()};document.addEventListener('deviceready',iapGo);setTimeout(()=>{iapGo();adInit()},1500);
 
 /* ---- Pinna: guided unlocks + inbox */
-const FEATC={shop:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],inbox:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],sharks:[()=>S.st.runs>=2,'dopo 2 partite','2 partite'],missions:[()=>S.st.runs>=2,'dopo 2 partite','2 partite'],
+const FEATC={shop:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],inbox:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],board:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],sharks:[()=>S.st.runs>=2,'dopo 2 partite','2 partite'],missions:[()=>S.st.runs>=2,'dopo 2 partite','2 partite'],
   wheel:[()=>lvInfo(S.xp).lv>=2,'al livello 2','Liv. 2'],bestiary:[()=>S.st.runs>=3,'dopo 3 partite','3 partite'],daily:[()=>lvInfo(S.xp).lv>=3,'al livello 3','Liv. 3'],skins:[()=>lvInfo(S.xp).lv>=3,'al livello 3','Liv. 3'],
   trophies:[()=>S.st.runs>=4,'dopo 4 partite','4 partite'],levels:[()=>S.st.runs>=4,'dopo 4 partite','4 partite'],history:[()=>S.st.runs>=5,'dopo 5 partite','5 partite'],gems:[()=>lvInfo(S.xp).lv>=4,'al livello 4','Liv. 4']};
 const GSTEPS=[
@@ -2271,6 +2283,7 @@ const GSTEPS=[
  {id:'inbox',feat:'inbox',sel:'[data-act=inbox]',txt:()=>'Questa è la tua <b>posta</b> 📬: regali e premio giornaliero arrivano qui. Aprila!'},
  {id:'shop',feat:'shop',sel:'.tile[data-tab=ups]',txt:()=>'Hai i tuoi primi pesciolini! Nel <b>Negozio</b> li spendi per potenziare il tuo squalo.'},
  {id:'sharks',feat:'sharks',sel:'.sharkcard [data-tab=sharks]',txt:()=>'Puoi cambiare squalo! Ognuno ha un\'abilità diversa: tocca <b>Cambia</b> per vederli tutti.'},
+ {id:'board',feat:'board',sel:'[data-act=board]',txt:()=>'La <b>Classifica amici</b>: aggiungi i tuoi amici col loro nome e vedi chi fa più ostacoli questa settimana!'},
  {id:'missions',feat:'missions',sel:'[data-act=missions]',txt:()=>'Le <b>Missioni</b> ti pagano extra: 3 nuove ogni giorno e 3 grosse ogni settimana.'},
  {id:'wheel',feat:'wheel',sel:'[data-act=wheel]',txt:()=>'Livello 2! Ogni giorno hai un <b>giro gratis</b> della Ruota della fortuna.'},
  {id:'bestiary',feat:'bestiary',sel:'[data-act=bestiary]',txt:()=>'Nel <b>Bestiario</b> trovi ogni animale e boss che incontri, e come batterlo.'},
@@ -2281,7 +2294,7 @@ const GSTEPS=[
  {id:'history',feat:'history',sel:'[data-act=history]',txt:()=>'Qui ritrovi le tue <b>ultime partite</b>.'},
  {id:'gems',feat:'gems',sel:'.gemw',txt:()=>'Queste sono le <b>gemme</b> 💎, la moneta più preziosa: servono per rinascere e per le cose speciali.'}];
 let guideStep=null,guideEl=null;
-function guideCheck(){if(state!=='menu'||screens.menu.hidden||guideStep||!$('#login').hidden||!$('#chal').hidden||!$('#sharebox').hidden||(screens.welcome&&!screens.welcome.hidden))return;S.guide=S.guide||{};if(S.guide._off)return;
+function guideCheck(){if(state==='menu'&&!screens.menu.hidden&&!S.uname){askName();return}if(state!=='menu'||screens.menu.hidden||guideStep||!$('#namebox').hidden||!$('#login').hidden||!$('#chal').hidden||!$('#sharebox').hidden||(screens.welcome&&!screens.welcome.hidden))return;S.guide=S.guide||{};if(S.guide._off)return;
   for(const st of GSTEPS){if(S.guide[st.id]||(st.feat&&!featOk(st.feat)))continue;const el=$('#menu '+st.sel);if(!el||!el.offsetParent)continue;showGuide(st,el);return}}
 function showGuide(st,el){guideStep=st;guideEl=el;const g=$('#guide'),fr=frameEl.getBoundingClientRect(),r=el.getBoundingClientRect(),pad=6,h=g.querySelector('.ghole'),bx=g.querySelector('.gbox');
   h.style.left=(r.left-fr.left-pad)+'px';h.style.top=(r.top-fr.top-pad)+'px';h.style.width=(r.width+pad*2)+'px';h.style.height=(r.height+pad*2)+'px';
@@ -2316,6 +2329,45 @@ function drawCue(z){const T=z.type,k=.5+Math.sin(t*9)*.18;if(z.trial)return;
   if(dangerNow(z))glowAt(ctx,z.x,z.y,20,'#ff3a2a',.55*k+.2)}
 function firstMeet(k){if(S.seen[k])return;S.seen[k]=1;save();if(BORDER.every(x=>S.seen[x]))award('bestiary');if(S.tips===false||!run)return;const B=BEASTS[k]||{};
   run.slowUntil=Math.max(run.slowUntil,t+1.1);run.slowF=.35;pops=pops.filter(q=>!q.hint);pops.push({hint:1,x:W/2,y:H*.3,txt:HINT[k]||(B.boss?`${B.name}: rispediscigli i colpi col cerchio dorato!`:B.name),life:2.6,c:'#aaffb8',big:true});SFX.warn()}
+
+/* ---- weekly friends leaderboard (Firebase via REST, no SDK) */
+const FB={apiKey:'',projectId:''};
+const fbOn=()=>!!(FB.apiKey&&FB.projectId);
+const FSB=()=>`https://firestore.googleapis.com/v1/projects/${FB.projectId}/databases/(default)/documents`;
+let fbTok=null,fbExp=0;
+async function fbAuth(){if(!fbOn())throw 'off';if(fbTok&&Date.now()<fbExp-60000)return fbTok;S.fb=S.fb||{};
+  if(S.fb.rt){const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(S.fb.rt)});
+    if(r.ok){const j=await r.json();fbTok=j.id_token;fbExp=Date.now()+(+j.expires_in)*1000;S.fb.uid=j.user_id;S.fb.rt=j.refresh_token;return fbTok}}
+  const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({returnSecureToken:true})});
+  if(!r.ok)throw 'auth';const j=await r.json();fbTok=j.idToken;fbExp=Date.now()+(+j.expiresIn)*1000;S.fb.uid=j.localId;S.fb.rt=j.refreshToken;save();return fbTok}
+const fv=v=>Array.isArray(v)?{arrayValue:{values:v.map(fv)}}:typeof v==='number'?{integerValue:String(Math.round(v))}:{stringValue:String(v)};
+const fr=x=>!x?null:'integerValue'in x?+x.integerValue:'stringValue'in x?x.stringValue:'arrayValue'in x?(x.arrayValue.values||[]).map(fr):'doubleValue'in x?+x.doubleValue:null;
+const fdoc=d=>{const o={};for(const k in (d.fields||{}))o[k]=fr(d.fields[k]);o._id=d.name.split('/').pop();return o};
+async function fbReq(path,opt={}){const tk=await fbAuth();const r=await fetch(FSB()+path,Object.assign({},opt,{headers:Object.assign({'Content-Type':'application/json',Authorization:'Bearer '+tk},opt.headers||{})}));return r}
+const BAD=['cazzo','merda','puttana','troia','stronz','vaffan','coglion','frocio','negro','fuck','shit','bitch','porco','dio'];
+function nameOk(n){if(!/^[A-Za-z0-9_.]{3,14}$/.test(n))return'Da 3 a 14 caratteri: lettere, numeri, _ o .';const l=n.toLowerCase();if(BAD.some(b=>l.includes(b)))return'Scegli un nome più gentile 🙂';return''}
+async function claimName(n){const e=nameOk(n);if(e)return e;if(!fbOn()){S.uname=n;save();return''}
+  try{await fbAuth();const r=await fbReq(`/names?documentId=${encodeURIComponent(n.toLowerCase())}`,{method:'POST',body:JSON.stringify({fields:{uid:fv(S.fb.uid),name:fv(n)}})});
+    if(r.status===409)return'Questo nome è già preso, provane un altro';if(!r.ok)return'Errore di connessione, riprova';S.uname=n;save();pushProfile();return''}catch(e){return'Errore di connessione, riprova'}}
+function myProfile(){const wk=weekKey();if(S.wk!==wk){S.wk=wk;S.wkBest=0}return{name:S.uname,level:lvInfo(S.xp).lv,best:S.best,fish:S.fish,sharks:S.owned.slice(),week:wk,weekBest:S.wkBest||0}}
+async function pushProfile(){if(!fbOn()||!S.uname)return;try{await fbAuth();const p=myProfile(),fields={};for(const k in p)fields[k]=fv(p[k]);
+  await fbReq(`/users/${S.fb.uid}`,{method:'PATCH',body:JSON.stringify({fields})})}catch(e){}}
+function lbAfterRun(score){const wk=weekKey();if(S.wk!==wk){S.wk=wk;S.wkBest=0}if(score>(S.wkBest||0))S.wkBest=score;save();pushProfile()}
+async function addFriend(n){n=(n||'').trim();if(!n)return;if(!fbOn()){toast('Classifica','In arrivo a breve!');return}if(S.uname&&n.toLowerCase()===S.uname.toLowerCase()){toast('Ehi','Quello sei tu 😄');return}
+  try{const r=await fbReq(`/names/${encodeURIComponent(n.toLowerCase())}`);if(r.status===404){toast('Non trovato',`Nessuno squalo si chiama "${n}"`);return}const d=fdoc(await r.json());S.friends=S.friends||[];
+    if(!S.friends.includes(d.uid)){S.friends.push(d.uid);save();toast('Amico aggiunto 🦈',d.name)}renderBoard()}catch(e){toast('Errore','Controlla la connessione')}}
+let boardCache=[];
+async function renderBoard(){const L=$('#lbList');const wk=weekKey();
+  L.innerHTML=`<div class="lbme">Tu sei <b>${S.uname||'—'}</b> · gli amici ti aggiungono con questo nome</div><div class="lbadd"><input id="lbName" type="text" placeholder="Nome di un amico" maxlength="14" autocapitalize="off"><button class="btn buy sm" data-act="lbAdd">Aggiungi</button></div><p class="note">Classifica della settimana: si azzera ogni lunedì a mezzanotte.</p><div id="lbRows"><p class="note" style="text-align:center">Carico…</p></div>`;
+  if(!fbOn()){$('#lbRows').innerHTML='<p class="note" style="text-align:center;margin-top:1.5em">🏗️ La classifica online si accende a breve: intanto aggiungi i nomi dei tuoi amici!</p>';return}
+  try{await pushProfile();const ids=[S.fb.uid,...(S.friends||[])];const r=await fbReq(':batchGet',{method:'POST',body:JSON.stringify({documents:ids.map(u=>`projects/${FB.projectId}/databases/(default)/documents/users/${u}`)})});
+    const arr=(await r.json()).filter(x=>x.found).map(x=>fdoc(x.found));boardCache=arr;const rows=arr.map(u=>({u,sc:u.week===wk?u.weekBest||0:0})).sort((a,b)=>b.sc-a.sc);
+    $('#lbRows').innerHTML=rows.map((x,i)=>`<button class="lbrow${x.u._id===S.fb.uid?' me':''}" data-act="lbUser" data-id="${x.u._id}"><span class="lbpos">${i<3?['🥇','🥈','🥉'][i]:i+1}</span><span class="lbn">${x.u.name}<small>Livello ${x.u.level||1}</small></span><b>${x.sc}</b></button>`).join('')+(rows.length<2?'<p class="note" style="text-align:center">Aggiungi i tuoi amici per sfidarli!</p>':'')}
+  catch(e){$('#lbRows').innerHTML='<p class="note" style="text-align:center">Niente connessione: riprova più tardi.</p>'}}
+function showUser(id){const u=boardCache.find(x=>x._id===id);if(!u)return;const sh=(u.sharks||[]).filter(k=>SHB[k]);
+  $('#upName').textContent=u.name;$('#upBody').innerHTML=`<div class="upst"><div><span class="lbl">Livello</span><b>${u.level||1}</b></div><div><span class="lbl">Record</span><b>${(u.best||0).toLocaleString('it-IT')}</b></div><div><span class="lbl">Pesciolini</span><b>${(u.fish||0).toLocaleString('it-IT')}</b></div></div><div class="lbl" style="margin-top:.6em">Squali sbloccati: ${sh.length}/${SHARKS.length}</div><div class="upsh">${sh.map(k=>`<span style="border-color:${RARC[RAR[k]||0]}">${SHB[k].name}</span>`).join('')}</div>`;$('#userpop').hidden=false}
+function askName(){if(S.uname||!$('#namebox').hidden)return;$('#nbErr').textContent='';$('#nbIn').value='';$('#namebox').hidden=false}
+async function submitName(){const n=($('#nbIn').value||'').trim();$('#nbErr').textContent='Controllo…';const e=await claimName(n);$('#nbErr').textContent=e;if(!e){$('#namebox').hidden=true;toast('Benvenuto '+n+' 🦈','Questo è il tuo nome in classifica');renderMenu()}}
 
 /* ---- tutorial & bestiary */
 function openTut(k){const B=BEASTS[k];if(!B)return;state='tut';holding=false;
@@ -2918,7 +2970,7 @@ function mission(id,amount,isMax){wmission(id,amount,isMax);if(!S.day)return;for
 function missionsReady(){return(S.day?S.day.list.filter(m=>m.done&&!m.claimed).length:0)+(S.week?S.week.list.filter(m=>m.done&&!m.claimed).length:0)}
 
 const DEATH_TITLES=['Fine dell\'immersione','Pinna ammaccata','Squalo arenato','Morso il fondale','Risalita obbligata'];
-function finishRun(){const r=run;if(S.doubler&&!r.dbl){r.dbl=1;r.fishVal*=2}finishMode(r);lastRunInfo={score:r.score,seed:r.seed,mode:r.mode,from:r.from,target:r.target};S.fish+=r.fishVal;S.totalFish+=r.fishVal;S.st.runs++;S.st.gold+=r.gold;mission('fish',r.fishVal);mission('runs',1);
+function finishRun(){const r=run;try{lbAfterRun(r.score)}catch(e){}if(S.doubler&&!r.dbl){r.dbl=1;r.fishVal*=2}finishMode(r);lastRunInfo={score:r.score,seed:r.seed,mode:r.mode,from:r.from,target:r.target};S.fish+=r.fishVal;S.totalFish+=r.fishVal;S.st.runs++;S.st.gold+=r.gold;mission('fish',r.fishVal);mission('runs',1);
   const rec=r.score>S.best;if(rec)S.best=r.score;if(r.score===0)S.st.zero++;else S.st.zero=0;
   award('first');if(r.fishVal>=150)award('run150');if(S.st.zero>=10)award('goblin');mission('obs',r.score);S.st.obs=(S.st.obs||0)+r.score;if(S.st.obs>=1000)award('p25');checkGlobal();
   const xp=Math.round((r.score*10+r.fishCount*2+r.bossesBeaten*100)*r.st.xpM);addXp(xp,r.unl);S.hist.unshift({t:Date.now(),score:r.score,fish:r.fishVal,n:r.fishCount,sh:S.sel,bi:biomeIdx(r.score),boss:r.bossesBeaten,ab:r.abUsed,k:r.kills});S.hist=S.hist.slice(0,30);save();
@@ -2930,11 +2982,11 @@ function finishRun(){const r=run;if(S.doubler&&!r.dbl){r.dbl=1;r.fishVal*=2}fini
   showScreen('over')}
 
 /* =============================================== UI */
-const screens={inbox:$('#inbox'),menu:$('#menu'),over:$('#over'),shop:$('#shop'),missions:$('#missions'),trophies:$('#trophies'),levels:$('#levels'),history:$('#history'),audio:$('#audio'),bestiary:$('#bestiary'),wheel:$('#wheel'),feedback:$('#feedback'),welcome:$('#welcome')};
+const screens={board:$('#board'),inbox:$('#inbox'),menu:$('#menu'),over:$('#over'),shop:$('#shop'),missions:$('#missions'),trophies:$('#trophies'),levels:$('#levels'),history:$('#history'),audio:$('#audio'),bestiary:$('#bestiary'),wheel:$('#wheel'),feedback:$('#feedback'),welcome:$('#welcome')};
 let back='menu',shopTab='sharks';
 function showScreen(n){for(const k in screens)screens[k].hidden=k!==n;if(n==='menu')renderMenu()}
-function anyFull(){return['inbox','shop','missions','trophies','levels','history','audio','bestiary','wheel','feedback','welcome'].some(k=>!screens[k].hidden)}
-function openFull(n,tab){back=!screens.over.hidden?'over':'menu';if(tab)shopTab=tab;showScreen(n);({inbox:renderInbox,shop:renderShop,missions:renderMissions,trophies:renderTrophies,levels:renderLevels,history:renderHistory,audio:renderAudio,bestiary:renderBestiary,wheel:renderWheel,feedback:renderFeedback,welcome:()=>{}})[n]()}
+function anyFull(){return['board','inbox','shop','missions','trophies','levels','history','audio','bestiary','wheel','feedback','welcome'].some(k=>!screens[k].hidden)}
+function openFull(n,tab){back=!screens.over.hidden?'over':'menu';if(tab)shopTab=tab;showScreen(n);({board:renderBoard,inbox:renderInbox,shop:renderShop,missions:renderMissions,trophies:renderTrophies,levels:renderLevels,history:renderHistory,audio:renderAudio,bestiary:renderBestiary,wheel:renderWheel,feedback:renderFeedback,welcome:()=>{}})[n]()}
 function closeFull(){showScreen(back)}
 function toMenu(){state='menu';run=null;corals=[];fishes=[];hazards=[];powers=[];parts=[];pops=[];companions=[];bgFrom=bgTo=0;bgK=1;$('#hud').hidden=true;$('#tapHint').hidden=true;$('#cancelBtn').hidden=true;$('#pause').hidden=true;$('#banner').hidden=true;showScreen('menu')}
 function updateHud(){if(!run)return;$('#hScore').textContent=run.score;$('#hFish').textContent=run.fishVal;$('#hVal').textContent=`×${run.st.value}`;
@@ -3067,7 +3119,7 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
   if(b.classList.contains('chip')){document.querySelectorAll('.chip').forEach(c=>{const on=c===b;c.classList.toggle('on',on);c.setAttribute('aria-checked',on)});fbCat=b.dataset.cat;updateFb();return}const id=b.dataset.id;
   switch(b.dataset.act){
     case 'play':pendingRun={mode:'normal'};startReady();break;case 'retry':startReady();break;case 'daily':startDaily();break;case 'share':openShare();break;case 'shNative':nativeShare();break;case 'shClose':updShareLinks();save();$('#sharebox').hidden=true;break;case 'chalOk':acceptChallenge();break;case 'chalNo':{const c=JSON.parse($('#chal').dataset.c||'null');if(c)S.lastChal=c.seed+'-'+c.target;save();$('#chal').hidden=true;openLogin();break}case 'loginOk':claimLogin();break;
-    case 'shop':sharkFilter=b.dataset.tab==='sharks'?'mine':'all';openFull('shop',b.dataset.tab);break;case 'sfilter':sharkFilter=id;renderShop();break;case 'missions':openFull('missions');break;case 'inbox':openFull('inbox');break;case 'ibAct':inboxAct(id);break;case 'tips':S.tips=S.tips===false;save();renderAudio();break;case 'guideReset':S.guide={};S.guide={};save();toast('Guida riattivata','Pinna ti mostrerà di nuovo tutto 🦈');break;case 'trophies':openFull('trophies');break;case 'levels':openFull('levels');break;case 'history':openFull('history');break;
+    case 'shop':sharkFilter=b.dataset.tab==='sharks'?'mine':'all';openFull('shop',b.dataset.tab);break;case 'sfilter':sharkFilter=id;renderShop();break;case 'missions':openFull('missions');break;case 'inbox':openFull('inbox');break;case 'board':openFull('board');break;case 'lbAdd':addFriend($('#lbName').value);break;case 'lbUser':showUser(id);break;case 'upClose':$('#userpop').hidden=true;break;case 'nameOk':submitName();break;case 'ibAct':inboxAct(id);break;case 'tips':S.tips=S.tips===false;save();renderAudio();break;case 'guideReset':S.guide={};S.guide={};save();toast('Guida riattivata','Pinna ti mostrerà di nuovo tutto 🦈');break;case 'trophies':openFull('trophies');break;case 'levels':openFull('levels');break;case 'history':openFull('history');break;
     case 'feedback':openFull('feedback');break;
     case 'welcomeok':try{localStorage.setItem('flappysqualo.beta.welcome','1')}catch(e){}showScreen('menu');break;
     case 'fbcopy':{const txt=fbMessage();const done=()=>{$('#fbNote').textContent='Testo copiato: incollalo nella chat con Simone.'};
