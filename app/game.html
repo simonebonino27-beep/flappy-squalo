@@ -1,4 +1,4 @@
-<title>Flappy Squalo</title>
+<title>Flappy Shark</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -342,6 +342,20 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 .toast.ms{border-color:var(--ok)}.toast.ms b{color:var(--ok)}
 @keyframes tin{from{transform:translateY(10px);opacity:0}}
 @media (prefers-reduced-motion:reduce){#tapHint b,.ring.ready{animation:none}.ocard,.toast{animation:none}#banner{animation-duration:.01s;animation-delay:2.5s}}
+
+/* ---- menu v3 */
+#menu{padding:.9em .9em .9em}
+#menu .mtop{top:.6em;left:.6em;right:.6em}
+.mtop .wallet{padding:.18em .7em .18em .4em}.mtop .wallet b{font-size:1.15em}.mtop .gemw b{color:#e6d2ff}
+.mtop-r{gap:.35em}.mtop-r .btn.sm{width:2.35em;height:2.35em;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05em;background:rgba(8,30,42,.72);border:1px solid var(--line2);box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.mtop-r .btn.sm .badge{position:absolute;top:-.25em;right:-.25em;margin:0;font-size:.62em}
+#menu .logo{margin-top:2.6em}#menu .l1{font-size:.95em;letter-spacing:.55em}#menu .l2{font-size:2.75em}#menu .lwave{width:7em}#menu .beta{font-size:.62em;margin-top:.35em;padding:.15em .5em}
+#menu .mpanel{gap:.5em;padding:.75em .75em .8em;border-radius:18px;background:linear-gradient(180deg,rgba(10,40,56,.82),rgba(4,20,30,.9));border:1px solid rgba(160,230,255,.22);box-shadow:0 -6px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08)}
+#menu .sharkcard .scl b{font-size:1.18em}#menu .abline{font-size:.74em}#menu .abline .abmode{font-size:.95em}
+#menu .mstats{gap:.35em}#menu .mst{padding:.22em .35em;border-radius:9px}#menu .mst>b{font-size:1.15em}
+#menu .btn.big{font-size:1.45em;padding:.45em;border-radius:14px}
+.mrow2{display:grid;grid-template-columns:1fr 1fr;gap:.4em}.mrow2 .btn{margin:0;padding:.38em .25em;border-radius:12px;font-size:.8em;min-width:0;letter-spacing:.04em}.mrow2 .btn span{white-space:nowrap}.mrow2 .btn small{font-size:.66em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#menu .mgrid{gap:.35em}#menu .tile{font-size:.66em;padding:.42em .1em .38em;border-radius:12px;background:rgba(255,255,255,.055);border-color:rgba(160,230,255,.16);gap:.2em}#menu .tile .ti{font-size:1.55em}#menu .tile small{font-size:.85em}
 </style>
 
 <div id="app">
@@ -363,10 +377,10 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
     <div id="tapHint" hidden><b>TOCCA PER NUOTARE</b><span>Tocca per nuotare. Tieni premuto per planare dritto. L'abilità parte da sola (o tasto E).</span></div>
 
     <section id="menu" class="screen">
-      <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
+      <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -377,8 +391,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
           <div class="mst"><span class="lbl">Partite</span><b id="mRuns">0</b></div>
         </div>
         <button class="btn big" data-act="play">NUOTA</button>
-        <button class="btn dailyb" data-act="daily" data-feat="daily"><span>🏁 Sfida del giorno</span><small id="mDaily"></small><em class="lk"></em></button>
-        <button class="btn lbbtn" data-act="board" data-feat="board"><span>🏅 Classifica amici</span><small>Chi fa più ostacoli questa settimana?</small><em class="lk"></em></button>
+        <div class="mrow2"><button class="btn dailyb" data-act="daily" data-feat="daily"><span>🏁 Sfida del giorno</span><small id="mDaily"></small><em class="lk"></em></button><button class="btn lbbtn" data-act="board" data-feat="board"><span>🏅 Classifica</span><small>Amici · settimana</small><em class="lk"></em></button></div>
         <div class="mgrid">
           <button class="tile" data-act="shop" data-tab="ups" data-feat="shop"><span class="ti">🛒</span>Negozio<em class="lk"></em></button>
           <button class="tile" data-act="wheel" data-feat="wheel"><span class="ti">🎡</span>Ruota<em class="lk"></em><span class="badge" id="wBadge" hidden>1</span></button>
@@ -1485,14 +1498,14 @@ function readChallenge(){try{const q=new URLSearchParams(location.search);const 
 function offerChallenge(){const c=readChallenge();if(!c||S.lastChal===c.seed+'-'+c.target)return;$('#chFrom').textContent=c.from||'Un amico';$('#chTarget').textContent=c.target;$('#chal').hidden=false;$('#chal').dataset.c=JSON.stringify(c)}
 function acceptChallenge(){const c=JSON.parse($('#chal').dataset.c||'null');$('#chal').hidden=true;if(!c)return;S.lastChal=c.seed+'-'+c.target;save();pendingRun={mode:'friend',seed:c.seed,target:c.target,from:c.from};startReady()}
 function shareText(r){const sh=SHB[S.sel].name,link=`${GAME_URL}?s=${r.seed}&r=${r.score}&n=${encodeURIComponent((S.name||'').slice(0,16))}`;
-  return `${r.mode==='daily'?'🏁 Sfida del giorno: ':''}Ho fatto ${r.score} ostacoli a Flappy Squalo col ${sh}! 🦈 Riesci a battermi sullo stesso percorso? ${link}`}
+  return `${r.mode==='daily'?'🏁 Sfida del giorno: ':''}Ho fatto ${r.score} ostacoli a Flappy Shark col ${sh}! 🦈 Riesci a battermi sullo stesso percorso? ${link}`}
 function makeCard(r){const Wc=1080,Hc=1350,c=document.createElement('canvas');c.width=Wc;c.height=Hc;const g=c.getContext('2d'),b=BIOMES[biomeIdx(r.score)];
   const bg=g.createLinearGradient(0,0,0,Hc);bg.addColorStop(0,b.top);bg.addColorStop(.55,b.mid);bg.addColorStop(1,b.bot);g.fillStyle=bg;g.fillRect(0,0,Wc,Hc);
   g.globalCompositeOperation='lighter';for(let i=0;i<6;i++){const x=80+i*190;const gr=g.createLinearGradient(0,0,0,1100);gr.addColorStop(0,'rgba(200,245,255,.10)');gr.addColorStop(1,'rgba(200,245,255,0)');g.fillStyle=gr;g.beginPath();g.moveTo(x,0);g.lineTo(x+60,0);g.lineTo(x+220,1100);g.lineTo(x+80,1100);g.closePath();g.fill()}g.globalCompositeOperation='source-over';
   for(let i=0;i<40;i++){g.strokeStyle='rgba(230,250,255,.35)';g.lineWidth=2;g.beginPath();g.arc((i*197)%Wc,(i*331)%Hc,3+(i%5)*2,0,7);g.stroke()}
   const vg=g.createRadialGradient(Wc/2,Hc*.45,Hc*.3,Wc/2,Hc*.45,Hc*.8);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,10,18,.55)');g.fillStyle=vg;g.fillRect(0,0,Wc,Hc);
   g.textAlign='center';g.fillStyle='#bfefff';g.font='600 48px "Barlow Condensed",system-ui,sans-serif';g.fillText('F L A P P Y',Wc/2,120);
-  g.fillStyle='#ffffff';g.font='800 150px "Barlow Condensed",system-ui,sans-serif';g.shadowColor='rgba(0,20,30,.6)';g.shadowBlur=24;g.fillText('SQUALO',Wc/2,250);g.shadowBlur=0;
+  g.fillStyle='#ffffff';g.font='800 150px "Barlow Condensed",system-ui,sans-serif';g.shadowColor='rgba(0,20,30,.6)';g.shadowBlur=24;g.fillText('SHARK',Wc/2,250);g.shadowBlur=0;
   try{const sp=curSpec(),fr=buildShark(sp,S.skin,9,1.2,1),sc=Math.min(860/fr.w,420/fr.h);g.drawImage(fr.c,Wc/2-fr.w*sc/2,330,fr.w*sc,fr.h*sc)}catch(e){}
   g.fillStyle='rgba(2,14,22,.72)';const rx=110,ry=790,rw=Wc-220,rh=360;g.beginPath();g.roundRect?g.roundRect(rx,ry,rw,rh,36):g.rect(rx,ry,rw,rh);g.fill();g.strokeStyle='rgba(255,210,122,.6)';g.lineWidth=3;g.stroke();
   g.fillStyle='#ffd27a';g.font='700 40px "Barlow Condensed",system-ui,sans-serif';g.fillText(r.mode==='daily'?'SFIDA DEL GIORNO':r.mode==='friend'?`SFIDA DI ${(r.from||'UN AMICO').toUpperCase()}`:'IL MIO RECORD',Wc/2,860);
@@ -2210,7 +2223,7 @@ function iapInit(){const C=window.CdvPurchase;if(!C)return;iapDone=true;try{cons
   st.when().productUpdated(pr=>{if(pr.owned&&OFFERS.some(o=>o.id===pr.id))grantOffer(pr.id)});
   st.when().approved(tr=>tr.verify()).verified(rc=>rc.finish()).finished(tr=>{for(const pr of tr.products){if(OFFERS.some(o=>o.id===pr.id)){grantOffer(pr.id);continue}const p=IAP.find(x=>x.id===pr.id);if(p){S.gems=(S.gems||0)+p.g;S.gemsBought=(S.gemsBought||0)+p.g;save();balances();toast('Acquisto completato',`+${p.g} gemme 💎`);SFX.unlock();if(!screens.shop.hidden)renderShop()}}});
   st.initialize([C.Platform.GOOGLE_PLAY])}catch(e){}}
-function iapBuy(id){const C=window.CdvPurchase;if(!C){toast('Gemme 💎','Si comprano nell\'app Android di Flappy Squalo');return}try{const pr=C.store.get(id,C.Platform.GOOGLE_PLAY),o=pr&&pr.getOffer();if(o)o.order();else toast('Negozio','Prodotto non ancora disponibile, riprova tra poco')}catch(e){toast('Negozio','Acquisto non riuscito')}}
+function iapBuy(id){const C=window.CdvPurchase;if(!C){toast('Gemme 💎','Si comprano nell\'app Android di Flappy Shark');return}try{const pr=C.store.get(id,C.Platform.GOOGLE_PLAY),o=pr&&pr.getOffer();if(o)o.order();else toast('Negozio','Prodotto non ancora disponibile, riprova tra poco')}catch(e){toast('Negozio','Acquisto non riuscito')}}
 let adRewarded=false;
 async function showRewarded(){const A=admobP();
   if(A){adRewarded=false;try{const h1=await A.addListener('onRewardedVideoAdReward',()=>{adRewarded=true});await A.prepareRewardVideoAd({adId:ADMOB_REWARDED});await A.showRewardVideoAd();
@@ -2546,7 +2559,7 @@ function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop
   for(const s of SNOW){s.y+=s.v*dt;s.x-=(spd*.06+2)*dt;if(s.y>H){s.y=-2;s.x=Math.random()*W}if(s.x<0)s.x+=W}
   if(!bigCreature&&Math.random()<dt*.05)bigCreature={bi:bgTo,x:W+150,y:120+Math.random()*170,s:.75+Math.random()*.4,ph:Math.random()*6};
   if(bigCreature){bigCreature.x-=(14+spd*.12)*dt;if(bigCreature.x<-170)bigCreature=null}
-  if(state==='menu'){shark.y=150+Math.sin(t*1.6)*5;shark.rot=Math.sin(t*1.6+1)*.05}
+  if(state==='menu'){shark.y=126+Math.sin(t*1.6)*5;shark.rot=Math.sin(t*1.6+1)*.05}
   else if(state==='ready'){shark.y=225+Math.sin(t*2.4)*6;shark.rot=Math.sin(t*2.4+1)*.06}
   else if(playing){
     speed=run.score<15?90+run.score*.4:Math.min(195,96+(run.score-15)*1.05);const wsp=speed*ws;
@@ -2796,7 +2809,7 @@ function render(){
   // shark
   const sp=curSpec(),pal=palette(sp,S.skin);
   if(state!=='menu'){const sh=clamp(1-(GROUND-shark.y)/200,0,1);if(sh>0){ctx.fillStyle=`rgba(0,0,0,${.25*sh})`;ell(ctx,shark.x,GROUND+3,sp.L*.5*sh,2*sh)}}
-  const live=gfxHigh();if(state==='menu'){if(!(live&&renderSharkLive(135,shark.y,shark.rot,1.75,sp,S.skin,1,animT,idleJaw(sp),Math.sin(t*.9)*.12)))renderShark(135,shark.y,shark.rot,1.75,sp,S.skin,1,animT)}
+  const live=gfxHigh();if(state==='menu'){if(!(live&&renderSharkLive(135,shark.y,shark.rot,1.55,sp,S.skin,1,animT,idleJaw(sp),Math.sin(t*.9)*.12)))renderShark(135,shark.y,shark.rot,1.55,sp,S.skin,1,animT)}
   else{const sc=run&&t<run.roarUntil?1.5:1,ghost=run&&t<run.ghostUntil,blink=run&&run.inv>0&&Math.floor(t*14)%2===0;
     for(const cp of companions)renderShark(cp.x,cp.y,0,.55,ORCA_SP,'naturale',1,animT+cp.o*2);
     if(ghost){for(let k=1;k<=2;k++)renderShark(shark.x-k*7,shark.y,shark.rot,sc,sp,S.skin,.15,animT-k*.3)}
@@ -2908,7 +2921,7 @@ function spinWheel(){if(wSpinning)return;const free=wheelFree();if(!free&&S.fish
   setTimeout(()=>{wSpinning=false;const big=p.t==='shark'||p.n>=10000;$('#wRes').textContent=(p.t==='shark'?'🎉 ':'')+txt;$('#wRes').className=p.t==='shark'?'r'+p.r:'';(big?SFX.unlock:SFX.buy)();if(big)toast('Ruota della fortuna',txt);updWheel()},4500)}
 function trProg(tr){if(!tr.pg)return'';const p=tr.pg();return` (${Math.min(p[0],p[1]).toLocaleString('it-IT')}/${p[1].toLocaleString('it-IT')})`}
 function migrate(){let ch=false;if(!S.mig)S.mig={};
-  if(!S.mig.wel1){S.mig.wel1=1;inboxAdd({id:'welcome',ico:'🦈',t:'Benvenuto in Flappy Squalo!',b:'Un piccolo regalo per iniziare la caccia.',fish:500});ch=true}
+  if(!S.mig.wel1){S.mig.wel1=1;inboxAdd({id:'welcome',ico:'🦈',t:'Benvenuto in Flappy Shark!',b:'Un piccolo regalo per iniziare la caccia.',fish:500});ch=true}
   if(!S.mig.obs){S.mig.obs=1;S.st.obs=Math.max(S.st.obs||0,S.hist.reduce((a,h)=>a+(h.score||0),0));ch=true}
   if(BETA_RESET&&!S.mig.sh1){S.mig.sh1=1;const rm=['volpe','zebra','sega','lanterna','goblin','groenlandia','megalodonte','orca'],had=S.owned.filter(k=>rm.includes(k));
     S.owned=S.owned.filter(k=>!rm.includes(k));if(!S.owned.includes(S.sel))S.sel='grigio';['p25','f1000','p50','night','goblin','fasting','p100'].forEach(k=>delete S.tro[k]);
@@ -2952,14 +2965,14 @@ function updateAbHud(){if(!run)return;const ab=abDef(),ring=$('#abRing');$('#abN
 function updateEffects(){if(!run)return;const e=[];const L=(u,n)=>{if(t<u)e.push(`${n} ${Math.ceil(u-t)}s`)};L(run.x2Until,'×2');L(run.magUntil,'Magnete');L(run.abMultUntil,`×${run.abMult}`);L(run.slowUntil,'Rallentatore');L(run.ghostUntil,'Intoccabile');L(run.roarUntil,'Gigante');L(run.podUntil,'Branco');L(run.goldUntil,'Oro');L(run.turboUntil,'Turbo');if(t>=run.turboUntil)L(run.afterTurbo||0,'Rallentatore');L(run.vacUntil,'Risucchio');
   $('#effects').innerHTML=e.map(x=>`<span>${x}</span>`).join('')}
 function balances(){document.querySelectorAll('.balv').forEach(b=>b.textContent=S.fish);document.querySelectorAll('.gemv').forEach(b=>b.textContent=(S.gems||0).toLocaleString('it-IT'))}
-function renderMute(){$('#muteBtn').textContent=S.mute?"Riattiva l'audio":"Disattiva tutto l'audio";$('#audioBtn').innerHTML='&#9881;&#65039; Opzioni';document.querySelectorAll('#audList input').forEach(i=>i.disabled=S.mute)}
+function renderMute(){$('#muteBtn').textContent=S.mute?"Riattiva l'audio":"Disattiva tutto l'audio";$('#audioBtn').innerHTML='⚙️';document.querySelectorAll('#audList input').forEach(i=>i.disabled=S.mute)}
 function renderAudio(){$('#tipsTxt').textContent=S.tips===false?'Spenti':'Attivi';$('#tipsBtn').textContent=S.tips===false?'Attiva':'Disattiva';$('#gfxTxt').textContent=S.gfx==='high'?'Alta':S.gfx==='normal'?'Normale':`Automatica (${S.gfxLow?'Normale':'Alta'})`;$('#gfxBtn').textContent=S.gfx==='auto'?'Passa ad Alta':S.gfx==='high'?'Passa a Normale':'Passa ad Automatica';$('#abModeTxt').textContent=S.abAuto?'Automatica':'Manuale';$('#abModeBtn').textContent=S.abAuto?'Passa a manuale':'Passa ad automatica';document.querySelectorAll('#audList input[data-vol]').forEach(i=>{const c=i.dataset.vol;i.value=S.vol[c];$('#vv-'+c).textContent=S.vol[c]+'%'});renderMute()}
 const VPREV={jump:()=>splash(),fish:()=>SFX.fish(),sfx:()=>SFX.shield&&SFX.shield(),music:()=>{}};let vprevT=0;
 document.addEventListener('input',e=>{const i=e.target;if(!i.dataset||!i.dataset.vol)return;const c=i.dataset.vol;S.vol[c]=+i.value;$('#vv-'+c).textContent=i.value+'%';ac();if(c==='music')setMusVol();else{const n=performance.now();if(n-vprevT>140){vprevT=n;VPREV[c]()}}});
 document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.vol)save()});
 function perksHTML(pk){const a=perkList(pk);return a.length?a.map(x=>`<li>${x}</li>`).join(''):'<li class="neutral">Nessun bonus passivo</li>'}
 function stars(n){return`<span class="stars">${'★'.repeat(n)}<i>${'★'.repeat(5-n)}</i></span>`}
-function renderMenu(){ensureDay();applyLocks();{const dd=dailyState();$('#mDaily').textContent=dd.best?`Il tuo record di oggi: ${dd.best}`:'Stesso percorso per tutti, cambia ogni giorno'}setTimeout(menuPopups,450);setTimeout(guideCheck,700);if(!renderMenu._rq||Date.now()-renderMenu._rq>30000){renderMenu._rq=Date.now();syncReqs()}{const n=inboxCount(),bd=$('#ibBadge');if(bd){bd.textContent=n;bd.hidden=!n||!featOk('inbox')}}$('#wBadge').hidden=!wheelFree()||!featOk('wheel');const s=SHB[S.sel],m=S.morph[S.sel];$('#mName').textContent=m?MOB[m].name:s.name;$('#mLatin').textContent=(m?MOB[m].latin:s.latin)+(S.skin!=='naturale'?` · ${COB[S.skin].name}`:'');
+function renderMenu(){ensureDay();applyLocks();{const dd=dailyState();$('#mDaily').textContent=dd.best?`Oggi: ${dd.best}`:'Uguale per tutti'}setTimeout(menuPopups,450);setTimeout(guideCheck,700);if(!renderMenu._rq||Date.now()-renderMenu._rq>30000){renderMenu._rq=Date.now();syncReqs()}{const n=inboxCount(),bd=$('#ibBadge');if(bd){bd.textContent=n;bd.hidden=!n||!featOk('inbox')}}$('#wBadge').hidden=!wheelFree()||!featOk('wheel');const s=SHB[S.sel],m=S.morph[S.sel];$('#mName').textContent=m?MOB[m].name:s.name;$('#mLatin').textContent=(m?MOB[m].latin:s.latin)+(S.skin!=='naturale'?` · ${COB[S.skin].name}`:'');
   $('#mAb').innerHTML=`Abilità: <b>${s.ab.name}</b><span class="stars">${'★'.repeat(s.ab.tier||1)}</span> · ${stats().value} per pesciolino<button class="abmode" data-act="abmode" title="Cambia attivazione abilità">${S.abAuto?'⚙️ Automatica':'👆 Manuale'} ⇄</button>`;
   const li=lvInfo(S.xp);$('#mLv').textContent=li.lv;$('#mXp').style.width=(li.rem/li.need*100)+'%';$('#mXpTxt').textContent=`${li.rem}/${li.need} XP`;
   $('#mFish').textContent=S.fish.toLocaleString('it-IT');balances();if(halloOn&&!(S.inbox||[]).some(x=>x.id==='hallo2026')){inboxAdd({id:'hallo2026',ico:'🎃',t:'Evento Halloween',b:'Squalo zombie e skin Zucca nel negozio, solo fino al 2 novembre!',go:'bonus'});save()}$('#mBest').textContent=S.best;$('#mRuns').textContent=(S.st.runs||0).toLocaleString('it-IT');{const rr=RAR[S.sel]||0,e=$('#mRar');e.textContent=RARN[rr];e.style.color=RARC[rr]}$('#mTro').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;$('#mBes').textContent=`${BORDER.filter(k=>S.seen[k]).length}/${BORDER.length}`;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
