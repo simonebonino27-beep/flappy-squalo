@@ -398,6 +398,17 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 .mnote{text-align:center;font-size:.75em;margin-top:.3em}
 .gbest{position:absolute;bottom:-.6em;left:50%;transform:translateX(-50%);font-style:normal;font-size:.6em;font-weight:900;letter-spacing:.05em;white-space:nowrap;background:linear-gradient(90deg,#ff6ad5,#ffd27a);color:#2a0a20;border-radius:1em;padding:.1em .5em}
 .gempacks{row-gap:.8em}
+.mtime.cal{color:#ffcf8a;background:rgba(255,150,60,.14);border-color:rgba(255,160,80,.4)}
+.calc{display:flex;flex-direction:column;gap:.5em;padding:.6em;border-radius:14px;border:1px solid rgba(255,160,80,.35);background:linear-gradient(160deg,rgba(255,150,60,.10),rgba(255,255,255,.02))}.calc .note{margin:0;font-size:.8em}.calc .lost{color:#ff8a7a}
+.calg{display:grid;grid-template-columns:repeat(7,1fr);gap:.28em}
+.cd{aspect-ratio:1;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:.15em;min-width:0}
+.cd .cn{font-size:.58em;color:#8fa9b2;font-weight:700}.cd .cv{font-size:.7em;font-weight:800;color:#ffe2a8;white-space:nowrap}
+.cd.gem{background:rgba(190,140,255,.12);border-color:rgba(205,170,255,.35)}.cd.gem .cv{font-size:.62em;color:#e6d2ff}
+.cd.got{background:rgba(127,224,160,.16);border-color:rgba(127,224,160,.45)}.cd.got .cv{color:#7fe0a0;font-size:.9em}
+.cd.now{border-color:#ffd27a;box-shadow:0 0 10px rgba(255,210,122,.55);background:rgba(255,210,122,.16);animation:cpop 1.4s ease-in-out infinite}
+.cd.big{grid-column:span 5;aspect-ratio:auto;flex-direction:row;gap:.4em;background:linear-gradient(90deg,rgba(255,207,74,.25),rgba(195,139,255,.25));border-color:#ffcf4a}.cd.big .cv{font-size:1.3em}.cd.big .cn{font-size:.75em;color:#ffe08a}
+.cd.big .cn::after{content:' · squalo epico/leggendario';font-weight:600}
+.calbtn{width:100%}.calok{text-align:center;font-size:.82em;font-weight:700;color:#7fe0a0}
 </style>
 
 <div id="app">
@@ -422,7 +433,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.54</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.55</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -511,7 +522,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.54</span>
+        <span class="beta big">BETA 0.55</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -897,7 +908,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.54';
+const KEY='flappysqualo.beta1';const BETA='0.55';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1626,8 +1637,8 @@ const WPOOL=[
  {id:'nm',txt:n=>`Fai ${n} "Per un pelo!"`,vals:[30,60],rw:[3500,6000]},
 ];
 function weekKey(){const d=new Date(romeParts().day+'T12:00:00Z'),wd=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-wd);return d.toISOString().slice(0,10)}
-function ensureWeek(){const k=weekKey();if(S.week&&S.week.key===k)return;const R=rngf(daySeed('w'+k));const pool=[...WPOOL].sort(()=>R()-.5).slice(0,3);
-  S.week={key:k,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
+function ensureWeek(){const k=weekKey();if(S.week&&S.week.key===k&&S.week.v===3)return;const R=rngf(daySeed('w'+k));const pool=[...WPOOL].sort(()=>R()-.5).slice(0,7);
+  S.week={key:k,v:3,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
 function weekLeft(){const sec=86400-romeParts().sec,d=new Date(romeParts().day+'T12:00:00Z'),wd=(d.getUTCDay()+6)%7,days=6-wd;return days>0?`${days} giorn${days===1?'o':'i'} e ${Math.floor(sec/3600)} ore`:`${Math.floor(sec/3600)} ore e ${Math.floor(sec%3600/60)} minuti`}
 function wmission(id,amount,isMax){if(!S.week)return;for(const m of S.week.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
   if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione settimanale completata',WPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
@@ -2290,7 +2301,7 @@ const OFFERS=[{id:'starter_pack',pvs:[['reale','naturale','Squalo reale'],['','c
   {id:'fish_doubler',pvs:[],name:'Raddoppiatore',was:'24,99 €',p:'9,99 €',once:'doubler',items:['🐟 ×2 pesciolini a fine partita','♾️ Per sempre, su tutti gli squali']}];
 function grantOffer(id){if(id==='starter_pack'&&!S.starter){S.starter=1;S.gems=(S.gems||0)+1200;if(!S.owned.includes('reale'))S.owned.push('reale');if(!S.skins.includes('corona'))S.skins.push('corona');S.rvTok=(S.rvTok||0)+3;save();toast('Pacchetto iniziale','Squalo reale, skin e 1.200 gemme sono tuoi!');SFX.unlock()}
   if(id==='fish_doubler'&&!S.doubler){S.doubler=1;save();toast('Raddoppiatore attivo','Da ora ogni partita ti dà ×2 pesciolini');SFX.unlock()}balances();if(!screens.shop.hidden)renderShop()}
-const IAP=[{id:'gems_100',g:100,p:'0,99 €'},{id:'gems_550',g:550,p:'4,99 €',tag:'+10%'},{id:'gems_1200',g:1200,p:'9,99 €',tag:'+20%'},{id:'gems_2600',g:2600,p:'19,99 €',tag:'+30%'},{id:'gems_7500',g:7500,p:'49,99 €',tag:'+50%'},{id:'gems_17000',g:17000,p:'99,99 €',tag:'+70%',best:1}];
+const IAP=[{id:'gems_105',g:105,p:'0,99 €',tag:'+5%'},{id:'gems_550',g:550,p:'4,99 €',tag:'+10%'},{id:'gems_1200',g:1200,p:'9,99 €',tag:'+20%'},{id:'gems_2800',g:2800,p:'19,99 €',tag:'+40%'},{id:'gems_9000',g:9000,p:'49,99 €',tag:'+80%'},{id:'gems_20000',g:20000,p:'99,99 €',tag:'+100%',best:1}];
 const GEMUSE=[{id:'f1',ico:'🐟',name:'5.000 pesciolini',cost:50,use:()=>{S.fish+=5000}},{id:'f2',ico:'🐟',name:'25.000 pesciolini',cost:200,use:()=>{S.fish+=25000}},{id:'f3',ico:'🐟',name:'90.000 pesciolini',cost:600,use:()=>{S.fish+=90000}},
   {id:'box',ico:'🎁',name:'Scatola bonus (1 di ogni bonus)',cost:150,use:()=>{S.inv=S.inv||{};for(const it of INV)if(it.use)S.inv[it.id]=Math.min(10,(S.inv[it.id]||0)+1)}},{id:'tk',ico:'🎟️',name:'Biglietto rinascita (max 1 a partita)',cost:100,use:()=>{S.rvTok=(S.rvTok||0)+1}}];
 const gemShark=c=>Math.max(80,Math.round(c/100));
@@ -3013,11 +3024,11 @@ function migrate(){let ch=false;if(!S.mig)S.mig={};
   if(!S.mig.gems1){S.mig.gems1=1;inboxAdd({id:'gems1',ico:'💎',t:'Regalo per i tester',b:'Gemme per provare il negozio e Halloween 🎃',gems:1000});ch=true}
   if(ch)save()}
 function today(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d&&S.day.v===2)return;const R=rngf(daySeed('md'+d)),k=Math.round(Date.parse(d+'T12:00:00Z')/864e5),P=[3,7,0,9,5,1,8,2,6,4].map(i=>MPOOL[i%MPOOL.length]);const pool=[0,1,2].map(j=>P[(3*k+j)%P.length]);
-  S.day={date:d,v:2,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
+function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d&&S.day.v===3)return;const R=rngf(daySeed('md'+d)),k=Math.round(Date.parse(d+'T12:00:00Z')/864e5),P=[3,7,0,9,5,1,8,2,6,4].map(i=>MPOOL[i%MPOOL.length]);const pool=[...MPOOL].sort(()=>R()-.5).slice(0,5);
+  S.day={date:d,v:3,list:pool.map(m=>{const i=(R()*m.vals.length)|0;return{id:m.id,n:m.vals[i],rw:m.rw[i],prog:0,done:false,claimed:false}})};save()}
 function mission(id,amount,isMax){wmission(id,amount,isMax);if(!S.day)return;for(const m of S.day.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
   if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione completata',MPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
-function missionsReady(){return(chestReady('d')?1:0)+(chestReady('w')?1:0)+(S.day?S.day.list.filter(m=>m.done&&!m.claimed).length:0)+(S.week?S.week.list.filter(m=>m.done&&!m.claimed).length:0)}
+function missionsReady(){return(calState().today?0:1)+(chestReady('d')?1:0)+(chestReady('w')?1:0)+(S.day?S.day.list.filter(m=>m.done&&!m.claimed).length:0)+(S.week?S.week.list.filter(m=>m.done&&!m.claimed).length:0)}
 
 const DEATH_TITLES=['Fine dell\'immersione','Pinna ammaccata','Squalo arenato','Morso il fondale','Risalita obbligata'];
 function finishRun(){const r=run;try{lbAfterRun(r.score)}catch(e){}if(S.doubler&&!r.dbl){r.dbl=1;r.fishVal*=2}finishMode(r);lastRunInfo={score:r.score,seed:r.seed,mode:r.mode,from:r.from,target:r.target};S.fish+=r.fishVal;S.totalFish+=r.fishVal;S.st.runs++;S.st.gold+=r.gold;mission('fish',r.fishVal);mission('runs',1);
@@ -3103,7 +3114,7 @@ function renderShop(){balances();['sharks','ups','bonus','skins'].forEach(k=>$('
     if(halloOn)L.insertAdjacentHTML('beforeend',`<div class="sec">🎃 Halloween · fino al 2 novembre</div>${[['zombie',SHB.zombie.name+' (Epico)','Abilità: '+SHB.zombie.ab.name+' · ×1,5 pesciolini',SHB.zombie.unlock.gem,S.owned.includes('zombie')],['zucca','Skin '+COB.zucca.name,'Arancione con occhi infuocati, vale per tutti gli squali',COB.zucca.unlock.gem,S.skins.includes('zucca')]].map(([id,n,d,g,own])=>`<div class="offer hallo${own?' owned':''}"><div class="oh"><b>${n}</b><span class="otag">${own?'Già tuo':'Solo ora'}</span></div><div class="opvs"><div class="opv" data-sh="${id==='zombie'?'zombie':''}" data-sk="${id==='zucca'?'zucca':'naturale'}"></div></div><p class="note" style="margin:0">${d}</p>${own?'':`<button class="btn gem" data-act="evBuy" data-id="${id}" ${(S.gems||0)>=g?'':'disabled'}>💎 ${g}</button>`}</div>`).join('')}`);
     L.insertAdjacentHTML('beforeend',`<div class="sec">🔥 Offerte</div>${OFFERS.map(o=>{const own=!!S[o.once];return`<div class="offer${own?' owned':''}"><div class="oh"><b>${o.name}</b>${own?'<span class="otag">Già tuo</span>':'<span class="otag">−'+Math.round((1-parseFloat(o.p.replace(',','.'))/parseFloat(o.was.replace(',','.')))*100)+'%</span>'}</div>${o.pvs.length?`<div class="opvs">${o.pvs.map(([sh,sk,lab])=>`<div class="opv" data-sh="${sh}" data-sk="${sk}"><small>${lab}</small></div>`).join('')}</div>`:''}<ul>${o.items.map(i=>`<li>${i}</li>`).join('')}</ul>${own?'':`<button class="btn obuy" data-act="iap" data-id="${o.id}" ${NATIVE?'':'disabled'}><s>${o.was}</s> ${gemPrice(o)}</button>`}</div>`}).join('')}${NATIVE?'':'<p class="note">Le offerte si comprano solo nell\'app Android (in arrivo).</p>'}`);
     L.querySelectorAll('.opv').forEach(el=>{const sh=el.dataset.sh,sk=el.dataset.sk;try{const c=pv(sh?SHB[sh].sp:curSpec(),sk,false,220,100);el.prepend(c)}catch(e){}});
-    L.insertAdjacentHTML('beforeend',`<div class="sec">💎 Gemme · ne hai <span class="gemv">${(S.gems||0).toLocaleString('it-IT')}</span></div><p class="note">${NATIVE?'Le gemme si comprano con soldi veri. Qualcuna arriva anche dai forzieri delle missioni.':'Le gemme si comprano solo nell\'app Android (in arrivo). Qui puoi già usare quelle che hai.'}</p><div class="gempacks">${IAP.map(p=>`<button class="gpack" data-act="iap" data-id="${p.id}" ${NATIVE?'':'disabled'}><b>💎 ${p.g.toLocaleString('it-IT')}</b>${p.tag?`<em>${p.tag}</em>`:''}${p.best?'<i class="gbest">MIGLIOR VALORE</i>':''}<span>${gemPrice(p)}</span></button>`).join('')}</div>`);
+    L.insertAdjacentHTML('beforeend',`<div class="sec">💎 Gemme · ne hai <span class="gemv">${(S.gems||0).toLocaleString('it-IT')}</span></div><p class="note">${NATIVE?'Le gemme si comprano con soldi veri. Qualcuna arriva anche dai forzieri delle missioni e dal calendario.':'Le gemme si comprano solo nell\'app Android (in arrivo). Qui puoi già usare quelle che hai.'}</p><div class="gempacks">${IAP.map(p=>`<button class="gpack" data-act="iap" data-id="${p.id}" ${NATIVE?'':'disabled'}><b>💎 ${p.g.toLocaleString('it-IT')}</b>${p.tag?`<em>${p.tag}</em>`:''}${p.best?'<i class="gbest">MIGLIOR VALORE</i>':''}<span>${gemPrice(p)}</span></button>`).join('')}</div>`);
     GEMUSE.forEach(u=>L.insertAdjacentHTML('beforeend',`<div class="ucard"><div class="uhead"><b>${u.ico} ${u.name}</b></div><div class="act"><span></span><button class="btn gem sm" data-act="gemUse" data-id="${u.id}" ${(S.gems||0)>=u.cost?'':'disabled'}>💎 ${u.cost}</button></div></div>`));
     L.insertAdjacentHTML('beforeend',`<div class="sec">Bonus per la partita</div><p class="note">Si comprano qui e si attivano da soli quando inizi a nuotare (uno di ogni tipo per partita). Puoi metterli in pausa se vuoi conservarli. Massimo 10 per tipo.</p>`);
     INV.forEach(it=>{const n=S.inv[it.id]||0,off=!!S.invOff[it.id];L.insertAdjacentHTML('beforeend',`<div class="ucard"><div class="uhead"><b>${it.ico} ${it.name}</b><span class="small">Ne hai ${it.id==='rv'?(S.rvTok||0):n}</span></div><p class="udesc">${it.desc}</p>
@@ -3122,20 +3133,35 @@ function renderShop(){balances();['sharks','ups','bonus','skins'].forEach(k=>$('
       el.insertAdjacentHTML('beforeend',`<b>${k.name}</b>${act}`);grid.appendChild(el)});L.appendChild(grid)}}
 const MICO={score:'🏁',fish:'🐟',abil:'⚡',pow:'✨',gold:'⭐',runs:'🎮',haz:'💥',kill:'🦷',biome:'🌊',boss:'👑',obs:'🧱',frz:'🔥',dailyc:'📅',nm:'😬'};
 const CHEST={d:{g:5,f:400},w:{g:20,f:5000}};
+const CAL=Array.from({length:31},(_,i)=>{const d=i+1;return d===31?{t:'shark'}:d%7===0?{t:'gem',n:5*d/7+5}:d===10||d===20?{t:'tk'}:d%5===0?{t:'box'}:{t:'fish',n:d<8?300+d*50:d<15?800+d*60:d<22?1500+d*70:2500+d*80}});
+function prevDay(d){const x=new Date(d+'T12:00:00Z');x.setUTCDate(x.getUTCDate()-1);return x.toISOString().slice(0,10)}
+function calState(){const c=S.cal||{},today=romeParts().day;if(c.last===today)return{today:true,n:c.n,next:c.n};if(c.last===prevDay(today)&&c.n<31)return{today:false,n:c.n,next:c.n+1};return{today:false,n:0,next:1,lost:!!c.last&&c.n<31}}
+function calLabel(r){return r.t==='shark'?'🦈':r.t==='gem'?`💎${r.n}`:r.t==='tk'?'🎟️':r.t==='box'?'🎁':(r.n>=1000?(r.n/1000).toLocaleString('it-IT',{maximumFractionDigits:1})+'k':r.n)}
+function calClaim(){const cs=calState();if(cs.today)return;const d=cs.next,r=CAL[d-1];let txt='';
+  if(r.t==='fish'){S.fish+=r.n;S.totalFish+=r.n;txt=`+${r.n.toLocaleString('it-IT')} pesciolini`}
+  else if(r.t==='gem'){S.gems=(S.gems||0)+r.n;txt=`+${r.n} gemme 💎`}
+  else if(r.t==='tk'){S.rvTok=(S.rvTok||0)+1;txt='+1 biglietto rinascita 🎟️'}
+  else if(r.t==='box'){S.inv=S.inv||{};for(const it of INV)if(it.use&&it.id!=='box'&&it.id!=='tk')S.inv[it.id]=Math.min(10,(S.inv[it.id]||0)+1);txt='Scatola bonus: 1 di ogni bonus 🎁'}
+  else{const pool=SHARKS.filter(s=>(RAR[s.id]===2||RAR[s.id]===3)&&!S.owned.includes(s.id)&&!isSecret(s)&&s.unlock.t!=='iap'&&s.unlock.t!=='event');
+    if(pool.length){const s=pool[(Math.random()*pool.length)|0];S.owned.push(s.id);txt=`Squalo ${RARN[RAR[s.id]].toLowerCase()}: ${s.name}! 🎉`}else{S.gems=(S.gems||0)+300;txt='Hai già tutti gli squali epici e leggendari: +300 gemme 💎'}}
+  S.cal={last:romeParts().day,n:d};SFX.unlock();save();balances();checkGlobal();toast(`Calendario · giorno ${d}`,txt,'ms')}
+function calCard(){const cs=calState();let h=`<div class="mhd"><div class="sec">Calendario 31 giorni</div><span class="mtime cal">🔥 ${cs.n} di fila</span></div><div class="calc"><p class="note">Entra ogni giorno e riscuoti il premio. Al <b>giorno 31</b> vinci uno <b>squalo epico o leggendario</b> a caso. Se salti un giorno si riparte dal giorno 1.${cs.lost?' <b class="lost">Serie persa: ricominci da capo.</b>':''}</p><div class="calg">`;
+  CAL.forEach((r,i)=>{const d=i+1,got=d<=cs.n,now=!cs.today&&d===cs.next;h+=`<div class="cd${got?' got':''}${now?' now':''}${d===31?' big':''}${r.t==='gem'?' gem':''}"><span class="cn">${d}</span><span class="cv">${got?'✓':calLabel(r)}</span></div>`});
+  h+=`</div>${cs.today?`<div class="calok">✓ Premio di oggi preso, torna domani per il giorno ${Math.min(31,cs.n+1)>cs.n?cs.n+1:1}</div>`:`<button class="btn buy calbtn" data-act="cal">Riscuoti giorno ${cs.next}: ${(r=>r.t==='fish'?r.n.toLocaleString('it-IT')+' pesciolini':r.t==='gem'?r.n+' gemme':r.t==='tk'?'biglietto rinascita':r.t==='box'?'scatola bonus':'squalo epico o leggendario')(CAL[cs.next-1])}</button>`}</div>`;return h}
 function chestReady(k){const o=k==='d'?S.day:S.week;return!!o&&!o.chest&&o.list.every(m=>m.claimed)}
 function dayLeft(){const sec=86400-romeParts().sec;return`${Math.floor(sec/3600)}h ${Math.floor(sec%3600/60)}m`}
 function missCard(m,i,def,wk){const pct=Math.min(100,m.prog/m.n*100),fmt=x=>x.toLocaleString('it-IT');
   return`<div class="miss${wk?' wk':''}${m.done?' done':''}${m.claimed?' got':''}"><div class="mico">${m.claimed?'✓':MICO[m.id]||'🎯'}</div><div class="mbody"><b>${def.txt(m.n)}</b><div class="mbar"><div class="bar"><i style="width:${pct}%"></i></div><span>${fmt(m.prog)}/${fmt(m.n)}</span></div></div>
   <div class="mside"><span class="mrw"><img class="fi" src="${ICON}" alt="">${fmt(m.rw)}</span>${m.claimed?'<span class="mgot">Riscossa</span>':m.done?`<button class="btn buy sm" data-act="${wk?'claimw':'claim'}" data-id="${i}">Riscuoti</button>`:''}</div></div>`}
 function chestCard(k){const o=k==='d'?S.day:S.week,c=CHEST[k],n=o.list.filter(m=>m.claimed).length,rd=chestReady(k);
-  return`<div class="chest${k==='w'?' wk':''}${rd?' ready':''}${o.chest?' open':''}"><div class="cbox">${o.chest?'🎉':'🎁'}</div><div class="cbody"><b>${k==='d'?'Forziere del giorno':'Forziere della settimana'}</b><div class="pips">${o.list.map(m=>`<i class="${m.claimed?'on':''}"></i>`).join('')}<span>${o.chest?'Aperto, torna '+(k==='d'?'domani':'lunedì'):n<3?`Riscuoti tutte e 3 le missioni (${n}/3)`:'Pronto da aprire!'}</span></div>
+  return`<div class="chest${k==='w'?' wk':''}${rd?' ready':''}${o.chest?' open':''}"><div class="cbox">${o.chest?'🎉':'🎁'}</div><div class="cbody"><b>${k==='d'?'Forziere del giorno':'Forziere della settimana'}</b><div class="pips">${o.list.map(m=>`<i class="${m.claimed?'on':''}"></i>`).join('')}<span>${o.chest?'Aperto, torna '+(k==='d'?'domani':'lunedì'):n<o.list.length?`Riscuoti tutte le ${o.list.length} missioni (${n}/${o.list.length})`:'Pronto da aprire!'}</span></div>
   <div class="crw">💎 ${c.g} + <img class="fi" src="${ICON}" alt="">${c.f.toLocaleString('it-IT')}</div></div>${rd?`<button class="btn buy sm" data-act="chest" data-id="${k}">Apri</button>`:''}</div>`}
-function renderMissions(){balances();ensureDay();const L=$('#missList');L.innerHTML='';
+function renderMissions(){balances();ensureDay();const L=$('#missList');L.innerHTML='';L.insertAdjacentHTML('beforeend',calCard());
   L.insertAdjacentHTML('beforeend',`<div class="mhd"><div class="sec">Giornaliere</div><span class="mtime">⏱ ${dayLeft()}</span></div>`+chestCard('d'));
   S.day.list.forEach((m,i)=>L.insertAdjacentHTML('beforeend',missCard(m,i,MPOOL.find(x=>x.id===m.id),false)));
   L.insertAdjacentHTML('beforeend',`<div class="mhd"><div class="sec">Settimanali</div><span class="mtime wk">⏱ ${weekLeft()}</span></div>`+chestCard('w'));
   S.week.list.forEach((m,i)=>L.insertAdjacentHTML('beforeend',missCard(m,i,WPOOL.find(x=>x.id===m.id),true)));
-  L.insertAdjacentHTML('beforeend',`<p class="note mnote">Le giornaliere cambiano ogni giorno a mezzanotte (ora italiana), le settimanali il lunedì.</p>`)}
+  L.insertAdjacentHTML('beforeend',`<p class="note mnote">Calendario e giornaliere cambiano a mezzanotte (ora italiana), le settimanali il lunedì.</p>`)}
 function renderTrophies(){const L=$('#troList');L.innerHTML='';$('#troCount').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;
   [['Trofei',TROPHIES.filter(t=>!t.hidden)],['Trofei nascosti',TROPHIES.filter(t=>t.hidden)]].forEach(([title,arr])=>{L.insertAdjacentHTML('beforeend',`<div class="sec">${title}</div>`);
     arr.forEach(tr=>{const done=!!S.tro[tr.id],hid=tr.hidden&&!done,rw=tr.shark?`Premio: ${hid?'una creatura misteriosa':SHB[tr.shark].name}`:`Premio: ${tr.reward} pesciolini`;
@@ -3210,6 +3236,7 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'selMorph':S.morph[MOB[id].base]=id;save();SFX.buy();renderShop();break;
     case 'unmorph':delete S.morph[S.sel];save();renderShop();break;
     case 'claimw':{const m=S.week.list[+id];if(m&&m.done&&!m.claimed){m.claimed=true;S.fish+=m.rw;S.st.claimed++;SFX.buy();save();checkGlobal()}renderMissions();break}
+    case 'cal':{calClaim();renderMissions();break}
     case 'chest':{const o=id==='d'?S.day:S.week,c=CHEST[id];if(chestReady(id)){o.chest=true;S.gems=(S.gems||0)+c.g;S.fish+=c.f;SFX.unlock();save();toast(id==='d'?'Forziere del giorno':'Forziere della settimana',`+💎${c.g} e +${c.f.toLocaleString('it-IT')} pesciolini`,'ms')}renderMissions();try{$('#missList .chest'+(id==='w'?'.wk':':not(.wk)')).classList.add('pop')}catch(e){}break}
     case 'claim':{const m=S.day.list[+id];if(m&&m.done&&!m.claimed){m.claimed=true;S.fish+=m.rw;S.st.claimed++;SFX.buy();save();checkGlobal()}renderMissions();break}
   }});
