@@ -376,7 +376,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.41</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.42</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -451,7 +451,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.41</span>
+        <span class="beta big">BETA 0.42</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -837,7 +837,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.41';
+const KEY='flappysqualo.beta1';const BETA='0.42';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -2838,6 +2838,7 @@ function migrate(){let ch=false;if(!S.mig)S.mig={};
     for(const m of S.morphs){if(MOB[m])ref+=Math.round(MOB[m].cost/5)}S.morphs=[];S.morph={};
     if(ref>0){S.fish+=ref;setTimeout(()=>toast('Acquisti rimborsati',`+${ref.toLocaleString('it-IT')} pesciolini: i prezzi sono cambiati, ricompra quello che vuoi`),1800)}ch=true}
   if(!S.mig.gift1){S.mig.gift1=1;S.fish+=200000;setTimeout(()=>toast('🎁 Regalo per i tester','+200.000 pesciolini! Grazie per i test 🦈'),2600);ch=true}
+  if(!S.mig.gems1){S.mig.gems1=1;S.gems=(S.gems||0)+1000;setTimeout(()=>toast('💎 Regalo per i tester','+1.000 gemme per provare il negozio e Halloween 🎃'),4200);ch=true}
   if(ch)save()}
 function today(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d&&S.day.v===2)return;const R=rngf(daySeed('md'+d)),k=Math.round(Date.parse(d+'T12:00:00Z')/864e5),P=[3,7,0,9,5,1,8,2,6,4].map(i=>MPOOL[i%MPOOL.length]);const pool=[0,1,2].map(j=>P[(3*k+j)%P.length]);
