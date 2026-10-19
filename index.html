@@ -384,7 +384,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.50</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.51</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -474,7 +474,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.50</span>
+        <span class="beta big">BETA 0.51</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -860,7 +860,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.50';
+const KEY='flappysqualo.beta1';const BETA='0.51';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -2331,7 +2331,7 @@ function firstMeet(k){if(S.seen[k])return;S.seen[k]=1;save();if(BORDER.every(x=>
   run.slowUntil=Math.max(run.slowUntil,t+1.1);run.slowF=.35;pops=pops.filter(q=>!q.hint);pops.push({hint:1,x:W/2,y:H*.3,txt:HINT[k]||(B.boss?`${B.name}: rispediscigli i colpi col cerchio dorato!`:B.name),life:2.6,c:'#aaffb8',big:true});SFX.warn()}
 
 /* ---- weekly friends leaderboard (Firebase via REST, no SDK) */
-const FB={apiKey:'',projectId:''};
+const FB={apiKey:'AIzaSyDDNLr-YJIdmRwPxk-falC6Ud9VwlBI1XI',projectId:'flappy-squalo'};
 const fbOn=()=>!!(FB.apiKey&&FB.projectId);
 const FSB=()=>`https://firestore.googleapis.com/v1/projects/${FB.projectId}/databases/(default)/documents`;
 let fbTok=null,fbExp=0;
@@ -2339,7 +2339,7 @@ async function fbAuth(){if(!fbOn())throw 'off';if(fbTok&&Date.now()<fbExp-60000)
   if(S.fb.rt){const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(S.fb.rt)});
     if(r.ok){const j=await r.json();fbTok=j.id_token;fbExp=Date.now()+(+j.expires_in)*1000;S.fb.uid=j.user_id;S.fb.rt=j.refresh_token;return fbTok}}
   const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({returnSecureToken:true})});
-  if(!r.ok)throw 'auth';const j=await r.json();fbTok=j.idToken;fbExp=Date.now()+(+j.expiresIn)*1000;S.fb.uid=j.localId;S.fb.rt=j.refreshToken;save();return fbTok}
+  if(!r.ok)throw 'auth '+r.status;const j=await r.json();fbTok=j.idToken;fbExp=Date.now()+(+j.expiresIn)*1000;S.fb.uid=j.localId;S.fb.rt=j.refreshToken;save();return fbTok}
 const fv=v=>Array.isArray(v)?{arrayValue:{values:v.map(fv)}}:typeof v==='number'?{integerValue:String(Math.round(v))}:{stringValue:String(v)};
 const fr=x=>!x?null:'integerValue'in x?+x.integerValue:'stringValue'in x?x.stringValue:'arrayValue'in x?(x.arrayValue.values||[]).map(fr):'doubleValue'in x?+x.doubleValue:null;
 const fdoc=d=>{const o={};for(const k in (d.fields||{}))o[k]=fr(d.fields[k]);o._id=d.name.split('/').pop();return o};
@@ -2348,7 +2348,7 @@ const BAD=['cazzo','merda','puttana','troia','stronz','vaffan','coglion','frocio
 function nameOk(n){if(!/^[A-Za-z0-9_.]{3,14}$/.test(n))return'Da 3 a 14 caratteri: lettere, numeri, _ o .';const l=n.toLowerCase();if(BAD.some(b=>l.includes(b)))return'Scegli un nome più gentile 🙂';return''}
 async function claimName(n){const e=nameOk(n);if(e)return e;if(!fbOn()){S.uname=n;save();return''}
   try{await fbAuth();const r=await fbReq(`/names?documentId=${encodeURIComponent(n.toLowerCase())}`,{method:'POST',body:JSON.stringify({fields:{uid:fv(S.fb.uid),name:fv(n)}})});
-    if(r.status===409)return'Questo nome è già preso, provane un altro';if(!r.ok)return'Errore di connessione, riprova';S.uname=n;save();pushProfile();return''}catch(e){return'Errore di connessione, riprova'}}
+    if(r.status===409)return'Questo nome è già preso, provane un altro';if(!r.ok)return'Errore '+r.status+', riprova';S.uname=n;save();pushProfile();return''}catch(e){return'Connessione non riuscita ('+e+'), riprova'}}
 function myProfile(){const wk=weekKey();if(S.wk!==wk){S.wk=wk;S.wkBest=0}return{name:S.uname,level:lvInfo(S.xp).lv,best:S.best,fish:S.fish,sharks:S.owned.slice(),week:wk,weekBest:S.wkBest||0}}
 async function pushProfile(){if(!fbOn()||!S.uname)return;try{await fbAuth();const p=myProfile(),fields={};for(const k in p)fields[k]=fv(p[k]);
   await fbReq(`/users/${S.fb.uid}`,{method:'PATCH',body:JSON.stringify({fields})})}catch(e){}}
@@ -2363,7 +2363,7 @@ async function renderBoard(){const L=$('#lbList');const wk=weekKey();
   try{await pushProfile();const ids=[S.fb.uid,...(S.friends||[])];const r=await fbReq(':batchGet',{method:'POST',body:JSON.stringify({documents:ids.map(u=>`projects/${FB.projectId}/databases/(default)/documents/users/${u}`)})});
     const arr=(await r.json()).filter(x=>x.found).map(x=>fdoc(x.found));boardCache=arr;const rows=arr.map(u=>({u,sc:u.week===wk?u.weekBest||0:0})).sort((a,b)=>b.sc-a.sc);
     $('#lbRows').innerHTML=rows.map((x,i)=>`<button class="lbrow${x.u._id===S.fb.uid?' me':''}" data-act="lbUser" data-id="${x.u._id}"><span class="lbpos">${i<3?['🥇','🥈','🥉'][i]:i+1}</span><span class="lbn">${x.u.name}<small>Livello ${x.u.level||1}</small></span><b>${x.sc}</b></button>`).join('')+(rows.length<2?'<p class="note" style="text-align:center">Aggiungi i tuoi amici per sfidarli!</p>':'')}
-  catch(e){$('#lbRows').innerHTML='<p class="note" style="text-align:center">Niente connessione: riprova più tardi.</p>'}}
+  catch(e){$('#lbRows').innerHTML=`<p class="note" style="text-align:center">Niente connessione: riprova più tardi. <small>(${e})</small></p>`}}
 function showUser(id){const u=boardCache.find(x=>x._id===id);if(!u)return;const sh=(u.sharks||[]).filter(k=>SHB[k]);
   $('#upName').textContent=u.name;$('#upBody').innerHTML=`<div class="upst"><div><span class="lbl">Livello</span><b>${u.level||1}</b></div><div><span class="lbl">Record</span><b>${(u.best||0).toLocaleString('it-IT')}</b></div><div><span class="lbl">Pesciolini</span><b>${(u.fish||0).toLocaleString('it-IT')}</b></div></div><div class="lbl" style="margin-top:.6em">Squali sbloccati: ${sh.length}/${SHARKS.length}</div><div class="upsh">${sh.map(k=>`<span style="border-color:${RARC[RAR[k]||0]}">${SHB[k].name}</span>`).join('')}</div>`;$('#userpop').hidden=false}
 function askName(){if(S.uname||!$('#namebox').hidden)return;$('#nbErr').textContent='';$('#nbIn').value='';$('#namebox').hidden=false}
