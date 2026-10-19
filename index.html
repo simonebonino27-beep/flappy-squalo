@@ -248,7 +248,7 @@ canvas.pv{width:100%;height:auto;display:block}
 .wallets{display:flex;gap:.35em;align-items:center}.gemw{font:inherit;color:#f2e2ff;cursor:pointer;background:linear-gradient(180deg,rgba(200,150,255,.25),rgba(150,90,230,.15))!important;border-color:rgba(210,170,255,.65)!important}.gemw b{font-family:var(--fd);font-weight:800;font-size:1.1em}
 .gempacks{display:grid;grid-template-columns:repeat(2,1fr);gap:.45em}.gpack{display:flex;flex-direction:column;align-items:center;gap:.15em;padding:.6em .3em;border-radius:12px;border:1px solid rgba(210,170,255,.6);background:linear-gradient(180deg,rgba(190,140,255,.22),rgba(110,60,200,.18));color:#fff;cursor:pointer;font:inherit;position:relative}.gpack b{font-family:var(--fd);font-size:1.15em}.gpack span{font-size:.85em;color:#ecdcff}.gpack em{position:absolute;top:-.55em;right:.4em;font-style:normal;font-size:.7em;font-weight:800;background:#ffd27a;color:#2a1900;border-radius:1em;padding:.05em .45em}.gpack:disabled{opacity:.55;cursor:default}
 .fakead{position:absolute;inset:0;z-index:60;background:rgba(2,10,16,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5em;color:#fff;text-align:center}.fakead b{font-family:var(--fd);font-size:1.5em;letter-spacing:.1em}.fakead span{color:#9fc4d0;font-size:.85em}.fakead i{font-style:normal;font-family:var(--fd);font-size:2.6em;color:#7fd8ff}
-.offer{border:1px solid rgba(255,210,122,.7);border-radius:14px;padding:.7em .8em;background:linear-gradient(160deg,rgba(255,200,90,.18),rgba(140,70,220,.16));display:flex;flex-direction:column;gap:.35em}.offer.owned{opacity:.65}.offer .oh{display:flex;justify-content:space-between;align-items:center}.offer .oh b{font-family:var(--fd);font-size:1.2em;letter-spacing:.03em}.otag{background:#ff5a4a;color:#fff;font-weight:800;font-size:.8em;border-radius:1em;padding:.1em .55em}.offer.owned .otag{background:#3a8a5a}.offer ul{margin:0;padding-left:1.1em;font-size:.88em;line-height:1.45}.obuy{background:linear-gradient(180deg,#ffe08a,#f2b33d)!important;color:#2a1900!important;font-weight:800}.obuy s{opacity:.55;font-weight:600;margin-right:.3em}.obuy:disabled{opacity:.6}
+.offer{border:1px solid rgba(255,210,122,.7);border-radius:14px;padding:.7em .8em;background:linear-gradient(160deg,rgba(255,200,90,.18),rgba(140,70,220,.16));display:flex;flex-direction:column;gap:.35em}.offer.owned{opacity:.65}.offer.hallo{border-color:#ff8a20;background:linear-gradient(160deg,rgba(255,120,20,.22),rgba(90,20,120,.25))}.offer.hallo .otag{background:#ff8a20;color:#2a0e00}.offer .oh{display:flex;justify-content:space-between;align-items:center}.offer .oh b{font-family:var(--fd);font-size:1.2em;letter-spacing:.03em}.otag{background:#ff5a4a;color:#fff;font-weight:800;font-size:.8em;border-radius:1em;padding:.1em .55em}.offer.owned .otag{background:#3a8a5a}.offer ul{margin:0;padding-left:1.1em;font-size:.88em;line-height:1.45}.obuy{background:linear-gradient(180deg,#ffe08a,#f2b33d)!important;color:#2a1900!important;font-weight:800}.obuy s{opacity:.55;font-weight:600;margin-right:.3em}.obuy:disabled{opacity:.6}
 #pauseBtn i{display:block;width:.32em;height:1em;background:#fff;border-radius:2px}
 #hShields{right:3.6em!important}
 #pause{align-items:center;justify-content:center;padding:1em;background:rgba(1,10,16,.6);z-index:9}
@@ -376,7 +376,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.40</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.41</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
@@ -451,7 +451,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.40</span>
+        <span class="beta big">BETA 0.41</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -633,6 +633,9 @@ const SHARKS=[
  {id:'reale',name:'Squalo reale',latin:'Esclusiva del pacchetto iniziale',sp:SP({L:52,h:9.8,blunt:.32,noseY:-.2,so:.2,jag:true,teeth:'some',pecTip:'#ffd23f',d1:{h:1.25,back:.06},pec:{len:.27,ang:.55},tail:{u:.35,ua:1.05,l:.3,la:.95},keel:true,col:{back:'#3b2470',belly:'#f6e9c0',pat:'#ffd23f'},glow:'#ffd23f'}),
   perk:{mult:2,gold:.05,shield:1},unlock:{t:'iap'},ab:{name:'Breccia reale',kind:'breach',pw:4,wave:true,charge:10,tier:5,desc:'Distrugge i prossimi 4 ostacoli che tocchi e spazza via i pericoli sullo schermo.'},
   fact:"Uno squalo che non esiste in natura: lo ha solo chi ha preso il pacchetto iniziale."},
+ {id:'zombie',name:'Squalo zombie',latin:'Evento di Halloween',sp:SP({L:46,h:8.6,blunt:.9,so:.26,pattern:'tiger',teeth:'some',d1:{h:1.0},tail:{u:.43,ua:.7,l:.16,la:.85},col:{back:'#5f7a5a',belly:'#c9d6b8',pat:'#2a3a24'},eyeGlow:'#9dff5a',scars:true,glow:'#7aff4a'}),
+  perk:{mult:1.5,gold:.03},unlock:{t:'event',gem:600},ab:{name:"Morso dell'oltretomba",kind:'devour',dur:7,charge:10,tier:4,desc:'Per 7 secondi i pesciolini valgono doppio e divori meduse, ami, mine e animali invece di farti male.'},
+  fact:"Esce dagli abissi solo per Halloween: dopo il 2 novembre non si può più prendere."},
  {id:'nutrice',name:'Squalo nutrice',latin:'Ginglymostoma cirratum',sp:SP({L:44,h:7.8,blunt:.95,so:.5,barbels:true,d1:{s:.5,b:.1,h:.75,back:.04},d2:{s:.64,b:.08,h:.6,back:.03},anal:{s:.7,b:.06,h:.4},pec:{len:.15,ang:.75,w:.08},tail:{u:.46,ua:.2,l:.04,la:.6},col:{back:'#a7804f',belly:'#d8b88b'}}),
   perk:{grav:.85,add:1},unlock:{t:'buy',cost:12000},ab:{name:'Risucchio',kind:'vacuum',dur:3,r:230,charge:8,tier:2,desc:'Per 3 secondi aspira tutti i pesciolini e i power-up sullo schermo, e ti arriva davanti una scia di pesci da risucchiare.'},
   fact:"Di giorno riposa sul fondo, di notte aspira le prede dalle tane come un aspirapolvere."},
@@ -708,6 +711,7 @@ const COLORS=[
  {id:'bioluce',name:'Bioluminescente',unlock:{t:'level',lv:10},f:p=>{p.back='#0b2230';p.belly='#123848';p.pat='#071820';p.photo='#6ff6ff';p.glow='#4fd8ff';p.eyeGlow='#9ffcff';p.spotsAll=true}},
  {id:'fantasma',name:'Fantasma',unlock:{t:'buy',cost:7500},f:p=>{p.back='#b7d3e2';p.belly='#f1f8fb';p.pat='#8fb3c7';p.alpha=.55;p.glow='#cdeeff'}},
  {id:'abisso',name:'Abisso',unlock:{t:'level',lv:14},f:p=>{p.back='#14161b';p.belly='#2b2e36';p.pat='#05060a';p.eyeGlow='#ff3a3a';p.glow='#ff3a3a'}},
+ {id:'zucca',name:'Zucca di Halloween',unlock:{t:'event',gem:250},f:p=>{p.back='#e8761c';p.belly='#ffd08a';p.pat='#2a1206';p.eyeGlow='#ffb020';p.glow='#ff9020'}},
  {id:'corona',name:'Corona reale',unlock:{t:'iap'},f:p=>{p.back='#4a2a8a';p.belly='#f4e6b0';p.pat='#ffd23f';p.metal=1;p.glow='#ffd23f'}},
  {id:'oro',name:'Oro massiccio',unlock:{t:'buy',cost:20000},f:p=>{p.back='#a8781f';p.belly='#f0d27a';p.pat='#6e4c10';p.metal=1}},
  {id:'leggenda',name:'Leggenda',unlock:{t:'level',lv:20},f:p=>{p.back='#c9d3dc';p.belly='#ffffff';p.pat='#8a98a6';p.metal=1;p.scars=true;p.glow='#ffffff'}},
@@ -833,7 +837,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.40';
+const KEY='flappysqualo.beta1';const BETA='0.41';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -2212,6 +2216,13 @@ BORDER.push(...Object.keys(B2).map(k=>'b_'+k));
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
 const ADMOB_REWARDED='ca-app-pub-3940256099942544/5224354917';
 const admobP=()=>{try{const C=window.Capacitor;if(!NATIVE||!C)return null;return C.Plugins.AdMob||(C.registerPlugin&&C.registerPlugin('AdMob'))}catch(e){return null}};
+const HALLO=()=>{try{const md=romeParts().day.slice(5);return md>='10-19'&&md<='11-02'}catch(e){return false}};let halloOn=HALLO();setInterval(()=>{halloOn=HALLO()},60000);
+function drawHallo(){if(!halloOn)return;for(let i=0;i<3;i++){const x=((i*113-scroll*.08)%(W+80)+W+80)%(W+80)-40,y=80+i*95+Math.sin(t*.8+i*2)*10;
+  ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(t*.6+i)*.15);glowAt(ctx,0,0,26,'#ff8a20',.35+Math.sin(t*3+i)*.08);ctx.globalAlpha=.85;ctx.fillStyle='#e8761c';ctx.strokeStyle='#4a1e04';ctx.lineWidth=.8;
+  for(const dx of [-4,0,4]){ctx.beginPath();ctx.ellipse(dx,0,5.5,7,0,0,7);ctx.fill();ctx.stroke()}ctx.fillStyle='#3a5a1a';ctx.fillRect(-1,-9.5,2,3);
+  ctx.fillStyle='#ffe066';ctx.beginPath();ctx.moveTo(-5,-2);ctx.lineTo(-2,-2);ctx.lineTo(-3.5,-4.5);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(5,-2);ctx.lineTo(2,-2);ctx.lineTo(3.5,-4.5);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.moveTo(-5,1.5);ctx.lineTo(-3,3.5);ctx.lineTo(-1,2);ctx.lineTo(1,3.5);ctx.lineTo(3,2);ctx.lineTo(5,1.5);ctx.lineTo(3,5);ctx.lineTo(-3,5);ctx.closePath();ctx.fill();ctx.restore()}
+  ctx.fillStyle='rgba(60,10,80,.08)';ctx.fillRect(0,0,W,H)}
 const OFFERS=[{id:'starter_pack',name:'Pacchetto iniziale',was:'13,99 €',p:'4,99 €',once:'starter',items:['💎 1.200 gemme','🦈 Squalo reale (Leggendario, esclusivo)','👑 Skin Corona reale','🎟️ 3 biglietti rinascita']},
   {id:'fish_doubler',name:'Raddoppiatore',was:'24,99 €',p:'9,99 €',once:'doubler',items:['🐟 ×2 pesciolini a fine partita','♾️ Per sempre, su tutti gli squali']}];
 function grantOffer(id){if(id==='starter_pack'&&!S.starter){S.starter=1;S.gems=(S.gems||0)+1200;if(!S.owned.includes('reale'))S.owned.push('reale');if(!S.skins.includes('corona'))S.skins.push('corona');S.rvTok=(S.rvTok||0)+3;save();toast('Pacchetto iniziale','Squalo reale, skin e 1.200 gemme sono tuoi!');SFX.unlock()}
@@ -2685,7 +2696,7 @@ function render(){
     ctx.globalCompositeOperation='lighter';for(let i=0;i<5;i++){const x=10+i*62+Math.sin(t*.22+i*1.7)*24;const gr=ctx.createLinearGradient(0,0,0,360);gr.addColorStop(0,`rgba(200,245,255,${.1*wc.light})`);gr.addColorStop(1,'rgba(200,245,255,0)');ctx.fillStyle=gr;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+18,0);ctx.lineTo(x+64,360);ctx.lineTo(x+22,360);ctx.closePath();ctx.fill()}ctx.globalCompositeOperation='source-over'}
   // layers
   for(const [bi,al] of [[bgFrom,1-bgK],[bgTo,bgK]]){if(al<=.01)continue;tileLayer(getLayer(bi,'far'),.12,al)}
-  drawBig();
+  drawBig();drawHallo();
   const sb=BIOMES[bgTo];
   if(sb.school){const cx=((W*1.4-(scroll*.2)%(W*2))+W*2)%(W*2)-W*.3,cy=150+Math.sin(t*.3)*40;ctx.fillStyle=rgba('#d8e8f0',.4*bgK);for(const f of SCHOOL){const a=f.a+t*f.s;const x=cx+Math.cos(a)*f.r*2.2+Math.sin(t+f.o)*3,y=cy+Math.sin(a*1.3)*f.r;ell(ctx,x,y,2.2,.7)}}
   if(sb.dark){for(let i=0;i<14;i++){const x=((i*53-scroll*.15)%W+W)%W,y=60+(i*97)%320;ctx.globalAlpha=.4+Math.sin(t*2+i)*.3;ctx.fillStyle=i%2?'#6ff0ff':'#a08cff';ell(ctx,x,y,.7,.7)}ctx.globalAlpha=1}
@@ -2772,7 +2783,7 @@ const BETA_RESET=true;
 
 /* ---- wheel of fortune: 1 free spin per Italian day, extra spins 15000. Slice width = probability */
 const WCOST=15000;
-const RAR={reale:3,grigio:0,martello:0,nutrice:0,tigre:0,mako:1,volpe:1,zebra:1,sega:1,bianco:2,balena:2,lanterna:2,goblin:2,cornuto:2,orca:3,groenlandia:3,collare:3,longimano:3,boccalarga:3,megalodonte:3};
+const RAR={zombie:2,reale:3,grigio:0,martello:0,nutrice:0,tigre:0,mako:1,volpe:1,zebra:1,sega:1,bianco:2,balena:2,lanterna:2,goblin:2,cornuto:2,orca:3,groenlandia:3,collare:3,longimano:3,boccalarga:3,megalodonte:3};
 const RARN=['Comune','Raro','Epico','Leggendario'],RARC=['#b8c4cc','#5ab4ff','#c38bff','#ffcf4a'];
 const WPRIZES=[{t:'fish',n:50,a:45,c:'#2a7f9e'},{t:'fish',n:1000,a:40,c:'#2f9e7a'},{t:'up',a:35,c:'#d07a2e'},{t:'fish',n:150,a:60,c:'#3a6fb0'},{t:'shark',r:1,a:12,c:'#2e7fe0'},
   {t:'fish',n:500,a:50,c:'#2a8f8f'},{t:'fish',n:10000,a:12,c:'#c8902a'},{t:'fish',n:50,a:40,c:'#2a7f9e'},{t:'fish',n:2500,a:30,c:'#3f9e4a'},{t:'shark',r:3,a:2,c:'#ffcf4a'},
@@ -2804,7 +2815,7 @@ function updWheel(){const free=wheelFree();$('#wBal').textContent=S.fish.toLocal
   $('#wInfo').textContent=free?'Hai un giro gratis oggi!':`Prossimo giro gratis tra ${fmtHMS(Math.max(0,86400-romeParts().sec))} (mezzanotte italiana)`+(S.fish<WCOST?` · ti mancano ${(WCOST-S.fish).toLocaleString('it-IT')} per un giro extra`:'')}
 function givePrize(p){if(p.t==='fish'){S.fish+=p.n;S.totalFish+=p.n;return`+${p.n.toLocaleString('it-IT')} pesciolini`}
   if(p.t==='up'){const ok=UPS.filter(u=>(S.up[u.id]||0)<u.costs.length);if(!ok.length){S.fish+=5000;return'+5.000 pesciolini (potenziamenti già al massimo)'}const u=ok[(Math.random()*ok.length)|0];S.up[u.id]=(S.up[u.id]||0)+1;return`Potenziamento gratis: ${u.name||u.id} livello ${S.up[u.id]}`}
-  const pool=SHARKS.filter(s=>RAR[s.id]===p.r&&!S.owned.includes(s.id)&&!isSecret(s)&&s.unlock.t!=='iap');const comp={1:10000,2:25000,3:50000}[p.r];
+  const pool=SHARKS.filter(s=>RAR[s.id]===p.r&&!S.owned.includes(s.id)&&!isSecret(s)&&s.unlock.t!=='iap'&&s.unlock.t!=='event');const comp={1:10000,2:25000,3:50000}[p.r];
   if(!pool.length){S.fish+=comp;return`Hai già tutti gli squali ${RARN[p.r].toLowerCase()}: +${comp.toLocaleString('it-IT')} pesciolini`}
   const s=pool[(Math.random()*pool.length)|0];S.owned.push(s.id);S.wheelShark=romeParts().day;return`Squalo ${RARN[p.r].toLowerCase()}: ${s.name}!`}
 function spinWheel(){if(wSpinning)return;const free=wheelFree();if(!free&&S.fish<WCOST)return;
@@ -2876,7 +2887,7 @@ function stars(n){return`<span class="stars">${'★'.repeat(n)}<i>${'★'.repeat
 function renderMenu(){ensureDay();applyLocks();{const dd=dailyState();$('#mDaily').textContent=dd.best?`Il tuo record di oggi: ${dd.best}`:'Stesso percorso per tutti, cambia ogni giorno'}setTimeout(menuPopups,450);$('#wBadge').hidden=!wheelFree();const s=SHB[S.sel],m=S.morph[S.sel];$('#mName').textContent=m?MOB[m].name:s.name;$('#mLatin').textContent=(m?MOB[m].latin:s.latin)+(S.skin!=='naturale'?` · ${COB[S.skin].name}`:'');
   $('#mAb').innerHTML=`Abilità: <b>${s.ab.name}</b><span class="stars">${'★'.repeat(s.ab.tier||1)}</span> · ${stats().value} per pesciolino<button class="abmode" data-act="abmode" title="Cambia attivazione abilità">${S.abAuto?'⚙️ Automatica':'👆 Manuale'} ⇄</button>`;
   const li=lvInfo(S.xp);$('#mLv').textContent=li.lv;$('#mXp').style.width=(li.rem/li.need*100)+'%';$('#mXpTxt').textContent=`${li.rem}/${li.need} XP`;
-  $('#mFish').textContent=S.fish.toLocaleString('it-IT');balances();$('#mBest').textContent=S.best;$('#mRuns').textContent=(S.st.runs||0).toLocaleString('it-IT');{const rr=RAR[S.sel]||0,e=$('#mRar');e.textContent=RARN[rr];e.style.color=RARC[rr]}$('#mTro').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;$('#mBes').textContent=`${BORDER.filter(k=>S.seen[k]).length}/${BORDER.length}`;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
+  $('#mFish').textContent=S.fish.toLocaleString('it-IT');balances();if(halloOn&&S.halloTip!==romeParts().day){S.halloTip=romeParts().day;setTimeout(()=>toast('🎃 Evento Halloween','Squalo zombie e skin Zucca nel negozio, solo fino al 2 novembre'),1200)}$('#mBest').textContent=S.best;$('#mRuns').textContent=(S.st.runs||0).toLocaleString('it-IT');{const rr=RAR[S.sel]||0,e=$('#mRar');e.textContent=RARN[rr];e.style.color=RARC[rr]}$('#mTro').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;$('#mBes').textContent=`${BORDER.filter(k=>S.seen[k]).length}/${BORDER.length}`;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
 const PVC={};
 function pv(sp,skin,sil,w=300,h=120){const c=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1);c.width=w*dpr;c.height=h*dpr;c.className='pv';const g=c.getContext('2d');g.scale(dpr,dpr);
   const bg=g.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#2a8ea6');bg.addColorStop(1,'#0b3a52');g.fillStyle=bg;g.fillRect(0,0,w,h);
@@ -2884,7 +2895,7 @@ function pv(sp,skin,sil,w=300,h=120){const c=document.createElement('canvas'),dp
   const ex=sharkExtent(sp),sc=Math.min((w*.9)/(ex.front+ex.back+4),(h*.92)/(ex.up+ex.down+4));const key=sp.uid+'|'+skin+'|'+(sil?1:0)+'|'+Math.round(sc*dpr*100);
   let fr=PVC[key];if(!fr){fr=buildShark(sp,skin,sc*dpr,.6,idleJaw(sp));if(sil){const q=fr.c.getContext('2d');q.save();q.setTransform(1,0,0,1,0,0);q.globalCompositeOperation='source-in';q.fillStyle='#0a1c26';q.fillRect(0,0,fr.c.width,fr.c.height);q.restore()}PVC[key]=fr}
   const dw=fr.w*sc,dh=fr.h*sc;if(fr.pal.glow&&!sil)glowAt(g,w/2,h/2,dw*.4,fr.pal.glow,.25);g.globalAlpha=sil?1:fr.pal.alpha;g.drawImage(fr.c,(w-dw)/2,(h-dh)/2,dw,dh);g.globalAlpha=1;return c}
-function unlockLabel(u){if(u.t==='iap')return'<span class="tagpill buy">Esclusivo</span>';if(u.t==='buy')return'<span class="tagpill buy">Negozio</span>';if(u.t==='level')return`<span class="tagpill lv">Livello ${u.lv}</span>`;
+function unlockLabel(u){if(u.t==='event')return'<span class="tagpill buy">🎃 Halloween</span>';if(u.t==='iap')return'<span class="tagpill buy">Esclusivo</span>';if(u.t==='buy')return'<span class="tagpill buy">Negozio</span>';if(u.t==='level')return`<span class="tagpill lv">Livello ${u.lv}</span>`;
   if(u.t==='trophy')return TRB[u.id].hidden?'<span class="tagpill hid">Trofeo nascosto</span>':'<span class="tagpill tro">Trofeo</span>';return'<span class="tagpill st">Iniziale</span>'}
 const fishBtn=(act,id,cost)=>`<button class="btn buy sm" data-act="${act}" data-id="${id}" ${S.fish>=cost?'':'disabled'}><img class="fi" src="${ICON}" alt=""> ${cost.toLocaleString('it-IT')}</button>`;
 
@@ -2901,6 +2912,7 @@ function renderShop(){balances();['sharks','ups','bonus','skins'].forEach(k=>$('
       let act='';
       if(own)act=S.sel===s.id?'<button class="btn ok sm" disabled>In uso</button>':`<button class="btn sm" data-act="selShark" data-id="${s.id}">Scegli</button>`;
       else if(u.t==='buy')act=fishBtn('buyShark',s.id,u.cost)+`<button class="btn gem sm" data-act="gemShark" data-id="${s.id}" ${(S.gems||0)>=gemShark(u.cost)?'':'disabled'}>💎 ${gemShark(u.cost)}</button>`+(S.fish>=u.cost?'':`<span class="lock">Ti mancano ${(u.cost-S.fish).toLocaleString('it-IT')}</span>`);
+      else if(u.t==='event')act=HALLO()?`<button class="btn gem sm" data-act="evBuy" data-id="${s.id}" ${(S.gems||0)>=u.gem?'':'disabled'}>💎 ${u.gem}</button><span class="lock">Solo fino al 2 novembre</span>`:'<span class="lock">Torna il prossimo Halloween</span>';
       else if(u.t==='iap')act=`<button class="btn gem sm" data-act="shop" data-tab="bonus">Nel pacchetto iniziale</button>`;
       else{act=u.t==='level'?`<span class="lock">Gratis al livello ${u.lv}</span>`:hid?`<span class="lock hid">${TRB[u.id].hint}</span>`:`<span class="lock">Gratis col trofeo: ${TRB[u.id].desc}${trProg(TRB[u.id])}</span>`;
         if(u.cost)act+=`<span class="lock">oppure compralo:</span>`+fishBtn('buyShark',s.id,u.cost)}
@@ -2915,6 +2927,7 @@ function renderShop(){balances();['sharks','ups','bonus','skins'].forEach(k=>$('
         <div class="pips">${Array.from({length:max},(_,i)=>`<i class="${i<lv?'on':''}"></i>`).join('')}</div>
         <div class="act"><span class="unow">${lv>=max?`${fmt(a)} · <em>MAX</em>`:`${fmt(a)} → <em>${fmt(b)}</em>`}</span>${lv>=max?'':fishBtn('buyUp',u.id,cost)}</div></div>`)})}
   else if(shopTab==='bonus'){S.inv=S.inv||{};S.invOff=S.invOff||{};
+    if(halloOn)L.insertAdjacentHTML('beforeend',`<div class="sec">🎃 Halloween · fino al 2 novembre</div>${[['zombie',SHB.zombie.name+' (Epico)','Abilità: '+SHB.zombie.ab.name+' · ×1,5 pesciolini',SHB.zombie.unlock.gem,S.owned.includes('zombie')],['zucca','Skin '+COB.zucca.name,'Arancione con occhi infuocati, vale per tutti gli squali',COB.zucca.unlock.gem,S.skins.includes('zucca')]].map(([id,n,d,g,own])=>`<div class="offer hallo${own?' owned':''}"><div class="oh"><b>${n}</b><span class="otag">${own?'Già tuo':'Solo ora'}</span></div><p class="note" style="margin:0">${d}</p>${own?'':`<button class="btn gem" data-act="evBuy" data-id="${id}" ${(S.gems||0)>=g?'':'disabled'}>💎 ${g}</button>`}</div>`).join('')}`);
     L.insertAdjacentHTML('beforeend',`<div class="sec">🔥 Offerte</div>${OFFERS.map(o=>{const own=!!S[o.once];return`<div class="offer${own?' owned':''}"><div class="oh"><b>${o.name}</b>${own?'<span class="otag">Già tuo</span>':'<span class="otag">−'+Math.round((1-parseFloat(o.p.replace(',','.'))/parseFloat(o.was.replace(',','.')))*100)+'%</span>'}</div><ul>${o.items.map(i=>`<li>${i}</li>`).join('')}</ul>${own?'':`<button class="btn obuy" data-act="iap" data-id="${o.id}" ${NATIVE?'':'disabled'}><s>${o.was}</s> ${gemPrice(o)}</button>`}</div>`}).join('')}${NATIVE?'':'<p class="note">Le offerte si comprano solo nell\'app Android (in arrivo).</p>'}`);
     L.insertAdjacentHTML('beforeend',`<div class="sec">💎 Gemme · ne hai <span class="gemv">${(S.gems||0).toLocaleString('it-IT')}</span></div><p class="note">${NATIVE?'Le gemme si comprano con soldi veri e non si trovano giocando.':'Le gemme si comprano solo nell\'app Android (in arrivo). Qui puoi già usare quelle che hai.'}</p><div class="gempacks">${IAP.map(p=>`<button class="gpack" data-act="iap" data-id="${p.id}" ${NATIVE?'':'disabled'}><b>💎 ${p.g.toLocaleString('it-IT')}</b>${p.tag?`<em>${p.tag}</em>`:''}<span>${gemPrice(p)}</span></button>`).join('')}</div>`);
     GEMUSE.forEach(u=>L.insertAdjacentHTML('beforeend',`<div class="ucard"><div class="uhead"><b>${u.ico} ${u.name}</b></div><div class="act"><span></span><button class="btn gem sm" data-act="gemUse" data-id="${u.id}" ${(S.gems||0)>=u.cost?'':'disabled'}>💎 ${u.cost}</button></div></div>`));
@@ -2931,7 +2944,7 @@ function renderShop(){balances();['sharks','ups','bonus','skins'].forEach(k=>$('
     L.insertAdjacentHTML('beforeend','<div class="sec">Colorazioni</div><p class="note">Valgono per tutte le creature.</p>');
     const grid=document.createElement('div');grid.className='sgrid';const cur=curSpec();
     COLORS.forEach(k=>{const own=S.skins.includes(k.id),u=k.unlock;const el=document.createElement('div');el.className='kcard'+(S.skin===k.id?' sel':'');const box=document.createElement('div');box.className='pvbox';box.appendChild(pv(cur,k.id,false,220,100));el.appendChild(box);
-      let act;if(own)act=S.skin===k.id?'<button class="btn ok sm" disabled>In uso</button>':`<button class="btn sm" data-act="selSkin" data-id="${k.id}">Usa</button>`;else if(u.t==='buy')act=fishBtn('buySkin',k.id,u.cost);else if(u.t==='iap')act='<button class="btn gem sm" data-act="shop" data-tab="bonus">Pacchetto iniziale</button>';else act=`<button class="btn sm" disabled>Livello ${u.lv}</button>`;
+      let act;if(own)act=S.skin===k.id?'<button class="btn ok sm" disabled>In uso</button>':`<button class="btn sm" data-act="selSkin" data-id="${k.id}">Usa</button>`;else if(u.t==='buy')act=fishBtn('buySkin',k.id,u.cost);else if(u.t==='iap')act='<button class="btn gem sm" data-act="shop" data-tab="bonus">Pacchetto iniziale</button>';else if(u.t==='event')act=HALLO()?`<button class="btn gem sm" data-act="evBuy" data-id="${k.id}" ${(S.gems||0)>=u.gem?'':'disabled'}>💎 ${u.gem}</button>`:'<button class="btn sm" disabled>Halloween</button>';else act=`<button class="btn sm" disabled>Livello ${u.lv}</button>`;
       el.insertAdjacentHTML('beforeend',`<b>${k.name}</b>${act}`);grid.appendChild(el)});L.appendChild(grid)}}
 function renderMissions(){balances();ensureDay();const L=$('#missList');L.innerHTML='';
   L.insertAdjacentHTML('beforeend',`<div class="sec">Giornaliere</div><p class="note">Tre sfide nuove ogni giorno a mezzanotte (ora italiana).</p>`);
@@ -3002,6 +3015,7 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
     case 'selShark':S.sel=id;save();SFX.buy();renderShop();break;
     case 'buyShark':{const c=SHB[id].unlock.cost;if(S.fish>=c&&!S.owned.includes(id)){S.fish-=c;S.owned.push(id);S.sel=id;SFX.buy();toast('Nuova creatura',SHB[id].name);save();checkGlobal()}renderShop();break}
     case 'iap':iapBuy(id);break;
+    case 'evBuy':{if(!HALLO())break;if(id==='zombie'){const g=SHB.zombie.unlock.gem;if((S.gems||0)>=g&&!S.owned.includes('zombie')){S.gems-=g;S.owned.push('zombie');S.sel='zombie';SFX.buy();toast('🎃 Nuova creatura','Squalo zombie');save();checkGlobal()}}else if(id==='zucca'){const g=COB.zucca.unlock.gem;if((S.gems||0)>=g&&!S.skins.includes('zucca')){S.gems-=g;S.skins.push('zucca');S.skin='zucca';SFX.buy();toast('🎃 Nuova skin','Zucca di Halloween');save()}}renderShop();break}
     case 'gemUse':{const u=GEMUSE.find(x=>x.id===id);if(u&&(S.gems||0)>=u.cost){S.gems-=u.cost;u.use();SFX.buy();save();toast(u.ico+' '+u.name,'Fatto!')}renderShop();break}
     case 'gemShark':{const c=gemShark(SHB[id].unlock.cost);if((S.gems||0)>=c&&!S.owned.includes(id)){S.gems-=c;S.owned.push(id);S.sel=id;SFX.buy();toast('Nuova creatura',SHB[id].name);save();checkGlobal()}renderShop();break}
     case 'buyInv':{const it=INV.find(x=>x.id===id);S.inv=S.inv||{};const have=id==='rv'?(S.rvTok||0):(S.inv[id]||0);if(it&&have<10&&S.fish>=it.cost){S.fish-=it.cost;if(id==='rv')S.rvTok=(S.rvTok||0)+1;else S.inv[id]=have+1;SFX.buy();save()}renderShop();break}
