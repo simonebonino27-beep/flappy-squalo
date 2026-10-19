@@ -249,6 +249,10 @@ canvas.pv{width:100%;height:auto;display:block}
 .gempacks{display:grid;grid-template-columns:repeat(2,1fr);gap:.45em}.gpack{display:flex;flex-direction:column;align-items:center;gap:.15em;padding:.6em .3em;border-radius:12px;border:1px solid rgba(210,170,255,.6);background:linear-gradient(180deg,rgba(190,140,255,.22),rgba(110,60,200,.18));color:#fff;cursor:pointer;font:inherit;position:relative}.gpack b{font-family:var(--fd);font-size:1.15em}.gpack span{font-size:.85em;color:#ecdcff}.gpack em{position:absolute;top:-.55em;right:.4em;font-style:normal;font-size:.7em;font-weight:800;background:#ffd27a;color:#2a1900;border-radius:1em;padding:.05em .45em}.gpack:disabled{opacity:.55;cursor:default}
 .fakead{position:absolute;inset:0;z-index:60;background:rgba(2,10,16,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5em;color:#fff;text-align:center}.fakead b{font-family:var(--fd);font-size:1.5em;letter-spacing:.1em}.fakead span{color:#9fc4d0;font-size:.85em}.fakead i{font-style:normal;font-family:var(--fd);font-size:2.6em;color:#7fd8ff}
 .offer{border:1px solid rgba(255,210,122,.7);border-radius:14px;padding:.7em .8em;background:linear-gradient(160deg,rgba(255,200,90,.18),rgba(140,70,220,.16));display:flex;flex-direction:column;gap:.35em}.offer.owned{opacity:.65}.opvs{display:flex;gap:.4em}.opv{flex:1;border-radius:10px;background:radial-gradient(ellipse at 50% 40%,rgba(120,200,255,.25),rgba(4,24,36,.6));display:flex;flex-direction:column;align-items:center;padding:.2em 0 .3em;overflow:hidden}.opv canvas{width:100%;height:auto;display:block}.opv small{font-size:.72em;color:#e8d8ff;margin-top:-.2em}.offer.hallo{border-color:#ff8a20;background:linear-gradient(160deg,rgba(255,120,20,.22),rgba(90,20,120,.25))}.offer.hallo .otag{background:#ff8a20;color:#2a0e00}.offer .oh{display:flex;justify-content:space-between;align-items:center}.offer .oh b{font-family:var(--fd);font-size:1.2em;letter-spacing:.03em}.otag{background:#ff5a4a;color:#fff;font-weight:800;font-size:.8em;border-radius:1em;padding:.1em .55em}.offer.owned .otag{background:#3a8a5a}.offer ul{margin:0;padding-left:1.1em;font-size:.88em;line-height:1.45}.obuy{background:linear-gradient(180deg,#ffe08a,#f2b33d)!important;color:#2a1900!important;font-weight:800}.obuy s{opacity:.55;font-weight:600;margin-right:.3em}.obuy:disabled{opacity:.6}
+#guide{position:absolute;inset:0;z-index:90}#guide .ghole{position:absolute;border-radius:14px;box-shadow:0 0 0 9999px rgba(2,10,16,.74);outline:2px solid #ffd27a;animation:gpulse 1.2s ease-in-out infinite;pointer-events:none}#guide .ghole.shake{animation:gshake .35s}@keyframes gpulse{50%{outline-color:rgba(255,210,122,.35);outline-offset:5px}}@keyframes gshake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+#guide .gbox{position:absolute;left:4%;right:4%;display:flex;align-items:flex-end;gap:.35em;pointer-events:none}#guide .pinna{width:5.4em;flex:none;animation:hbob .8s ease-in-out infinite alternate;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}#guide .gbub{background:#fff;color:#123;border-radius:16px;padding:.7em .85em;font-size:.95em;line-height:1.35;box-shadow:0 6px 20px rgba(0,0,0,.45);position:relative;flex:1}#guide .gbub p{margin:0}#guide .gbub b{color:#1a5f8f}#guide .gbub small{display:block;margin-top:.35em;color:#5a7a8a;font-size:.78em}#guide .gbub::before{content:'';position:absolute;left:-8px;bottom:16px;border:8px solid transparent;border-right-color:#fff;border-left:0}
+#guide .gfinger{position:absolute;font-size:1.9em;pointer-events:none;animation:hbob .45s ease-in-out infinite alternate;z-index:2}#guide .gskip{position:absolute;right:.9em;bottom:.9em;background:none;border:0;color:#9fc4d0;font-size:.8em;text-decoration:underline;cursor:pointer}
+.inboxb{position:relative;font-size:1.05em;padding-left:.55em;padding-right:.55em}.ibm{display:flex;gap:.6em;align-items:center;padding:.65em .7em;border-radius:12px;border:1px solid var(--line2);background:rgba(255,255,255,.05)}.ibm.done{opacity:.55}.ibi{font-size:1.6em}.ibt{flex:1;min-width:0}.ibt b{font-family:var(--fd);font-size:1.05em}.ibt p{margin:.15em 0 0;font-size:.82em;color:var(--muted)}.ibg{display:inline-block;margin-top:.3em;font-size:.8em;font-weight:700;color:#ffd27a}
 #pauseBtn i{display:block;width:.32em;height:1em;background:#fff;border-radius:2px}
 #hShields{right:3.6em!important}
 #pause{align-items:center;justify-content:center;padding:1em;background:rgba(1,10,16,.6);z-index:9}
@@ -373,13 +377,13 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
     <div id="tapHint" hidden><b>TOCCA PER NUOTARE</b><span>Tocca per nuotare. Tieni premuto per planare dritto. L'abilità parte da sola (o tasto E).</span></div>
 
     <section id="menu" class="screen">
-      <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
+      <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback">Feedback</button><button class="btn sm mute" data-act="audio" id="audioBtn">&#9881;&#65039; Opzioni</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.44</span>
+        <span class="l2">SQUALO</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.45</span>
       </header>
       <div class="mpanel">
-        <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks">Cambia</button></div>
+        <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
         <div class="abline" id="mAb"></div>
         <div class="mstats">
           <div class="mst"><span class="lbl">Record</span><b id="mBest">0</b></div>
@@ -389,13 +393,13 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
         <button class="btn big" data-act="play">NUOTA</button>
         <button class="btn dailyb" data-act="daily" data-feat="daily"><span>🏁 Sfida del giorno</span><small id="mDaily"></small><em class="lk"></em></button>
         <div class="mgrid">
-          <button class="tile" data-act="shop" data-tab="ups"><span class="ti">🛒</span>Negozio</button>
+          <button class="tile" data-act="shop" data-tab="ups" data-feat="shop"><span class="ti">🛒</span>Negozio<em class="lk"></em></button>
           <button class="tile" data-act="wheel" data-feat="wheel"><span class="ti">🎡</span>Ruota<em class="lk"></em><span class="badge" id="wBadge" hidden>1</span></button>
           <button class="tile" data-act="missions" data-feat="missions"><span class="ti">📋</span>Missioni<em class="lk"></em><span class="badge" id="mBadge" hidden>0</span></button>
-          <button class="tile" data-act="trophies"><span class="ti">🏆</span>Trofei<small id="mTro"></small></button>
-          <button class="tile" data-act="bestiary"><span class="ti">📖</span>Bestiario<small id="mBes"></small></button>
-          <button class="tile" data-act="levels"><span class="ti">⭐</span>Livelli</button>
-          <button class="tile" data-act="history"><span class="ti">🕘</span>Partite</button>
+          <button class="tile" data-act="trophies" data-feat="trophies"><span class="ti">🏆</span>Trofei<small id="mTro"></small><em class="lk"></em></button>
+          <button class="tile" data-act="bestiary" data-feat="bestiary"><span class="ti">📖</span>Bestiario<small id="mBes"></small><em class="lk"></em></button>
+          <button class="tile" data-act="levels" data-feat="levels"><span class="ti">⭐</span>Livelli<em class="lk"></em></button>
+          <button class="tile" data-act="history" data-feat="history"><span class="ti">🕘</span>Partite<em class="lk"></em></button>
           <button class="tile" data-act="shop" data-tab="skins" data-feat="skins"><span class="ti">🎨</span>Skin<em class="lk"></em></button>
         </div>
       </div>
@@ -426,6 +430,13 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="list" id="shopList"></div>
     </section>
 
+    <section id="inbox" class="screen full" hidden>
+      <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Posta</h2></div>
+      <div class="list" id="ibList"></div>
+    </section>
+
+    <div id="guide" hidden><div class="ghole"></div><span class="gfinger">👆</span><div class="gbox"><svg class="pinna" viewBox="0 0 120 84" aria-hidden="true"><path d="M14 46 L2 30 Q10 44 4 60 Z" fill="#3f78a6" stroke="#0e2a3d" stroke-width="2.2" stroke-linejoin="round"/><path d="M52 22 Q60 4 72 6 Q66 16 68 26 Z" fill="#3f78a6" stroke="#0e2a3d" stroke-width="2.2" stroke-linejoin="round"/><ellipse cx="62" cy="46" rx="48" ry="24" fill="#5b9bcc" stroke="#0e2a3d" stroke-width="2.2"/><path d="M22 52 Q60 74 106 50 Q92 66 62 68 Q36 68 22 52Z" fill="#eef7fb"/><path d="M54 60 Q46 74 36 76 Q46 64 46 58Z" fill="#3f78a6" stroke="#0e2a3d" stroke-width="2" stroke-linejoin="round"/><path d="M70 34 L72 40 M75 33 L77 39" stroke="#2a5f87" stroke-width="1.6" stroke-linecap="round"/><circle cx="88" cy="38" r="9" fill="#fff" stroke="#0e2a3d" stroke-width="2"/><circle cx="90" cy="39" r="5" fill="#0e2a3d"/><circle cx="92" cy="36.5" r="1.8" fill="#fff"/><path d="M92 54 Q100 56 106 50" fill="none" stroke="#0e2a3d" stroke-width="2.2" stroke-linecap="round"/><ellipse cx="81" cy="52" rx="4" ry="2.4" fill="#ff9aa8" opacity=".75"/></svg><div class="gbub"><p></p><small>Tocca il punto illuminato</small></div></div><button class="gskip">Salta la guida</button></div>
+
     <section id="missions" class="screen full" hidden>
       <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Missioni</h2><span class="bal"><img class="fi" alt=""><b class="balv">0</b></span></div>
       <div class="list" id="missList"></div>
@@ -451,7 +462,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.44</span>
+        <span class="beta big">BETA 0.45</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Squalo è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -551,6 +562,7 @@ input,textarea,#frame input,#frame textarea{-webkit-user-select:text;user-select
       <div class="hbar"><button class="btn sm" data-act="back" aria-label="Indietro">&#8592;</button><h2>Opzioni</h2></div>
       <div class="list" id="audList">
         <div class="vrow"><div class="vtop"><b>Attivazione abilit&agrave;</b><span id="abModeTxt">Manuale</span></div><button class="btn" data-act="abmode" id="abModeBtn">Passa ad automatica</button><small>Manuale: la attivi tu quando vuoi toccando il cerchio in basso a sinistra (o tasto E). Automatica: parte da sola.</small></div>
+        <div class="vrow"><div class="vtop"><b>Guida di Pinna</b><span>🦈</span></div><button class="btn" data-act="guideReset">Rivedi la guida dall'inizio</button><small>Pinna ti mostra di nuovo ogni funzione del menu, una alla volta.</small></div>
         <div class="vrow"><div class="vtop"><b>Grafica</b><span id="gfxTxt">Automatica</span></div><button class="btn" data-act="gfx" id="gfxBtn">Cambia</button><small>Alta: squalo 3D in tempo reale, luce che filtra, riflessi sul fondale, bagliori e acqua che ondeggia. Normale: più leggera, consuma meno batteria. Automatica: sceglie da sola in base al telefono.</small></div>
         <div class="sec">Salvataggio</div>
         <div class="vrow"><div class="vtop"><b>Codice dei progressi</b></div><small>Copialo e tienilo da parte (WhatsApp, Note). Se il telefono cancella i dati del gioco, incollalo qui e premi Ripristina.</small><textarea id="bkCode" rows="3" placeholder="Incolla qui il codice SQ1-..." spellcheck="false"></textarea><div class="grid2"><button class="btn" data-act="bkCopy">Copia codice</button><button class="btn" data-act="bkLoad" id="bkLoadBtn">Ripristina</button></div><a class="btn" id="bkWa" target="_blank" rel="noopener" hidden>Invia su WhatsApp</a><small id="bkMsg"></small></div>
@@ -837,7 +849,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.44';
+const KEY='flappysqualo.beta1';const BETA='0.45';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1539,9 +1551,9 @@ async function nativeShare(){updShareLinks();save();const txt=shareText(lastRunI
 let lastRunInfo=null;
 
 /* ---- progressive unlocks */
-const FEAT={wheel:2,missions:2,daily:3,skins:3},FEATN={wheel:'Ruota della fortuna',missions:'Missioni giornaliere',daily:'Sfida del giorno',skins:'Skin e colorazioni'};
-const featOk=k=>lvInfo(S.xp).lv>=(FEAT[k]||1);
-function applyLocks(){document.querySelectorAll('[data-feat]').forEach(b=>{const k=b.dataset.feat,ok=featOk(k);b.classList.toggle('locked',!ok);b.dataset.lockmsg=ok?'':`Si sblocca al livello ${FEAT[k]}`;const l=b.querySelector('.lk');if(l)l.textContent=ok?'':`🔒 Liv. ${FEAT[k]}`})}
+const FEAT={wheel:2,daily:3,skins:3,gems:4},FEATN={wheel:'Ruota della fortuna',daily:'Sfida del giorno',skins:'Skin e colorazioni',gems:'Gemme'};
+const featOk=k=>!FEATC[k]||FEATC[k][0]();
+function applyLocks(){document.querySelectorAll('[data-feat]').forEach(b=>{const k=b.dataset.feat,ok=featOk(k);b.classList.toggle('locked',!ok);b.dataset.lockmsg=ok?'':`Si sblocca ${FEATC[k][1]}`;const l=b.querySelector('.lk');if(l)l.textContent=ok?'':`🔒 ${FEATC[k][2]}`})}
 
 /* ---- 7-day login calendar */
 const LOGINRW=[500,1000,2000,3000,5000,7500,20000];
@@ -1550,7 +1562,7 @@ function loginPending(){const d=romeParts().day;return !S.login||S.login.last!==
 function openLogin(){if(!loginPending())return;const d=romeParts().day,L=S.login||{last:null,streak:0};const st=L.last===prevDay(d)?(L.streak%7)+1:1;$('#lgDays').innerHTML=LOGINRW.map((v,i)=>`<div class="lgd${i+1<st?' got':''}${i+1===st?' now':''}"><small>Giorno ${i+1}</small><b>${i===6?'🎁':'🐟'}</b><span>${v.toLocaleString('it-IT')}</span></div>`).join('');
   $('#lgTitle').textContent=st===1&&L.streak>1&&L.last!==prevDay(d)?'Serie ripartita: Giorno 1':`Premio del giorno ${st}`;$('#login').dataset.st=st;$('#login').hidden=false}
 function claimLogin(){const st=+$('#login').dataset.st||1,v=LOGINRW[st-1];S.fish+=v;S.totalFish+=v;S.login={last:romeParts().day,streak:st};save();$('#login').hidden=true;toast(`Premio giornaliero · giorno ${st}`,`+${v.toLocaleString('it-IT')} pesciolini`);SFX.unlock();renderMenu()}
-function menuPopups(){if(state==='menu'&&!screens.menu.hidden&&$('#chal').hidden&&$('#sharebox').hidden&&(!$('#welcome')||$('#welcome').hidden)){if(readChallenge()&&!S._chalShown){S._chalShown=1;offerChallenge();if(!$('#chal').hidden)return}openLogin()}}
+function menuPopups(){if(state==='menu'&&!screens.menu.hidden&&$('#chal').hidden&&$('#sharebox').hidden&&(!$('#welcome')||$('#welcome').hidden)){if(readChallenge()&&!S._chalShown){S._chalShown=1;offerChallenge();if(!$('#chal').hidden)return}}}
 
 
 /* ---- weekly missions (reset Monday 00:00 Italian time) */
@@ -2248,6 +2260,47 @@ async function adAndRevive(){if(!reviveOpen||run.adUsed)return;clearInterval(rvT
 async function adInit(){const A=admobP();if(A)try{await A.initialize({})}catch(e){}}
 let iapDone=false;const iapGo=()=>{if(iapDone||!window.CdvPurchase)return;iapDone=true;iapInit()};document.addEventListener('deviceready',iapGo);setTimeout(()=>{iapGo();adInit()},1500);
 
+/* ---- Pinna: guided unlocks + inbox */
+const FEATC={shop:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],inbox:[()=>S.st.runs>=1,'dopo la prima partita','1 partita'],sharks:[()=>S.st.runs>=2,'dopo 2 partite','2 partite'],missions:[()=>S.st.runs>=2,'dopo 2 partite','2 partite'],
+  wheel:[()=>lvInfo(S.xp).lv>=2,'al livello 2','Liv. 2'],bestiary:[()=>S.st.runs>=3,'dopo 3 partite','3 partite'],daily:[()=>lvInfo(S.xp).lv>=3,'al livello 3','Liv. 3'],skins:[()=>lvInfo(S.xp).lv>=3,'al livello 3','Liv. 3'],
+  trophies:[()=>S.st.runs>=4,'dopo 4 partite','4 partite'],levels:[()=>S.st.runs>=4,'dopo 4 partite','4 partite'],history:[()=>S.st.runs>=5,'dopo 5 partite','5 partite'],gems:[()=>lvInfo(S.xp).lv>=4,'al livello 4','Liv. 4']};
+const GSTEPS=[
+ {id:'intro',sel:'[data-act=play]',txt:()=>S.st.runs?'Ciao! Sono <b>Pinna</b> 🦈 Ho messo in ordine il mare: ogni volta che si sblocca qualcosa te lo mostro io. Tocca <b>NUOTA</b> per tuffarti!':'Ciao! Sono <b>Pinna</b> 🦈 Ti accompagno io. Tocca <b>NUOTA</b> per la tua prima immersione: tocca lo schermo per salire, tieni premuto per planare.'},
+ {id:'inbox',feat:'inbox',sel:'[data-act=inbox]',txt:()=>'Questa è la tua <b>posta</b> 📬: regali e premio giornaliero arrivano qui. Aprila!'},
+ {id:'shop',feat:'shop',sel:'.tile[data-tab=ups]',txt:()=>'Hai i tuoi primi pesciolini! Nel <b>Negozio</b> li spendi per potenziare il tuo squalo.'},
+ {id:'sharks',feat:'sharks',sel:'.sharkcard [data-tab=sharks]',txt:()=>'Puoi cambiare squalo! Ognuno ha un\'abilità diversa: tocca <b>Cambia</b> per vederli tutti.'},
+ {id:'missions',feat:'missions',sel:'[data-act=missions]',txt:()=>'Le <b>Missioni</b> ti pagano extra: 3 nuove ogni giorno e 3 grosse ogni settimana.'},
+ {id:'wheel',feat:'wheel',sel:'[data-act=wheel]',txt:()=>'Livello 2! Ogni giorno hai un <b>giro gratis</b> della Ruota della fortuna.'},
+ {id:'bestiary',feat:'bestiary',sel:'[data-act=bestiary]',txt:()=>'Nel <b>Bestiario</b> trovi ogni animale e boss che incontri, e come batterlo.'},
+ {id:'daily',feat:'daily',sel:'[data-act=daily]',txt:()=>'La <b>Sfida del giorno</b> è lo stesso percorso per tutti: fai più dei tuoi amici!'},
+ {id:'skins',feat:'skins',sel:'.tile[data-tab=skins]',txt:()=>'Con le <b>Skin</b> cambi i colori del tuo squalo.'},
+ {id:'trophies',feat:'trophies',sel:'[data-act=trophies]',txt:()=>'I <b>Trofei</b> premiano le imprese. Quelli segreti regalano squali rarissimi 👀'},
+ {id:'levels',feat:'levels',sel:'[data-act=levels]',txt:()=>'Qui vedi cosa sblocchi salendo di <b>livello</b>.'},
+ {id:'history',feat:'history',sel:'[data-act=history]',txt:()=>'Qui ritrovi le tue <b>ultime partite</b>.'},
+ {id:'gems',feat:'gems',sel:'.gemw',txt:()=>'Queste sono le <b>gemme</b> 💎, la moneta più preziosa: servono per rinascere e per le cose speciali.'}];
+let guideStep=null,guideEl=null;
+function guideCheck(){if(state!=='menu'||screens.menu.hidden||guideStep||!$('#login').hidden||!$('#chal').hidden||!$('#sharebox').hidden||(screens.welcome&&!screens.welcome.hidden))return;S.guide=S.guide||{};if(S.guide._off)return;
+  for(const st of GSTEPS){if(S.guide[st.id]||(st.feat&&!featOk(st.feat)))continue;const el=$('#menu '+st.sel);if(!el||!el.offsetParent)continue;showGuide(st,el);return}}
+function showGuide(st,el){guideStep=st;guideEl=el;const g=$('#guide'),fr=frameEl.getBoundingClientRect(),r=el.getBoundingClientRect(),pad=6,h=g.querySelector('.ghole'),bx=g.querySelector('.gbox');
+  h.style.left=(r.left-fr.left-pad)+'px';h.style.top=(r.top-fr.top-pad)+'px';h.style.width=(r.width+pad*2)+'px';h.style.height=(r.height+pad*2)+'px';
+  g.querySelector('.gbub p').innerHTML=st.txt();const below=(r.top-fr.top)<fr.height*.45;bx.style.top=below?(r.bottom-fr.top+pad+14)+'px':'';bx.style.bottom=below?'':(fr.bottom-r.top+pad+14)+'px';
+  const fg=g.querySelector('.gfinger');fg.style.left=(r.left-fr.left+r.width/2-10)+'px';fg.style.top=(below?r.bottom-fr.top-6:r.top-fr.top-34)+'px';fg.textContent=below?'👆':'👇';g.hidden=false;SFX.unlock&&SFX.unlock()}
+function guideDone(go){if(!guideStep)return;S.guide[guideStep.id]=1;save();const el=guideEl;guideStep=null;guideEl=null;$('#guide').hidden=true;if(go&&el)setTimeout(()=>el.click(),30)}
+function guideInit(){const g=$('#guide');g.addEventListener('click',e=>{e.stopPropagation();if(e.target.closest('.gskip')){S.guide=S.guide||{};S.guide._off=1;guideDone(false);toast('Guida disattivata','Puoi riattivarla in Opzioni');return}
+    if(!guideEl)return;const r=guideEl.getBoundingClientRect();if(e.clientX>=r.left-8&&e.clientX<=r.right+8&&e.clientY>=r.top-8&&e.clientY<=r.bottom+8)guideDone(true);else{const h=g.querySelector('.ghole');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake')}});
+  g.addEventListener('pointerdown',e=>e.stopPropagation())}
+function inboxAdd(m){S.inbox=S.inbox||[];if(S.inbox.some(x=>x.id===m.id))return;S.inbox.unshift(Object.assign({claimed:false,t0:Date.now()},m));S.inbox=S.inbox.slice(0,30)}
+function inboxItems(){const v=[];if(loginPending())v.push({id:'_login',ico:'📅',t:'Premio giornaliero',b:'Il premio di oggi ti aspetta: torna ogni giorno, cresce fino al 7° giorno!',act:'login',btn:'Apri'});
+  if(featOk('wheel')&&wheelFree())v.push({id:'_wheel',ico:'🎡',t:'Giro gratis della ruota',b:'Oggi hai un giro gratis della Ruota della fortuna.',act:'wheel',btn:'Gira'});return v.concat(S.inbox||[])}
+const inboxCount=()=>inboxItems().filter(m=>m.act||!m.claimed).length;
+function renderInbox(){const L=$('#ibList');L.innerHTML='';const it=inboxItems();if(!it.length){L.innerHTML='<p class="note" style="text-align:center;margin-top:2em">Nessun messaggio. Torna più tardi! 🦈</p>';return}
+  for(const m of it){const gift=[m.fish?`🐟 ${m.fish.toLocaleString('it-IT')}`:'',m.gems?`💎 ${m.gems.toLocaleString('it-IT')}`:''].filter(Boolean).join(' · ');
+    const btn=m.act?`<button class="btn buy sm" data-act="ibAct" data-id="${m.id}">${m.btn}</button>`:m.claimed?'<button class="btn ok sm" disabled>Fatto</button>':`<button class="btn buy sm" data-act="ibAct" data-id="${m.id}">${gift?'Riscuoti':m.go?'Vai':'Ok'}</button>`;
+    L.insertAdjacentHTML('beforeend',`<div class="ibm${m.claimed?' done':''}"><span class="ibi">${m.ico}</span><div class="ibt"><b>${m.t}</b><p>${m.b}</p>${gift?`<span class="ibg">${gift}</span>`:''}</div>${btn}</div>`)}}
+function inboxAct(id){if(id==='_login'){showScreen('menu');openLogin();return}if(id==='_wheel'){openFull('wheel');return}
+  const m=(S.inbox||[]).find(x=>x.id===id);if(!m||m.claimed)return;m.claimed=true;if(m.fish){S.fish+=m.fish;S.totalFish+=m.fish}if(m.gems)S.gems=(S.gems||0)+m.gems;if(m.fish||m.gems){SFX.unlock();toast(m.ico+' '+m.t,[m.fish?`+${m.fish.toLocaleString('it-IT')} pesciolini`:'',m.gems?`+${m.gems.toLocaleString('it-IT')} gemme`:''].filter(Boolean).join(' · '))}
+  save();balances();if(m.go){openFull('shop',m.go);return}renderInbox()}
+
 /* ---- tutorial & bestiary */
 function openTut(k){const B=BEASTS[k];if(!B)return;state='tut';holding=false;
   $('#tutKick').textContent=B.boss?'Nuovo boss':'Nuovo animale';$('#tutImg').src=portrait(k,false);$('#tutName').textContent=B.name;
@@ -2827,6 +2880,7 @@ function spinWheel(){if(wSpinning)return;const free=wheelFree();if(!free&&S.fish
   setTimeout(()=>{wSpinning=false;const big=p.t==='shark'||p.n>=10000;$('#wRes').textContent=(p.t==='shark'?'🎉 ':'')+txt;$('#wRes').className=p.t==='shark'?'r'+p.r:'';(big?SFX.unlock:SFX.buy)();if(big)toast('Ruota della fortuna',txt);updWheel()},4500)}
 function trProg(tr){if(!tr.pg)return'';const p=tr.pg();return` (${Math.min(p[0],p[1]).toLocaleString('it-IT')}/${p[1].toLocaleString('it-IT')})`}
 function migrate(){let ch=false;if(!S.mig)S.mig={};
+  if(!S.mig.wel1){S.mig.wel1=1;inboxAdd({id:'welcome',ico:'🦈',t:'Benvenuto in Flappy Squalo!',b:'Un piccolo regalo per iniziare la caccia.',fish:500});ch=true}
   if(!S.mig.obs){S.mig.obs=1;S.st.obs=Math.max(S.st.obs||0,S.hist.reduce((a,h)=>a+(h.score||0),0));ch=true}
   if(BETA_RESET&&!S.mig.sh1){S.mig.sh1=1;const rm=['volpe','zebra','sega','lanterna','goblin','groenlandia','megalodonte','orca'],had=S.owned.filter(k=>rm.includes(k));
     S.owned=S.owned.filter(k=>!rm.includes(k));if(!S.owned.includes(S.sel))S.sel='grigio';['p25','f1000','p50','night','goblin','fasting','p100'].forEach(k=>delete S.tro[k]);
@@ -2837,8 +2891,8 @@ function migrate(){let ch=false;if(!S.mig)S.mig={};
     S.skins=S.skins.filter(k=>{const c=COB[k];if(c&&c.unlock&&c.unlock.t==='buy'){ref+=Math.round(c.unlock.cost/5);return false}return true});if(!S.skins.includes(S.skin))S.skin='naturale';
     for(const m of S.morphs){if(MOB[m])ref+=Math.round(MOB[m].cost/5)}S.morphs=[];S.morph={};
     if(ref>0){S.fish+=ref;setTimeout(()=>toast('Acquisti rimborsati',`+${ref.toLocaleString('it-IT')} pesciolini: i prezzi sono cambiati, ricompra quello che vuoi`),1800)}ch=true}
-  if(!S.mig.gift1){S.mig.gift1=1;S.fish+=200000;setTimeout(()=>toast('🎁 Regalo per i tester','+200.000 pesciolini! Grazie per i test 🦈'),2600);ch=true}
-  if(!S.mig.gems1){S.mig.gems1=1;S.gems=(S.gems||0)+1000;setTimeout(()=>toast('💎 Regalo per i tester','+1.000 gemme per provare il negozio e Halloween 🎃'),4200);ch=true}
+  if(!S.mig.gift1){S.mig.gift1=1;inboxAdd({id:'gift1',ico:'🎁',t:'Regalo per i tester',b:'Grazie per i test! 🦈',fish:200000});ch=true}
+  if(!S.mig.gems1){S.mig.gems1=1;inboxAdd({id:'gems1',ico:'💎',t:'Regalo per i tester',b:'Gemme per provare il negozio e Halloween 🎃',gems:1000});ch=true}
   if(ch)save()}
 function today(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function ensureDay(){ensureWeek();const d=romeParts().day;if(S.day&&S.day.date===d&&S.day.v===2)return;const R=rngf(daySeed('md'+d)),k=Math.round(Date.parse(d+'T12:00:00Z')/864e5),P=[3,7,0,9,5,1,8,2,6,4].map(i=>MPOOL[i%MPOOL.length]);const pool=[0,1,2].map(j=>P[(3*k+j)%P.length]);
@@ -2860,11 +2914,11 @@ function finishRun(){const r=run;if(S.doubler&&!r.dbl){r.dbl=1;r.fishVal*=2}fini
   showScreen('over')}
 
 /* =============================================== UI */
-const screens={menu:$('#menu'),over:$('#over'),shop:$('#shop'),missions:$('#missions'),trophies:$('#trophies'),levels:$('#levels'),history:$('#history'),audio:$('#audio'),bestiary:$('#bestiary'),wheel:$('#wheel'),feedback:$('#feedback'),welcome:$('#welcome')};
+const screens={inbox:$('#inbox'),menu:$('#menu'),over:$('#over'),shop:$('#shop'),missions:$('#missions'),trophies:$('#trophies'),levels:$('#levels'),history:$('#history'),audio:$('#audio'),bestiary:$('#bestiary'),wheel:$('#wheel'),feedback:$('#feedback'),welcome:$('#welcome')};
 let back='menu',shopTab='sharks';
 function showScreen(n){for(const k in screens)screens[k].hidden=k!==n;if(n==='menu')renderMenu()}
-function anyFull(){return['shop','missions','trophies','levels','history','audio','bestiary','wheel','feedback','welcome'].some(k=>!screens[k].hidden)}
-function openFull(n,tab){back=!screens.over.hidden?'over':'menu';if(tab)shopTab=tab;showScreen(n);({shop:renderShop,missions:renderMissions,trophies:renderTrophies,levels:renderLevels,history:renderHistory,audio:renderAudio,bestiary:renderBestiary,wheel:renderWheel,feedback:renderFeedback,welcome:()=>{}})[n]()}
+function anyFull(){return['inbox','shop','missions','trophies','levels','history','audio','bestiary','wheel','feedback','welcome'].some(k=>!screens[k].hidden)}
+function openFull(n,tab){back=!screens.over.hidden?'over':'menu';if(tab)shopTab=tab;showScreen(n);({inbox:renderInbox,shop:renderShop,missions:renderMissions,trophies:renderTrophies,levels:renderLevels,history:renderHistory,audio:renderAudio,bestiary:renderBestiary,wheel:renderWheel,feedback:renderFeedback,welcome:()=>{}})[n]()}
 function closeFull(){showScreen(back)}
 function toMenu(){state='menu';run=null;corals=[];fishes=[];hazards=[];powers=[];parts=[];pops=[];companions=[];bgFrom=bgTo=0;bgK=1;$('#hud').hidden=true;$('#tapHint').hidden=true;$('#cancelBtn').hidden=true;$('#pause').hidden=true;$('#banner').hidden=true;showScreen('menu')}
 function updateHud(){if(!run)return;$('#hScore').textContent=run.score;$('#hFish').textContent=run.fishVal;$('#hVal').textContent=`×${run.st.value}`;
@@ -2885,10 +2939,10 @@ document.addEventListener('input',e=>{const i=e.target;if(!i.dataset||!i.dataset
 document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.vol)save()});
 function perksHTML(pk){const a=perkList(pk);return a.length?a.map(x=>`<li>${x}</li>`).join(''):'<li class="neutral">Nessun bonus passivo</li>'}
 function stars(n){return`<span class="stars">${'★'.repeat(n)}<i>${'★'.repeat(5-n)}</i></span>`}
-function renderMenu(){ensureDay();applyLocks();{const dd=dailyState();$('#mDaily').textContent=dd.best?`Il tuo record di oggi: ${dd.best}`:'Stesso percorso per tutti, cambia ogni giorno'}setTimeout(menuPopups,450);$('#wBadge').hidden=!wheelFree();const s=SHB[S.sel],m=S.morph[S.sel];$('#mName').textContent=m?MOB[m].name:s.name;$('#mLatin').textContent=(m?MOB[m].latin:s.latin)+(S.skin!=='naturale'?` · ${COB[S.skin].name}`:'');
+function renderMenu(){ensureDay();applyLocks();{const dd=dailyState();$('#mDaily').textContent=dd.best?`Il tuo record di oggi: ${dd.best}`:'Stesso percorso per tutti, cambia ogni giorno'}setTimeout(menuPopups,450);setTimeout(guideCheck,700);{const n=inboxCount(),bd=$('#ibBadge');if(bd){bd.textContent=n;bd.hidden=!n||!featOk('inbox')}}$('#wBadge').hidden=!wheelFree()||!featOk('wheel');const s=SHB[S.sel],m=S.morph[S.sel];$('#mName').textContent=m?MOB[m].name:s.name;$('#mLatin').textContent=(m?MOB[m].latin:s.latin)+(S.skin!=='naturale'?` · ${COB[S.skin].name}`:'');
   $('#mAb').innerHTML=`Abilità: <b>${s.ab.name}</b><span class="stars">${'★'.repeat(s.ab.tier||1)}</span> · ${stats().value} per pesciolino<button class="abmode" data-act="abmode" title="Cambia attivazione abilità">${S.abAuto?'⚙️ Automatica':'👆 Manuale'} ⇄</button>`;
   const li=lvInfo(S.xp);$('#mLv').textContent=li.lv;$('#mXp').style.width=(li.rem/li.need*100)+'%';$('#mXpTxt').textContent=`${li.rem}/${li.need} XP`;
-  $('#mFish').textContent=S.fish.toLocaleString('it-IT');balances();if(halloOn&&S.halloTip!==romeParts().day){S.halloTip=romeParts().day;setTimeout(()=>toast('🎃 Evento Halloween','Squalo zombie e skin Zucca nel negozio, solo fino al 2 novembre'),1200)}$('#mBest').textContent=S.best;$('#mRuns').textContent=(S.st.runs||0).toLocaleString('it-IT');{const rr=RAR[S.sel]||0,e=$('#mRar');e.textContent=RARN[rr];e.style.color=RARC[rr]}$('#mTro').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;$('#mBes').textContent=`${BORDER.filter(k=>S.seen[k]).length}/${BORDER.length}`;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
+  $('#mFish').textContent=S.fish.toLocaleString('it-IT');balances();if(halloOn&&!(S.inbox||[]).some(x=>x.id==='hallo2026')){inboxAdd({id:'hallo2026',ico:'🎃',t:'Evento Halloween',b:'Squalo zombie e skin Zucca nel negozio, solo fino al 2 novembre!',go:'bonus'});save()}$('#mBest').textContent=S.best;$('#mRuns').textContent=(S.st.runs||0).toLocaleString('it-IT');{const rr=RAR[S.sel]||0,e=$('#mRar');e.textContent=RARN[rr];e.style.color=RARC[rr]}$('#mTro').textContent=`${TROPHIES.filter(t=>S.tro[t.id]).length}/${TROPHIES.length}`;$('#mBes').textContent=`${BORDER.filter(k=>S.seen[k]).length}/${BORDER.length}`;const r=missionsReady();$('#mBadge').hidden=!r;$('#mBadge').textContent=r;renderMute()}
 const PVC={};
 function pv(sp,skin,sil,w=300,h=120){const c=document.createElement('canvas'),dpr=Math.min(2,window.devicePixelRatio||1);c.width=w*dpr;c.height=h*dpr;c.className='pv';const g=c.getContext('2d');g.scale(dpr,dpr);
   const bg=g.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#2a8ea6');bg.addColorStop(1,'#0b3a52');g.fillStyle=bg;g.fillRect(0,0,w,h);
@@ -2997,7 +3051,7 @@ frameEl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b
   if(b.classList.contains('chip')){document.querySelectorAll('.chip').forEach(c=>{const on=c===b;c.classList.toggle('on',on);c.setAttribute('aria-checked',on)});fbCat=b.dataset.cat;updateFb();return}const id=b.dataset.id;
   switch(b.dataset.act){
     case 'play':pendingRun={mode:'normal'};startReady();break;case 'retry':startReady();break;case 'daily':startDaily();break;case 'share':openShare();break;case 'shNative':nativeShare();break;case 'shClose':updShareLinks();save();$('#sharebox').hidden=true;break;case 'chalOk':acceptChallenge();break;case 'chalNo':{const c=JSON.parse($('#chal').dataset.c||'null');if(c)S.lastChal=c.seed+'-'+c.target;save();$('#chal').hidden=true;openLogin();break}case 'loginOk':claimLogin();break;
-    case 'shop':sharkFilter=b.dataset.tab==='sharks'?'mine':'all';openFull('shop',b.dataset.tab);break;case 'sfilter':sharkFilter=id;renderShop();break;case 'missions':openFull('missions');break;case 'trophies':openFull('trophies');break;case 'levels':openFull('levels');break;case 'history':openFull('history');break;
+    case 'shop':sharkFilter=b.dataset.tab==='sharks'?'mine':'all';openFull('shop',b.dataset.tab);break;case 'sfilter':sharkFilter=id;renderShop();break;case 'missions':openFull('missions');break;case 'inbox':openFull('inbox');break;case 'ibAct':inboxAct(id);break;case 'guideReset':S.guide={};save();toast('Guida riattivata','Pinna ti mostrerà di nuovo tutto 🦈');break;case 'trophies':openFull('trophies');break;case 'levels':openFull('levels');break;case 'history':openFull('history');break;
     case 'feedback':openFull('feedback');break;
     case 'welcomeok':try{localStorage.setItem('flappysqualo.beta.welcome','1')}catch(e){}showScreen('menu');break;
     case 'fbcopy':{const txt=fbMessage();const done=()=>{$('#fbNote').textContent='Testo copiato: incollalo nella chat con Simone.'};
@@ -3044,7 +3098,7 @@ function fit(){const app=$('#app');const aw=app.clientWidth,ah=app.clientHeight-
   frameEl.style.width=w+'px';frameEl.style.height=h+'px';frameEl.style.fontSize=clamp(w/26,11,19)+'px';
   const dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);RS=cv.width/W;FX.size();
   if(!fit.done){TRS=Math.min(3,RS);fit.done=true}}
-window.addEventListener('resize',fit);fit();
+window.addEventListener('resize',fit);fit();guideInit();
 FISH_N=makeFish(false);FISH_G=makeFish(true);
 ICON=(()=>{const[c,g]=texCanvas(36,20,2);g.drawImage(FISH_N,0,0,36,20);return c.toDataURL()})();
 document.querySelectorAll('img.fi').forEach(i=>i.src=ICON);
