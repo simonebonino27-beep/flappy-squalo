@@ -1,0 +1,59 @@
+name: App Android
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', '.github/workflows/android.yml']
+  workflow_dispatch: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    env:
+      ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
+      ADMOB_REWARDED_ID: ${{ secrets.ADMOB_REWARDED_ID }}
+      KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+      KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - name: Dipendenze
+        run: npm install --no-audit --no-fund
+      - name: Prepara il gioco
+        run: ./prepare-www.sh
+      - name: Progetto Android
+        run: |
+          npx cap add android
+          npx capacitor-assets generate --android --iconBackgroundColor '#0b3a52' --splashBackgroundColor '#020b12' || echo "icone: uso quelle di default"
+          APPID="${ADMOB_APP_ID:-ca-app-pub-3940256099942544~3347511713}"
+          sed -i "s#<application#<application android:usesCleartextTraffic=\"false\"#" android/app/src/main/AndroidManifest.xml
+          sed -i "s#</application>#<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"$APPID\"/></application>#" android/app/src/main/AndroidManifest.xml
+          sed -i "s/versionCode 1$/versionCode ${{ github.run_number }}/; s/versionName \"1.0\"/versionName \"1.0.${{ github.run_number }}\"/" android/app/build.gradle
+          sed -i 's#android:screenOrientation="[a-z]*"##' android/app/src/main/AndroidManifest.xml
+          sed -i 's#<activity#<activity android:screenOrientation="portrait"#' android/app/src/main/AndroidManifest.xml
+          npx cap sync android
+      - name: Firma (se c'è la chiave)
+        if: env.KEYSTORE_B64 != ''
+        run: |
+          echo "$KEYSTORE_B64" | base64 -d > android/app/upload.jks
+          cat >> android/app/build.gradle <<GRADLE
+          android {
+            signingConfigs { upload { storeFile file('upload.jks'); storePassword System.getenv('KEYSTORE_PASS'); keyAlias 'upload'; keyPassword System.getenv('KEYSTORE_PASS') } }
+            buildTypes { release { signingConfig signingConfigs.upload } }
+          }
+          GRADLE
+      - name: Costruisci
+        working-directory: app/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon bundleRelease assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flappy-squalo-android
+          path: |
+            app/android/app/build/outputs/bundle/release/*.aab
+            app/android/app/build/outputs/apk/debug/*.apk

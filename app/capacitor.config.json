@@ -1,0 +1,6 @@
+{
+  "appId": "io.github.bonysqualo.flappysqualo",
+  "appName": "Flappy Squalo",
+  "webDir": "www",
+  "android": { "backgroundColor": "#020b12" }
+}
