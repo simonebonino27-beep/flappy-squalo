@@ -689,7 +689,7 @@ const INV=[
  {id:'frz',ico:'🔥',name:'Partenza in frenesia',desc:'Parti subito in frenesia per 8 secondi.',cost:6000,use:()=>{run.frzUntil=t+8;run.frzOn=true}},
  {id:'ab',ico:'⚡',name:'Abilità carica',desc:'Parti con l\'abilità già pronta.',cost:5000,use:()=>{run.charge=run.st.charge}},
  {id:'armor',ico:'💎',name:'Corazza iniziale',desc:'Intoccabile per i primi 6 secondi.',cost:6000,use:()=>{run.ghostUntil=t+6}},
- {id:'rv',ico:'🎟️',name:'Biglietto rinascita',desc:'Una rinascita gratis quando muori (non si consuma all\'inizio).',cost:15000},
+ {id:'rv',ico:'🎟️',name:'Biglietto rinascita',desc:'Una rinascita gratis quando muori. Se ne può usare 1 a partita (non si consuma all\'inizio).',cost:15000},
 ];
 UPS.forEach(u=>u.costs=u.costs.map((c,i)=>Math.round(c*3*(1+.35*i)/50)*50));INV.forEach(i=>i.cost*=2);
 function applyInv(){if(!S.inv)return;const used=[];for(const it of INV){if(!it.use||!(S.inv[it.id]>0)||S.invOff&&S.invOff[it.id])continue;S.inv[it.id]--;it.use();used.push(it.ico+' '+it.name)}
@@ -1519,14 +1519,14 @@ function weekLeft(){const sec=86400-romeParts().sec,d=new Date(romeParts().day+'
 function wmission(id,amount,isMax){if(!S.week)return;for(const m of S.week.list){if(m.id!==id||m.done)continue;m.prog=isMax?Math.max(m.prog,amount):m.prog+amount;
   if(m.prog>=m.n){m.prog=m.n;m.done=true;toast('Missione settimanale completata',WPOOL.find(x=>x.id===id).txt(m.n),'ms');SFX.unlock()}}}
 const rvC=n=>Math.max(50,Math.round(rvCostN(n)*run.st.rv/50)*50);const reviveCost=()=>rvC(run.respawns||0);
-function offerRevive(){const c=reviveCost(),tk=S.rvTok>0,gc=gemRevive(),adOk=!run.adUsed,gemOk=(S.gems||0)>=gc,fishOk=S.fish>=c||tk;if(!fishOk&&!adOk&&!gemOk){finishRun();return}
+function offerRevive(){const c=reviveCost(),tk=S.rvTok>0&&!run.tkUsed,gc=gemRevive(),adOk=!run.adUsed,gemOk=(S.gems||0)>=gc,fishOk=S.fish>=c||tk;if(!fishOk&&!adOk&&!gemOk){finishRun();return}
   $('#rvBtn').hidden=!fishOk;$('#rvAd').hidden=!adOk;$('#rvGem').hidden=!gemOk;$('#rvGem').textContent=`RINASCI · 💎 ${gc}`;
-  reviveOpen=true;let left=5;$('#rvT').textContent=left;$('#rvBtn').innerHTML=tk?`RINASCI GRATIS · biglietto (${S.rvTok})`:`RINASCI · <img class="fi" src="${ICON}" alt=""> ${c.toLocaleString('it-IT')}`;
+  reviveOpen=true;let left=5;$('#rvT').textContent=left;$('#rvBtn').innerHTML=(S.rvTok>0&&!run.tkUsed)?`RINASCI GRATIS · biglietto (${S.rvTok})`:`RINASCI · <img class="fi" src="${ICON}" alt=""> ${c.toLocaleString('it-IT')}`;
   $('#rvInfo').textContent=`Hai ${S.fish.toLocaleString('it-IT')} pesciolini · la prossima volta costerà ${rvC((run.respawns||0)+1).toLocaleString('it-IT')}`;
   $('#revive').hidden=false;SFX.warn();clearInterval(rvTimer);rvTimer=setInterval(()=>{left--;$('#rvT').textContent=Math.max(0,left);if(left<=0)declineRevive()},1000)}
 function closeRevive(){reviveOpen=false;clearInterval(rvTimer);$('#revive').hidden=true}
 function declineRevive(){if(!reviveOpen)return;closeRevive();finishRun()}
-function doRevive(mode){if(!reviveOpen)return;const c=mode?0:reviveCost();if(mode==='gem'){const gc=gemRevive();if((S.gems||0)<gc)return;S.gems-=gc}else if(mode==='ad'){}else if(S.rvTok>0)S.rvTok--;else{if(S.fish<c)return;S.fish-=c}run.respawns=(run.respawns||0)+1;run.paid=(run.paid||0)+c;closeRevive();save();
+function doRevive(mode){if(!reviveOpen)return;const c=mode?0:reviveCost();if(mode==='gem'){const gc=gemRevive();if((S.gems||0)<gc)return;S.gems-=gc}else if(mode==='ad'){}else if(S.rvTok>0&&!run.tkUsed){S.rvTok--;run.tkUsed=true}else{if(S.fish<c)return;S.fish-=c}run.respawns=(run.respawns||0)+1;run.paid=(run.paid||0)+c;closeRevive();save();
   state='play';overShown=false;run.deadT=0;run.combo=0;updCombo();shark.vy=0;shark.rot=0;holding=false;
   const nc=corals.find(k=>!k.broken&&k.x+22+CHW>shark.x-12);shark.y=nc?nc.gy:(GROUND/2);run.inv=2.5;run.flash=.5;
   for(const z of hazards)if(z.x<shark.x+140)z.dead=true;if(run.boss)for(const a of run.boss.atts)if(a.kind!=='refl')a.spent=true;
@@ -2176,7 +2176,7 @@ function grantOffer(id){if(id==='starter_pack'&&!S.starter){S.starter=1;S.gems=(
   if(id==='fish_doubler'&&!S.doubler){S.doubler=1;save();toast('Raddoppiatore attivo','Da ora ogni partita ti dà ×2 pesciolini');SFX.unlock()}balances();if(!screens.shop.hidden)renderShop()}
 const IAP=[{id:'gems_100',g:100,p:'0,99 €'},{id:'gems_550',g:550,p:'4,99 €',tag:'+10%'},{id:'gems_1200',g:1200,p:'9,99 €',tag:'+20%'},{id:'gems_2600',g:2600,p:'19,99 €',tag:'+30%'}];
 const GEMUSE=[{id:'f1',ico:'🐟',name:'5.000 pesciolini',cost:50,use:()=>{S.fish+=5000}},{id:'f2',ico:'🐟',name:'25.000 pesciolini',cost:200,use:()=>{S.fish+=25000}},{id:'f3',ico:'🐟',name:'90.000 pesciolini',cost:600,use:()=>{S.fish+=90000}},
-  {id:'box',ico:'🎁',name:'Scatola bonus (1 di ogni bonus)',cost:150,use:()=>{S.inv=S.inv||{};for(const it of INV)if(it.use)S.inv[it.id]=Math.min(10,(S.inv[it.id]||0)+1)}},{id:'tk',ico:'🎟️',name:'Biglietto rinascita',cost:25,use:()=>{S.rvTok=(S.rvTok||0)+1}}];
+  {id:'box',ico:'🎁',name:'Scatola bonus (1 di ogni bonus)',cost:150,use:()=>{S.inv=S.inv||{};for(const it of INV)if(it.use)S.inv[it.id]=Math.min(10,(S.inv[it.id]||0)+1)}},{id:'tk',ico:'🎟️',name:'Biglietto rinascita (max 1 a partita)',cost:100,use:()=>{S.rvTok=(S.rvTok||0)+1}}];
 const gemShark=c=>Math.max(80,Math.round(c/100));
 const gemRevive=()=>15*Math.pow(2,run.respawns||0);
 function gemPrice(p){try{const C=window.CdvPurchase;const pr=C&&C.store.get(p.id,C.Platform.GOOGLE_PLAY);if(pr&&pr.pricing)return pr.pricing.price}catch(e){}return p.p}
