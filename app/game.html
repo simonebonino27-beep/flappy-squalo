@@ -749,8 +749,6 @@ const TROPHIES=[
  {id:'sec3',hidden:true,name:'Nuotatore oceanico',desc:'Supera 60 ostacoli in una partita senza mai planare',hint:'I veri nuotatori oceanici non si riposano mai.',shark:'longimano'},
  {id:'sec4',hidden:true,name:'Banchetto infinito',desc:'Mangia 250 pesciolini in una sola partita',hint:'Una bocca enorme ha bisogno di un banchetto enorme.',shark:'boccalarga'},
  {id:'k_barra',name:'Freccia spuntata',desc:'Uccidi 10 barracuda',reward:400,kg:'barracuda',kn:10},
- {id:'k_octo',name:'Otto braccia in meno',desc:'Uccidi 10 polpi',reward:400,kg:'octopus',kn:10},
- {id:'k_horse',name:'Cavalcata marina',desc:'Prendi 15 cavallucci marini',reward:500,kg:'seahorse',kn:15},
  {id:'k_star',name:'Stelle cadenti',desc:'Uccidi 15 stelle marine',reward:400,kg:'starfish',kn:15},
  {id:'k_turtle',name:'Guscio duro',desc:'Rimbalza su 15 tartarughe',reward:400,kg:'turtle',kn:15},
  {id:'k_angler',name:'Luci spente',desc:'Uccidi 8 rane pescatrici',reward:600,kg:'angler',kn:8},
@@ -786,12 +784,12 @@ const need=n=>Math.round(80*Math.pow(n,1.6));
 function lvInfo(xp){let lv=1,rem=xp;while(rem>=need(lv)){rem-=need(lv);lv++}return{lv,rem,need:need(lv)}}
 
 const BIOMES=[
- {id:'reef',name:'Barriera corallina',top:'#5ccad3',mid:'#1b8eab',bot:'#0b4a68',far:'#3a98ad',mid2:'#1d6d85',light:1,snow:'225,250,255',sand:['#e2d0a2','#b49f74'],haz:['jelly','puffer','crab','urchin','turtle','seahorse','starfish','lionfish','tang','cleaner','mantis','pistol','boxfish','porcupine','needle','stonefish','boxjelly','dolphin'],school:true},
- {id:'kelp',name:'Foresta di kelp',top:'#78b8a0',mid:'#2a7568',bot:'#0c3532',far:'#3f7c6c',mid2:'#22564b',light:.8,snow:'215,240,205',sand:['#9c9372','#615b45'],haz:['jelly','hook','moray','crab','puffer','manta','turtle','barracuda','cuttle','seahorse','sailfish','archer','flyfish','trigger','needle','eagleray','dolphin','cleaner'],swords:true,school:true},
- {id:'harbor',name:'Porto dei pescatori',top:'#8aa48d',mid:'#46634f',bot:'#18261f',far:'#4f6b58',mid2:'#2c4036',light:.5,snow:'200,215,190',sand:['#6a6450','#3e3b2e'],haz:['hook','mine','crab','squid','urchin','barracuda','octopus','starfish','tuna','pistol','archer','gannet','mola','trigger','spidercrab','grouper'],harpoons:true,school:true},
- {id:'wreck',name:'Relitto affondato',top:'#336d8e',mid:'#173d59',bot:'#06121e',far:'#2a5674',mid2:'#173149',light:.35,snow:'190,215,235',sand:['#56606a','#323a42'],haz:['mine','jelly','moray','eel','squid','urchin','octopus','lionfish','cuttle','seahorse','lamprey','grouper','nautilus','stonefish','blueoct','torpedo','spidercrab','humboldt'],school:true},
- {id:'abyss',name:'Fossa abissale',top:'#173a52',mid:'#0c2032',bot:'#040c16',far:'#16304a',mid2:'#0b1a2a',light:0,snow:'160,200,230',sand:['#24211f','#121010'],haz:['glow','mine','eel','squid','angler','angler','viper','firefly','humboldt','comb','nautilus','lamprey','boxjelly'],school:false,dark:true},
- {id:'ice',name:'Ghiacci artici',top:'#c4e8f3',mid:'#5aa5c4',bot:'#16435d',far:'#86c0d6',mid2:'#4d90ad',light:.9,snow:'240,250,255',sand:['#7a8a94','#4f5c66'],haz:['lion','manta','urchin','lion','seal','narwhal','seal','penguin','walrus','comb','mola','torpedo','eagleray','tuna','sailfish'],swords:true,school:false},
+ {id:'reef',name:'Barriera corallina',top:'#5ccad3',mid:'#1b8eab',bot:'#0b4a68',far:'#3a98ad',mid2:'#1d6d85',light:1,snow:'225,250,255',sand:['#e2d0a2','#b49f74'],haz:['jelly','puffer','crab','turtle','starfish','tang','needle','porcupine','boxfish','dolphin','cleaner'],school:true},
+ {id:'kelp',name:'Foresta di kelp',top:'#78b8a0',mid:'#2a7568',bot:'#0c3532',far:'#3f7c6c',mid2:'#22564b',light:.8,snow:'215,240,205',sand:['#9c9372','#615b45'],haz:['jelly','hook','moray','crab','manta','barracuda','cuttle','needle','flyfish','dolphin','cleaner'],swords:true,school:true},
+ {id:'harbor',name:'Porto dei pescatori',top:'#8aa48d',mid:'#46634f',bot:'#18261f',far:'#4f6b58',mid2:'#2c4036',light:.5,snow:'200,215,190',sand:['#6a6450','#3e3b2e'],haz:['hook','mine','crab','squid','barracuda','starfish','grouper','porcupine'],harpoons:true,school:true},
+ {id:'wreck',name:'Relitto affondato',top:'#336d8e',mid:'#173d59',bot:'#06121e',far:'#2a5674',mid2:'#173149',light:.35,snow:'190,215,235',sand:['#56606a','#323a42'],haz:['mine','jelly','moray','eel','squid','cuttle','lamprey','grouper'],school:true},
+ {id:'abyss',name:'Fossa abissale',top:'#173a52',mid:'#0c2032',bot:'#040c16',far:'#16304a',mid2:'#0b1a2a',light:0,snow:'160,200,230',sand:['#24211f','#121010'],haz:['jelly','mine','eel','squid','angler','angler','lamprey'],school:false,dark:true},
+ {id:'ice',name:'Ghiacci artici',top:'#c4e8f3',mid:'#5aa5c4',bot:'#16435d',far:'#86c0d6',mid2:'#4d90ad',light:.9,snow:'240,250,255',sand:['#7a8a94','#4f5c66'],haz:['jelly','manta','seal','narwhal','seal'],swords:true,school:false},
 ];
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
@@ -1414,7 +1412,7 @@ function spawnCoral(x){const n=spawned;if(n>0&&n%50===0&&!run.bossDone.includes(
   const gy=clamp(lastGap+(Math.random()*2-1)*range,58+gap/2,GROUND-44-gap/2);
   const v=(Math.random()*2)|0;corals.push({x,gy,gap,scored:false,broken:false,bi,top:getTex(bi,'top',v),bot:getTex(bi,'bot',v),ph:Math.random()*6});
   if(n%20===12)queueBiome((bi+1)%BIOMES.length);
-  const px=x-SPACING,a=lastGap,haveHaz=n>2&&Math.random()<(n<12?.12:Math.min(.85,.2+(n-12)*.009));
+  const px=x-SPACING,a=lastGap,haveHaz=n>=(run.nextHaz||6);if(haveHaz)run.nextHaz=n+(n<40?4:n<90?3:2)+(Math.random()<.3?1:0);
   let hz=null;if(haveHaz){const b=BIOMES[bi],type=b.haz[(Math.random()*b.haz.length)|0];hz=mkHaz(type,px,x,a,gy,gap)}
   if(n>0){for(let i=1;i<=2;i++){const f=i/3,fx=px+22+SPACING*f,fy=a+(gy-a)*f-Math.sin(f*Math.PI)*14;if(hz&&Math.hypot(fx-hz.x,fy-hz.y)<22)continue;if(n>=20&&Math.random()<.45)continue;fishes.push(mkFish(fx,fy))}}
   if(n>2&&Math.random()<.14*(1+(run.st.pow-1)*.75)){const PT=['shield','magnet','x2','charge','gold','slow','ghost','bomb','fish'];powers.push({x:x+22,y:gy,by:gy,type:PT[(Math.random()*PT.length)|0],ph:Math.random()*6})}else if(Math.random()<.3)fishes.push(mkFish(x+22,gy));
@@ -1628,7 +1626,7 @@ const BEASTS={
 };
 const BORDER=['jelly','glow','lion','crab','puffer','moray','sword','squid','urchin','eel','manta','turtle','seahorse','lionfish','starfish','barracuda','cuttle','octopus','angler','seal','narwhal','b_trawler','b_squid','b_moray','b_crab','b_medusa','b_sub','b_leopard','b_angler'];
 const BOSSN={trawler:'Peschereccio',squid:'Calamaro gigante',moray:'Murena gigante',crab:'Granchio reale',medusa:'Medusa colossale',sub:'Sottomarino',leopard:'Foca leopardo gigante',angler:'Rana pescatrice abissale'};
-const KILLT=[['k_jelly','jelly',20],['k_crab','crab',15],['k_puffer','puffer',15],['k_moray','moray',10],['k_sword','sword',8],['k_squid','squid',15],['k_eel','eel',10],['k_manta','manta',8],['k_all','all',200],['k_barra','barracuda',10],['k_octo','octopus',10],['k_horse','seahorse',15],['k_star','starfish',15],['k_turtle','turtle',15],['k_angler','angler',8],['k_seal','seal',8],['k_narwhal','narwhal',8],['k_all2','all',1000]];
+const KILLT=[['k_jelly','jelly',20],['k_crab','crab',15],['k_puffer','puffer',15],['k_moray','moray',10],['k_sword','sword',8],['k_squid','squid',15],['k_eel','eel',10],['k_manta','manta',8],['k_all','all',200],['k_barra','barracuda',10],['k_star','starfish',15],['k_turtle','turtle',15],['k_angler','angler',8],['k_seal','seal',8],['k_narwhal','narwhal',8],['k_all2','all',1000]];
 let holding=false,holdT=0;
 
 function mkHaz(type,px,cx,a,gy,gap){const hy=clamp(a+(gy-a)*.5+(Math.random()-.5)*90,70,GROUND-60);
@@ -2170,6 +2168,8 @@ Object.assign(BEASTS,{
 for(const k in B2){BEASTS['b_'+k]={boss:true,name:B2[k].name,where:'Boss: arriva ogni 50 ostacoli.',does:B2[k].b.does,kill:B2[k].b.kill};BOSSN[k]=B2[k].name}
 BORDER.splice(BORDER.indexOf('b_trawler'),0,'tang','cleaner','dolphin','mantis','pistol','boxfish','porcupine','needle','stonefish','boxjelly','sailfish','archer','flyfish','trigger','eagleray','tuna','gannet','mola','grouper','spidercrab','lamprey','nautilus','blueoct','torpedo','humboldt','viper','firefly','comb','penguin','walrus');
 BORDER.push(...Object.keys(B2).map(k=>'b_'+k));
+const REMOVED=['glow','lion','urchin','seahorse','lionfish','octopus','sailfish','tuna','humboldt','gannet','penguin','walrus','mantis','pistol','stonefish','torpedo','spidercrab','blueoct','nautilus','firefly','boxjelly','viper','trigger','archer','mola','eagleray','comb'];
+for(const k of REMOVED){const i=BORDER.indexOf(k);if(i>=0)BORDER.splice(i,1)}
 
 /* ---- gems (real money, Android app only) + rewarded ads */
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
@@ -2496,8 +2496,8 @@ function update(dt){if(state==='tut'||state==='pause')return;if(run&&run.hitstop
       if(ellRect(hb.cx,hb.cy,hb.rx,hb.ry,x1,-200,x2,c.gy-c.gap/2)||ellRect(hb.cx,hb.cy,hb.rx,hb.ry,x1,c.gy+c.gap/2,x2,GROUND)){
         if(t<run.roarUntil){breakCoral(c);run.shake=.12;continue}if(invuln())continue;hit({coral:c});if(state!=='play')break}}
     // hazards
-    if(BIOMES[biomeIdx(run.score)].swords&&!run.boss){run.swT-=dt;if(run.swT<=0){run.swT=6+Math.random()*4;hazards.push({type:'sword',st:'warn',t:0,x:W+30,y:clamp(shark.y,50,GROUND-50),ph:0,dead:false})}}
-    if(BIOMES[biomeIdx(run.score)].harpoons&&!run.boss){run.harpT-=dt;if(run.harpT<=0){run.harpT=3+Math.random()*3;hazards.push({type:'harpoon',state:'warn',t:0,x:W+20,y:clamp(shark.y+(Math.random()-.5)*60,40,GROUND-40)})}}
+    if(BIOMES[biomeIdx(run.score)].swords&&!run.boss){run.swT-=dt;if(run.swT<=0){run.swT=9+Math.random()*5;hazards.push({type:'sword',st:'warn',t:0,x:W+30,y:clamp(shark.y,50,GROUND-50),ph:0,dead:false})}}
+    if(BIOMES[biomeIdx(run.score)].harpoons&&!run.boss){run.harpT-=dt;if(run.harpT<=0){run.harpT=6+Math.random()*4;hazards.push({type:'harpoon',state:'warn',t:0,x:W+20,y:clamp(shark.y+(Math.random()-.5)*60,40,GROUND-40)})}}
     for(const z of hazards){if(z.dead)continue;
       if(z.type==='jelly'||z.type==='glow'||z.type==='lion'){z.ph+=dt;z.y=z.by+Math.sin(z.ph*1.3)*20}
       if(z.type==='hook'){z.ph+=dt;z.y=z.by+Math.sin(z.ph*1.6)*12}
