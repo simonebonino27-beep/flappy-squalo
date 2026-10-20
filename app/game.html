@@ -1713,7 +1713,7 @@ function abFx(kind,ab,d){
     case 'sonar':run.magAllUntil=t+d;run.magR=ab.r;break;
     case 'devour':run.devourUntil=t+d;run.abMult=2;run.abMultUntil=t+d;break;
     case 'turbo':run.ghostUntil=t+d+.8;run.turboUntil=t+d;run.afterTurbo=t+d+1.4;break;
-    case 'breach':run.breaks+=ab.pw;if(ab.wave){clearHazards();parts.push({x:shark.x,y:shark.y,kind:'ring',life:.6,max:.6,vx:0,vy:0})}break;
+    case 'breach':run.breaks=Math.max(run.breaks||0,ab.pw);if(ab.wave){clearHazards();parts.push({x:shark.x,y:shark.y,kind:'ring',life:.6,max:.6,vx:0,vy:0})}break;
     case 'filter':run.magAllUntil=t+d;run.magR=ab.r;run.abMult=2;run.abMultUntil=t+d;for(let i=0;i<10;i++)fishes.push(mkFish(W+20+i*14,clamp(shark.y+Math.sin(i*.5)*40,60,GROUND-40)));break;
     case 'vacuum':run.vacUntil=t+d;run.vacR=ab.r;for(let i=0;i<8;i++)fishes.push(mkFish(W+10+i*16,clamp(shark.y+Math.sin(i*.8)*30,50,GROUND-40)));run.slowUntil=t+1;run.slowF=.85;break;
     case 'pod':run.podUntil=t+d;addSh(1);companions=[{x:shark.x-30,y:shark.y-40,o:0},{x:shark.x-30,y:shark.y+40,o:1}];break;
@@ -1731,7 +1731,7 @@ function abFx(kind,ab,d){
     case 'goldrain':for(let i=0;i<12;i++)fishes.push(mkFish(shark.x+70+i*22,clamp(shark.y+Math.sin(i*.9)*50,60,GROUND-40),true));break;
     case 'netall':for(const f of fishes)if(!f.taken&&f.x<W+10)f.pull=true;for(const p of powers)if(p.x<W+10){p.x=shark.x+6;p.y=shark.y}break;
     case 'stun':for(const z of hazards)if(!z.dead&&BEASTS[z.type]&&!BEASTS[z.type].boss&&z.x<W+30){z.trial=1;z.trialTold=1}break;
-    case 'eat':run.eatN=(run.eatN||0)+(ab.pw||3);break;
+    case 'eat':run.eatN=Math.max(run.eatN||0,ab.pw||3);break;
     case 'lure':{const PT=['shield','magnet','x2','gold','slow','ghost','fish'];for(let i=0;i<3;i++){const y=clamp(shark.y+(i-1)*45,60,GROUND-50);powers.push({x:W+20+i*50,y,by:y,type:PT[(Math.random()*PT.length)|0],ph:Math.random()*6})}break}
     case 'gold':run.goldUntil=t+Math.max(d,4);break;
     case 'x2':run.abMult=2;run.abMultUntil=t+Math.max(d,3);break;

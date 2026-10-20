@@ -442,7 +442,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.62</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.63</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -531,7 +531,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.62</span>
+        <span class="beta big">BETA 0.63</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -973,7 +973,7 @@ const BIOMES=[
 const biomeIdx=n=>Math.floor(n/20)%BIOMES.length;
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.62';
+const KEY='flappysqualo.beta1';const BETA='0.63';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1766,7 +1766,7 @@ function abFx(kind,ab,d){
     case 'sonar':run.magAllUntil=t+d;run.magR=ab.r;break;
     case 'devour':run.devourUntil=t+d;run.abMult=2;run.abMultUntil=t+d;break;
     case 'turbo':run.ghostUntil=t+d+.8;run.turboUntil=t+d;run.afterTurbo=t+d+1.4;break;
-    case 'breach':run.breaks+=ab.pw;if(ab.wave){clearHazards();parts.push({x:shark.x,y:shark.y,kind:'ring',life:.6,max:.6,vx:0,vy:0})}break;
+    case 'breach':run.breaks=Math.max(run.breaks||0,ab.pw);if(ab.wave){clearHazards();parts.push({x:shark.x,y:shark.y,kind:'ring',life:.6,max:.6,vx:0,vy:0})}break;
     case 'filter':run.magAllUntil=t+d;run.magR=ab.r;run.abMult=2;run.abMultUntil=t+d;for(let i=0;i<10;i++)fishes.push(mkFish(W+20+i*14,clamp(shark.y+Math.sin(i*.5)*40,60,GROUND-40)));break;
     case 'vacuum':run.vacUntil=t+d;run.vacR=ab.r;for(let i=0;i<8;i++)fishes.push(mkFish(W+10+i*16,clamp(shark.y+Math.sin(i*.8)*30,50,GROUND-40)));run.slowUntil=t+1;run.slowF=.85;break;
     case 'pod':run.podUntil=t+d;addSh(1);companions=[{x:shark.x-30,y:shark.y-40,o:0},{x:shark.x-30,y:shark.y+40,o:1}];break;
@@ -1784,7 +1784,7 @@ function abFx(kind,ab,d){
     case 'goldrain':for(let i=0;i<12;i++)fishes.push(mkFish(shark.x+70+i*22,clamp(shark.y+Math.sin(i*.9)*50,60,GROUND-40),true));break;
     case 'netall':for(const f of fishes)if(!f.taken&&f.x<W+10)f.pull=true;for(const p of powers)if(p.x<W+10){p.x=shark.x+6;p.y=shark.y}break;
     case 'stun':for(const z of hazards)if(!z.dead&&BEASTS[z.type]&&!BEASTS[z.type].boss&&z.x<W+30){z.trial=1;z.trialTold=1}break;
-    case 'eat':run.eatN=(run.eatN||0)+(ab.pw||3);break;
+    case 'eat':run.eatN=Math.max(run.eatN||0,ab.pw||3);break;
     case 'lure':{const PT=['shield','magnet','x2','gold','slow','ghost','fish'];for(let i=0;i<3;i++){const y=clamp(shark.y+(i-1)*45,60,GROUND-50);powers.push({x:W+20+i*50,y,by:y,type:PT[(Math.random()*PT.length)|0],ph:Math.random()*6})}break}
     case 'gold':run.goldUntil=t+Math.max(d,4);break;
     case 'x2':run.abMult=2;run.abMultUntil=t+Math.max(d,3);break;
