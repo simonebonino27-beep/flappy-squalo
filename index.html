@@ -464,7 +464,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.68</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.69</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -560,7 +560,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.68</span>
+        <span class="beta big">BETA 0.69</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -754,8 +754,8 @@ function glowAt(g,x,y,r,col,a){const gr=g.createRadialGradient(x,y,0,x,y,r);gr.a
 /* =============================================== SPECIES */
 let SPID=0;
 function SP(o){const d={L:44,h:8,blunt:.35,noseY:-.22,belly:1,pd:.14,so:.2,jag:false,
-  d1:{s:.32,b:.15,h:1.05,back:.07,tip:.035},d2:{s:.74,b:.035,h:.3,back:.015,tip:.02},anal:{s:.78,b:.035,h:.24,back:.015,tip:.02},pel:{s:.55,b:.06,h:.42,back:.035,tip:.02},
-  pec:{s:.21,len:.26,ang:.95,w:.11},tail:{u:.34,ua:.95,l:.24,la:.9},gills:5,gs:.19,gsp:.021,gh:1,eye:{s:.11,y:-.32,r:.09},mouth:{s0:.075,s1:.235,y:.42},teeth:null,amp:.5,beat:1,keel:false};
+  d1:{s:.37,b:.15,h:1.1,back:.08,tip:.035},d2:{s:.76,b:.035,h:.3,back:.015,tip:.02},anal:{s:.8,b:.035,h:.24,back:.015,tip:.02},pel:{s:.6,b:.06,h:.42,back:.035,tip:.02},
+  pec:{s:.27,len:.27,ang:.9,w:.11},tail:{u:.36,ua:.98,l:.25,la:.9},gills:5,gs:.25,gsp:.022,gh:1,eye:{s:.16,y:-.27,r:.08},mouth:{s0:.085,s1:.27,y:.4},teeth:null,amp:.5,beat:1,keel:false};
   const r=Object.assign({},d,o);['d1','pec','tail','eye','mouth'].forEach(k=>{r[k]=Object.assign({},d[k],o[k]||{})});
   r.d2=o.d2===null?null:Object.assign({},d.d2,o.d2||{});r.anal=o.anal===null?null:Object.assign({},d.anal,o.anal||{});r.pel=o.pel===null?null:Object.assign({},d.pel,o.pel||{});r.uid=++SPID;return r}
 
@@ -1010,7 +1010,7 @@ const BLEN=25,biomeIdx=n=>Math.floor(n/BLEN)%BIOMES.length;
 const BIOBOSS={reef:['fugu','moray'],lagoon:['crab','medusa'],kelp:['grouper','marlin'],harbor:['trawler'],atlantis:['kraken'],wreck:['sub'],volcano:['eelking'],crystal:['spiderking','squid'],abyss:['angler','squid'],ice:['leopard','walrus','leviathan']};
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.68';
+const KEY='flappysqualo.beta1';const BETA='0.69';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1048,9 +1048,10 @@ function palette(sp,skinId){const sk=COB[skinId]||COB.naturale,c=sp.col;
 function cr(P,s){let i=0;while(i<P.length-2&&s>P[i+1][0])i++;const p0=P[Math.max(0,i-1)],p1=P[i],p2=P[i+1],p3=P[Math.min(P.length-1,i+2)];const ds=(p2[0]-p1[0])||1e-6,t=clamp((s-p1[0])/ds,0,1);
   const m1=(p2[1]-p0[1])/((p2[0]-p0[0])||1e-6)*ds,m2=(p3[1]-p1[1])/((p3[0]-p1[0])||1e-6)*ds,t2=t*t,t3=t2*t;return(2*t3-3*t2+1)*p1[1]+(t3-2*t2+t)*m1+(-2*t3+3*t2)*p2[1]+(t3-t2)*m2}
 function profOf(sp){if(sp._p)return sp._p;const b=sp.blunt,n=sp.noseY,be=sp.belly;
-  sp._p={top:sp.topP||[[0,n],[.025,n-.07-.25*b],[.07,n-.24-.3*b],[.13,-.6-.15*b],[.21,-.86],[.28,-.98],[.36,-1],[.46,-.95],[.58,-.8],[.7,-.6],[.84,-.38],[1,-sp.pd]],
-    bot:sp.botP||[[0,n],[.03,n+.07+.25*b],[.08,n+.27+.3*b],[.15,.46+.1*b],[.22,.7*be],[.3,.82*be],[.4,.88*be],[.52,.8*be],[.65,.62*be],[.78,.45],[.9,.3],[1,sp.pd]]};return sp._p}
-const idleJaw=sp=>sp.boss?0:(sp.head==='whale'||sp.basking)?.12:sp.head==='orca'?.15:.36;
+  sp._p={top:sp.topP||[[0,n],[.03,n-.1-.3*b],[.1,-.47-.2*b],[.2,-.68-.12*b],[.3,-.83-.05*b],[.4,-.93],[.5,-.99],[.56,-1],[.66,-.88],[.78,-.64],[.9,-.38],[1,-sp.pd]],
+    bot:sp.botP||[[0,n],[.03,n+.08+.22*b],[.1,.44+.12*b],[.2,.76*be],[.3,.93*be],[.4,.98*be],[.5,.92*be],[.6,.78*be],[.72,.57],[.86,.34],[1,sp.pd]]};return sp._p}
+const mBand=(sp,k)=>sp.h*.26*Math.pow(Math.sin(Math.PI*clamp(k,0,1)),.5);
+const idleJaw=sp=>sp.boss?0:(sp.head==='whale'||sp.basking)?.12:sp.head==='orca'?.15:.05;
 
 /* Draws the shark in local coords (nose +x). pass 'base' paints albedo + part-id map; pass 'over' paints teeth and eyes on top of the lit result. */
 function drawSharkPro(g,sp,pal,ph,o={}){
@@ -1068,11 +1069,14 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   const upAt=k=>({x:(1-k)*(1-k)*m0.x+2*(1-k)*k*mc.x+k*k*m1.x,y:(1-k)*(1-k)*m0.y+2*(1-k)*k*mc.y+k*k*m1.y});
   const jt=h*.17,loAt=k=>{const s=M.s0+(M.s1-M.s0)*k,q={x:X(s)-.15,y:BY(s)-jt*(1-k*.5)},w=k*k*k;return{x:q.x+(m1.x-q.x)*w,y:q.y+(m1.y-q.y)*w}};
   let eye={x:X(sp.eye.s),y:wv(sp.eye.s)+h*sp.eye.y};
+  const TKt=sp.teeth||(orca||sp.head==='whale'||sp.basking||M.s0===0?null:'norm');
+  const mY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),u=1-k,yt=h*cr(P.top,s),yb=h*cr(P.bot,s),yc=(yt+yb)/2,a=(yb-yt)/2;return wv(s)+clamp(u*u*(m0.y-wv(M.s0))+2*u*k*(mc.y-wv((M.s0+M.s1)/2))+k*k*(m1.y-wv(M.s1))-h*(.3*u+.06*k*(1-k)*4),yc-a*.2,yb-a*.04)};
   if(over){
     const T2=sp.teeth||(orca||sp.head==='whale'||sp.mouth.s0===0?null:'norm');if(T2||(orca&&open)){const big=(T2==='ragged'?1.7:T2==='needle'?1.3:T2==='norm'?1.1:orca?.6:1.25)*(sp.h/8);const nT=T2==='ragged'?9:8;
       const tooth=(x,y,dir,len,wd)=>{const gr=g.createLinearGradient(x,y,x,y+dir*len);gr.addColorStop(0,'#d9d2c2');gr.addColorStop(.6,'#fbf8f0');gr.addColorStop(1,'#ffffff');g.fillStyle=gr;
         g.beginPath();g.moveTo(x-wd,y);g.quadraticCurveTo(x-wd*.3,y+dir*len*.6,x+(sp.teeth==='ragged'?(R()-.5)*.5:0),y+dir*len);g.quadraticCurveTo(x+wd*.3,y+dir*len*.6,x+wd,y);g.closePath();g.fill();g.strokeStyle='rgba(90,70,60,.35)';g.lineWidth=.1;g.stroke()};
       const ol=open?1:.55;
+      if(!open){const nn=10;for(let i=0;i<nn;i++){const k=(i+.5)/nn,s2=M.s0+(M.s1-M.s0)*k,bd=mBand(sp,k),x=X(s2),y=mY(s2),wd=(M.s1-M.s0)*L/nn*.5;if(bd<.3)continue;tooth(x,y-.1,1,bd*.92,wd);const k2=(i+1)/nn;if(k2<1){const s3=M.s0+(M.s1-M.s0)*k2,b2=mBand(sp,k2);if(b2>.3)tooth(X(s3),mY(s3)+b2+.1,-1,b2*.88,wd*.95)}}}else
       for(let i=1;i<nT;i++){const k=i/nT;if(k>.85)break;const q=upAt(k);tooth(q.x,q.y-.1,1,(.7+(1-k)*.55)*big*ol,.36*big)}
       if(open)for(let i=1;i<nT-1;i++){const k=i/nT+.06;if(k>.8)break;const q=loAt(k);tooth(q.x,q.y+.1,-1,(.6+(1-k)*.5)*big,.34*big)}}
     if(sp.head!=='hammer'){const r=sp.eye.r*h;
@@ -1149,12 +1153,14 @@ function drawSharkPro(g,sp,pal,ph,o={}){
     if(!orca){g.strokeStyle=rgba(shade(pal.back,-.5),.6);g.lineWidth=r*.55;g.lineCap='round';g.beginPath();g.moveTo(eye.x-r*1.6,eye.y-r*1.05);g.quadraticCurveTo(eye.x,eye.y-r*1.75,eye.x+r*1.5,eye.y-r*.65);g.stroke()}}
   // gills (reddish slits)
   for(let i=0;i<sp.gills;i++){const s=sp.gs+.01+i*sp.gsp,a=pf(s,-Math.min(.9,.22*sp.gh)),b=pf(s+.008,Math.min(.92,.42*sp.gh)),cx=X(s+.013),cy=(a.y+b.y)/2;
-    g.strokeStyle='rgba(255,255,255,.22)';g.lineWidth=.45;g.beginPath();g.moveTo(a.x-.55,a.y);g.quadraticCurveTo(cx-.55,cy,b.x-.55,b.y);g.stroke();
-    g.strokeStyle='rgba(25,18,20,.4)';g.lineWidth=.28;g.beginPath();g.moveTo(a.x,a.y);g.quadraticCurveTo(cx,cy,b.x,b.y);g.stroke();
+    if(!tex){g.strokeStyle='rgba(255,255,255,.22)';g.lineWidth=.45;g.beginPath();g.moveTo(a.x-.55,a.y);g.quadraticCurveTo(cx-.55,cy,b.x-.55,b.y);g.stroke()}
+    g.strokeStyle=tex?'rgba(14,20,28,.8)':'rgba(25,18,20,.55)';g.lineWidth=tex?.5:.32;g.beginPath();g.moveTo(a.x,a.y);g.quadraticCurveTo(cx,cy,b.x,b.y);g.stroke();
     g.strokeStyle='rgba(150,60,65,.15)';g.lineWidth=.12;g.beginPath();g.moveTo(a.x+.15,a.y+.4);g.quadraticCurveTo(cx+.15,cy,b.x+.15,b.y-.4);g.stroke()}
   if(!orca&&!tex){g.fillStyle='rgba(10,10,10,.3)';for(let i=0;i<30;i++){const q=pf(.008+R()*.1,R()*1.1-.65);ell(g,q.x,q.y,.14,.14)}
     const ns=pf(.03,.5);g.fillStyle='rgba(15,10,10,.6)';ell(g,ns.x,ns.y,.6,.22,-.3)}
   // mouth
+  if((tex||!open)&&TKt){const bp=new Path2D();for(let i=0;i<=30;i++){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;i?bp.lineTo(X(s2),mY(s2)-.25):bp.moveTo(X(s2),mY(s2)-.25)}for(let i=30;i>=0;i--){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;bp.lineTo(X(s2),mY(s2)+mBand(sp,k))}bp.closePath();
+    g.fillStyle='#1d0608';g.fill(bp);g.strokeStyle='rgba(10,2,4,.9)';g.lineWidth=.35;g.stroke(bp)}
   if(open){const ip=new Path2D();ip.moveTo(m0.x,m0.y);for(let k=.05;k<=1.001;k+=.05){const q=upAt(k);ip.lineTo(q.x,q.y)}for(let k=1;k>=-.001;k-=.05){const q=loAt(k);ip.lineTo(q.x,q.y)}ip.closePath();
     const mg=g.createLinearGradient(m0.x,m0.y,m1.x,m1.y);mg.addColorStop(0,'#3a0c10');mg.addColorStop(1,'#0e0203');g.fillStyle=mg;g.fill(ip);ID(ip,6);
     g.strokeStyle='rgba(120,40,45,.55)';g.lineWidth=.35;g.beginPath();for(let k=0;k<=1.001;k+=.05){const q=upAt(k);k?g.lineTo(q.x,q.y+.25):g.moveTo(q.x,q.y+.25)}g.stroke();
@@ -1226,7 +1232,7 @@ const BBX={};function bossBB(k){if(BBX[k])return BBX[k];const c=document.createE
 function buildBossFrame(sp,ps,ph){const ex=sharkExtent(sp),Wl=ex.front+ex.back+4,Hl=ex.up+ex.down+4,c=document.createElement('canvas');c.width=Math.ceil(Wl*ps);c.height=Math.ceil(Hl*ps);const g=c.getContext('2d');
   const bb=bossBB(sp.boss),bw=bb.x1-bb.x0,bh=bb.y1-bb.y0,s=Math.min(sp.L*1.15/bw,sp.h*3.2/bh);g.scale(ps,ps);g.translate(ex.back+2,ex.up+2);g.rotate(Math.sin(ph)*.04);g.scale(-s,s);g.translate(-(bb.x0+bb.x1)/2,-(bb.y0+bb.y1)/2);
   try{if(BDRAW[sp.boss])BDRAW[sp.boss](g,ph);else drawBeastAt(g,'b_'+sp.boss,0,0,ph)}catch(e){}return{c,ox:ex.back+2,oy:ex.up+2,w:Wl,h:Hl,pal:{alpha:1,glow:null}}}
-function buildShark(sp,skin,ps,ph,jaw){if(sp.boss)return buildBossFrame(sp,ps,ph);const r3=buildShark3D(sp,skin,ps,ph,jaw);if(r3)return r3;return buildShark2D(sp,skin,ps,ph,jaw)}
+function buildShark(sp,skin,ps,ph,jaw){if(sp.boss)return buildBossFrame(sp,ps,ph);return buildShark2D(sp,skin,ps,ph,jaw)}
 function buildShark2D(sp,skin,ps,ph,jaw){const pal=palette(sp,skin),ex=sharkExtent(sp),Wl=ex.front+ex.back+4,Hl=ex.up+ex.down+4,cw=Math.ceil(Wl*ps),ch=Math.ceil(Hl*ps);
   const c=document.createElement('canvas');c.width=cw;c.height=ch;const g=c.getContext('2d');const ci=document.createElement('canvas');ci.width=cw;ci.height=ch;const gi=ci.getContext('2d');
   for(const q of [g,gi]){q.scale(ps,ps);q.translate(ex.back+2,ex.up+2)}
@@ -1288,7 +1294,7 @@ function buildRig(sp,skin){const T=THREE,G=glInit(),pal=palette(sp,skin),L=sp.L,
   {const ci=pos.length/3;pos.push(X(1),-(TY(1)+BY(1))/2,0);const t=uvOf(X(1),(TY(1)+BY(1))/2);uv.push(t[0],t[1]);low.push(0);const base=(NS-1)*RV;for(let j=0;j<RV-1;j++)idx.push(base+j,ci,base+j+1)}
   const bg=new T.BufferGeometry();bg.setAttribute('position',new T.Float32BufferAttribute(pos,3));bg.setAttribute('uv',new T.Float32BufferAttribute(uv,2));bg.setIndex(idx);bg.computeVertexNormals();
   const body=new T.Mesh(bg,bodyMat);group.add(body);parts.push({mesh:body,base:Float32Array.from(pos),low:Uint8Array.from(low),normals:true});
-  {const bb=new T.BufferGeometry();bb.setAttribute('position',bg.getAttribute('position'));bb.setIndex(bidx);const br=new T.Mesh(bb,new T.MeshBasicMaterial({color:0x4a0812,side:T.DoubleSide}));group.add(br);parts.push({mesh:br,shared:true})}
+  {const bb=new T.BufferGeometry();bb.setAttribute('position',bg.getAttribute('position'));bb.setIndex(bidx);const dk=new T.MeshBasicMaterial({color:0x1c0306,side:T.DoubleSide}),br=new T.Mesh(bb,bodyMat);br.userData.noOl=true;group.add(br);parts.push({mesh:br,shared:true,dk,lt:bodyMat})}
   const halfW=(s,y2)=>{const yt=TY(s),yb=BY(s),yc=(yt+yb)/2,a=Math.max(.001,(yb-yt)/2),w=a*wF;const k=clamp((y2-yc)/a,-1,1);return w*Math.sqrt(Math.max(0,1-k*k))};
   // ---- fins
   const ext=(pts,thick,mat,plane)=>{const sh=new T.Shape();pts.forEach((p,i)=>i?sh.lineTo(p[0],-p[1]):sh.moveTo(p[0],-p[1]));
@@ -1318,17 +1324,17 @@ function buildRig(sp,skin){const T=THREE,G=glInit(),pal=palette(sp,skin),L=sp.L,
   // eyes
   const eyeS=sp.eye.s,eyeY=h*sp.eye.y,er=sp.eye.r*h*(sp.bigeye?1.25:1);
   const mkEye=(x,y,z,r,side,brow=true)=>{const sc=new T.Mesh(new T.SphereGeometry(r,20,16),scleraMat);sc.position.set(x,y,z);addMesh(sc);
-    const pu=new T.Mesh(new T.SphereGeometry(r*.62,16,12),pupilMat);pu.position.set(x+r*.5,y-r*.02,z+(side>0?r*.42:r*.12));pu.userData.noOl=true;addMesh(pu);
-    const hl=new T.Mesh(new T.SphereGeometry(r*.21,8,6),hlMat);hl.position.set(x+r*.72,y+r*.22,z+(side>0?r*.62:r*.3));hl.userData.noOl=true;addMesh(hl);
-    if(brow){const lid=new T.Mesh(new T.SphereGeometry(r*1.08,22,10,0,Math.PI*2,0,Math.PI*.36),browMat);lid.rotation.set(side*.12,0,-.42);lid.position.set(x-r*.05,y+r*.12,z);lid.userData.noOl=true;addMesh(lid)}};
-  const er2=Math.max(er*2.05,h*.185);
+    const pu=new T.Mesh(new T.SphereGeometry(r*.86,16,12),pupilMat);pu.position.set(x+r*.22,y-r*.02,z+(side>0?r*.3:r*.1));pu.userData.noOl=true;addMesh(pu);
+    const hl=new T.Mesh(new T.SphereGeometry(r*.24,8,6),hlMat);hl.position.set(x+r*.55,y+r*.3,z+(side>0?r*.98:r*.45));hl.userData.noOl=true;addMesh(hl);
+    if(brow){const lid=new T.Mesh(new T.SphereGeometry(r*1.1,22,10,0,Math.PI*2,0,Math.PI*.24),browMat);lid.rotation.set(side*.12,0,-.42);lid.position.set(x-r*.05,y+r*.12,z);lid.userData.noOl=true;addMesh(lid)}};
+  const er2=Math.max(er*1.7,h*.135);
   if(sp.head!=='hammer')for(const side of [1,-1])mkEye(X(eyeS),-eyeY,side*(halfW(eyeS,eyeY)-er2*.3),er2,side,!orca);
   // teeth
   const TK=sp.teeth||(orca||sp.head==='whale'||(sp.mouth&&sp.mouth.s0===0)?null:'norm');
-  if(TK||orca){const tp=[],big=(TK==='ragged'?1.6:TK==='needle'?1.25:TK==='norm'?1.05:orca?.7:1.15)*(h/8),n=TK==='ragged'?9:8;
+  if(TK||orca){const tp=[],big=(TK==='ragged'?1.6:TK==='needle'?1.25:TK==='norm'?1.05:orca?.7:1.15)*(h/8),n=TK==='ragged'?10:10;
     const cone=(arr,bx,by,bz,dy,dz,r,len)=>{const seg=6,tipx=bx,tipy=by+dy*len,tipz=bz+dz*len;for(let k=0;k<seg;k++){const a1=k/seg*Math.PI*2,a2=(k+1)/seg*Math.PI*2;arr.push(bx+Math.cos(a1)*r,by,bz+Math.sin(a1)*r,bx+Math.cos(a2)*r,by,bz+Math.sin(a2)*r,tipx,tipy,tipz)}};
-    const big2=big*1.35,up=[],lo=[],bj=bnd.filter(q=>q.s>M.s0+.004&&q.s<M.s1-.01);for(const side of [1,-1])for(let i=1;i<n;i++){const k=i/n;if(k>.9)break;const q=bj[Math.min(bj.length-1,Math.floor(k*bj.length))];if(!q)continue;const ln=(.75+(1-k)*.5)*big2,rr=.36*big2,z=side*q.z*.97;
-      cone(up,q.x,-q.y+.05,z,-1,0,rr,ln*(sp.teeth==='ragged'?1+(i%2)*.3:1));cone(lo,q.x-.35*big,-q.y-.05,z*1.01,1,0,rr*.9,ln*.85)}
+    const big2=big*1.75,up=[],lo=[],bj=bnd.filter(q=>q.s>M.s0+.004&&q.s<M.s1-.01);for(const side of [1,-1])for(let i=1;i<n;i++){const k=i/n;if(k>.9)break;const q=bj[Math.min(bj.length-1,Math.floor(k*bj.length))];if(!q)continue;const ln=(.75+(1-k)*.5)*big2,rr=bj.length>1?Math.abs(bj[0].x-bj[bj.length-1].x)/n*.52:.42*big2,z=side*q.z*.97;
+      const bdA=mBand(sp,(q.s-M.s0)/(M.s1-M.s0));cone(up,q.x,-q.y+.05,z,-1,0,rr,Math.min(ln,bdA*.95)*(sp.teeth==='ragged'?1+(i%2)*.2:1));const q2=bj[Math.min(bj.length-1,Math.floor((k+.5/n)*bj.length))]||q,bdB=mBand(sp,(q2.s-M.s0)/(M.s1-M.s0));if(bdB>.3)cone(lo,q2.x,-q2.y-bdB+.05,side*q2.z*.97,1,0,rr*.95,Math.min(ln*.9,bdB*.9))}
     for(const [arr,isLow] of [[up,0],[lo,1]]){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(arr,3));g.computeVertexNormals();const m=new T.Mesh(g,toothMat);group.add(m);parts.push({mesh:m,base:Float32Array.from(arr),low:isLow?2:0,normals:true})}}
   // head specials
   if(sp.head==='hammer'){const cx=X(.03),cy=-(TY(.03)+BY(.03))/2+h*.05,span=h*2.3,dep=L*.07;const sh=new T.Shape();sh.moveTo(dep*.6,0);sh.quadraticCurveTo(dep*.9,span*.6,dep*.2,span);sh.quadraticCurveTo(-dep*.3,span*1.05,-dep*.5,span*.85);sh.quadraticCurveTo(-dep*.2,span*.3,-dep*.9,0);
@@ -1346,11 +1352,11 @@ function buildRig(sp,skin){const T=THREE,G=glInit(),pal=palette(sp,skin),L=sp.L,
   {const olW=Math.max(.2,L*.0065),olMat=new T.ShaderMaterial({uniforms:{w:{value:olW},c:{value:new T.Color(0x07131a)}},side:T.BackSide,
       vertexShader:'uniform float w;void main(){vec3 p=position+normalize(normal)*w;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}',fragmentShader:'uniform vec3 c;void main(){gl_FragColor=vec4(c,1.0);}'});
     group.children.slice().forEach(m=>{if(!m.isMesh||m.userData.noOl||m.material===toothMat||m.material.isMeshBasicMaterial)return;const o=new T.Mesh(m.geometry,olMat);group.add(o)})}
-  group.rotation.set(.22,-.32,0);
+  group.rotation.set(.13,-.2,0);
   return{group,parts,sp,L,orca,hinge:{x:m1.x,y:-m1.y}}}
 function poseRig(rig,ph,jaw){const L=rig.L,A=L*.065,orca=rig.orca,th=-jaw*.55,c=Math.cos(th),sn=Math.sin(th),hx=rig.hinge.x,hy=rig.hinge.y;
   const wave=x=>{const s=(L/2-x)/L;return s<=0?0:A*s*s*Math.sin(ph-s*2.4)};
-  for(const p of rig.parts){const m=p.mesh;if(p.shared)continue;
+  for(const p of rig.parts){const m=p.mesh;if(p.shared){if(p.dk)m.material=jaw>.1?p.dk:p.lt;continue}
     if(p.obj){m.visible=jaw>.15;m.position.set(p.base[0],p.base[1]+(orca?wave(p.base[0]):0),p.base[2]+(orca?0:wave(p.base[0])));continue}
     const pa=m.geometry.attributes.position,b=p.base,arr=pa.array;
     for(let i=0;i<pa.count;i++){let x=b[i*3],y=b[i*3+1],z=b[i*3+2];
@@ -1404,7 +1410,7 @@ void main(){vec2 uv=v;float asp=u_res.y/u_res.x;
   function show(on){const v=on&&ok;if(cvx)cvx.style.display=v?'block':'none';cv.style.opacity=v?'0':''}
   return{init,size,draw,show,get ok(){return ok}}})();
 let fxFrz=0,sharkRoll=0;
-function renderSharkLive(x,y,rot,sc,sp,skin,alpha,anim,jaw,roll){if(sp.boss)return false;const G=glInit();if(!G)return false;const key=sp.uid+'|'+skin;let rig=RIG[key];if(!rig)rig=RIG[key]=buildRig(sp,skin);poseRig(rig,anim,jaw);
+function renderSharkLive(x,y,rot,sc,sp,skin,alpha,anim,jaw,roll){if(sp.boss||!window.__sh3d)return false;const G=glInit();if(!G)return false;const key=sp.uid+'|'+skin;let rig=RIG[key];if(!rig)rig=RIG[key]=buildRig(sp,skin);poseRig(rig,anim,jaw);
   const ex=sharkExtent(sp),ps=RS*sc,Wl=ex.front+ex.back+4,Hl=ex.up+ex.down+4,cw=Math.ceil(Wl*ps),ch=Math.ceil(Hl*ps);
   if(G.cvs.width!==cw||G.cvs.height!==ch){G.r.setPixelRatio(1);G.r.setSize(cw,ch,false)}
   const cam=G.cam;cam.left=-(ex.back+2);cam.right=ex.front+2;cam.top=ex.up+2;cam.bottom=-(ex.down+2);cam.updateProjectionMatrix();
