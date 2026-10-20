@@ -1578,7 +1578,7 @@ const SCHOOL=Array.from({length:28},(_,i)=>({a:Math.random()*6,r:6+Math.random()
 const SNOW=Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H,v:3+Math.random()*9,a:.15+Math.random()*.45,r:.4+Math.random()*.7}));
 let bigCreature=null;
 
-function newRun(){const st=stats();run={score:0,fishVal:0,fishCount:0,gold:0,shields:st.shields,hits:0,inv:0,sky:0,atTop:false,st,flash:0,shake:0,deadT:0,unl:[],
+function newRun(){const st=stats();run={score:0,fishVal:0,fishCount:0,gold:0,shields:Math.min(4,st.shields),hits:0,inv:0,sky:0,atTop:false,st,flash:0,shake:0,deadT:0,unl:[],
   charge:0,abUsed:0,pows:0,haz:0,breaks:0,ghostUntil:0,turboUntil:0,magAllUntil:0,devourUntil:0,abMult:1,abMultUntil:0,goldUntil:0,slowUntil:0,slowF:1,podUntil:0,roarUntil:0,
   x2Until:0,magUntil:0,magR:999,boss:null,bossWait:false,bossDone:[],harpT:3,maxBiome:0,bossesBeaten:0,kills:0,stam:1,gliding:false,glideLock:false,inkUntil:0,swT:5,vacUntil:0,vacR:0,readyTold:false};
   shark.x=SHX;shark.y=225;shark.vy=0;shark.rot=0;corals=[];fishes=[];hazards=[];powers=[];parts=[];pops=[];lastGap=230;spawned=0;overShown=false;
@@ -1730,7 +1730,8 @@ function breakCoral(c){c.broken=true;const col=({reef:'#c9a070',lagoon:'#efe2c0'
   for(let i=0;i<18;i++)parts.push({x:c.x+22+(Math.random()-.5)*20,y:shark.y+(Math.random()-.5)*40,vx:(Math.random()-.3)*170,vy:(Math.random()-.5)*170,life:.9,max:.9,c:col,kind:'chip',r:1+Math.random()*1.5})}
 function destroyHaz(z,reward){z.dead=true;run.haz++;mission('haz',1);for(let i=0;i<10;i++)parts.push({x:z.x,y:z.y,vx:(Math.random()-.5)*120,vy:(Math.random()-.5)*120,life:.6,max:.6,c:'#d8eef5',kind:'chip',r:1});
   if(reward){run.fishVal+=reward;pops.push({x:z.x,y:z.y-10,txt:'+'+reward,life:.8,c:'#ffd27a'})}}
-function addSh(n){if(!run)return;const cap=Math.max(3,(run.st.shields||0)+1),room=Math.max(0,cap-run.shields),over=n-Math.min(n,room);run.shields+=Math.min(n,room);if(over>0){run.fishVal+=10*over;pops.push({x:shark.x,y:shark.y-30,txt:'Scudi al massimo: +'+10*over,life:1,c:'#ffd27a'})}try{updateHud()}catch(e){}}
+const SHCAP=()=>Math.min(4,Math.max(2,Math.min(4,run.st.shields||0)+1));
+function addSh(n){if(!run)return;const cap=SHCAP(),room=Math.max(0,cap-run.shields),over=n-Math.min(n,room);run.shields+=Math.min(n,room);if(over>0){run.fishVal+=10*over;pops.push({x:shark.x,y:shark.y-30,txt:'Scudi al massimo: +'+10*over,life:1,c:'#ffd27a'})}try{updateHud()}catch(e){}}
 function hit(src){if(run.inv>0||invuln())return;
   if(src&&src.coral&&run.breaks>0){run.breaks--;breakCoral(src.coral);run.shake=.15;SFX.shield();updateAbHud();return}
   if(src&&src.haz&&t<run.devourUntil){destroyHaz(src.haz,5);SFX.gold();return}

@@ -447,7 +447,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.66</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.67</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -536,7 +536,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.66</span>
+        <span class="beta big">BETA 0.67</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -985,7 +985,7 @@ const BLEN=25,biomeIdx=n=>Math.floor(n/BLEN)%BIOMES.length;
 const BIOBOSS={reef:['fugu','moray'],lagoon:['crab','medusa'],kelp:['grouper','marlin'],harbor:['trawler'],atlantis:['kraken'],wreck:['sub'],volcano:['eelking'],crystal:['spiderking','squid'],abyss:['angler','squid'],ice:['leopard','walrus','leviathan']};
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.66';
+const KEY='flappysqualo.beta1';const BETA='0.67';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1631,7 +1631,7 @@ const SCHOOL=Array.from({length:28},(_,i)=>({a:Math.random()*6,r:6+Math.random()
 const SNOW=Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H,v:3+Math.random()*9,a:.15+Math.random()*.45,r:.4+Math.random()*.7}));
 let bigCreature=null;
 
-function newRun(){const st=stats();run={score:0,fishVal:0,fishCount:0,gold:0,shields:st.shields,hits:0,inv:0,sky:0,atTop:false,st,flash:0,shake:0,deadT:0,unl:[],
+function newRun(){const st=stats();run={score:0,fishVal:0,fishCount:0,gold:0,shields:Math.min(4,st.shields),hits:0,inv:0,sky:0,atTop:false,st,flash:0,shake:0,deadT:0,unl:[],
   charge:0,abUsed:0,pows:0,haz:0,breaks:0,ghostUntil:0,turboUntil:0,magAllUntil:0,devourUntil:0,abMult:1,abMultUntil:0,goldUntil:0,slowUntil:0,slowF:1,podUntil:0,roarUntil:0,
   x2Until:0,magUntil:0,magR:999,boss:null,bossWait:false,bossDone:[],harpT:3,maxBiome:0,bossesBeaten:0,kills:0,stam:1,gliding:false,glideLock:false,inkUntil:0,swT:5,vacUntil:0,vacR:0,readyTold:false};
   shark.x=SHX;shark.y=225;shark.vy=0;shark.rot=0;corals=[];fishes=[];hazards=[];powers=[];parts=[];pops=[];lastGap=230;spawned=0;overShown=false;
@@ -1783,7 +1783,8 @@ function breakCoral(c){c.broken=true;const col=({reef:'#c9a070',lagoon:'#efe2c0'
   for(let i=0;i<18;i++)parts.push({x:c.x+22+(Math.random()-.5)*20,y:shark.y+(Math.random()-.5)*40,vx:(Math.random()-.3)*170,vy:(Math.random()-.5)*170,life:.9,max:.9,c:col,kind:'chip',r:1+Math.random()*1.5})}
 function destroyHaz(z,reward){z.dead=true;run.haz++;mission('haz',1);for(let i=0;i<10;i++)parts.push({x:z.x,y:z.y,vx:(Math.random()-.5)*120,vy:(Math.random()-.5)*120,life:.6,max:.6,c:'#d8eef5',kind:'chip',r:1});
   if(reward){run.fishVal+=reward;pops.push({x:z.x,y:z.y-10,txt:'+'+reward,life:.8,c:'#ffd27a'})}}
-function addSh(n){if(!run)return;const cap=Math.max(3,(run.st.shields||0)+1),room=Math.max(0,cap-run.shields),over=n-Math.min(n,room);run.shields+=Math.min(n,room);if(over>0){run.fishVal+=10*over;pops.push({x:shark.x,y:shark.y-30,txt:'Scudi al massimo: +'+10*over,life:1,c:'#ffd27a'})}try{updateHud()}catch(e){}}
+const SHCAP=()=>Math.min(4,Math.max(2,Math.min(4,run.st.shields||0)+1));
+function addSh(n){if(!run)return;const cap=SHCAP(),room=Math.max(0,cap-run.shields),over=n-Math.min(n,room);run.shields+=Math.min(n,room);if(over>0){run.fishVal+=10*over;pops.push({x:shark.x,y:shark.y-30,txt:'Scudi al massimo: +'+10*over,life:1,c:'#ffd27a'})}try{updateHud()}catch(e){}}
 function hit(src){if(run.inv>0||invuln())return;
   if(src&&src.coral&&run.breaks>0){run.breaks--;breakCoral(src.coral);run.shake=.15;SFX.shield();updateAbHud();return}
   if(src&&src.haz&&t<run.devourUntil){destroyHaz(src.haz,5);SFX.gold();return}
