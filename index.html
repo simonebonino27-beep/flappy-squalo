@@ -464,7 +464,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.71</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.72</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -560,7 +560,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.71</span>
+        <span class="beta big">BETA 0.72</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -1010,7 +1010,7 @@ const BLEN=25,biomeIdx=n=>Math.floor(n/BLEN)%BIOMES.length;
 const BIOBOSS={reef:['fugu','moray'],lagoon:['crab','medusa'],kelp:['grouper','marlin'],harbor:['trawler'],atlantis:['kraken'],wreck:['sub'],volcano:['eelking'],crystal:['spiderking','squid'],abyss:['angler','squid'],ice:['leopard','walrus','leviathan']};
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.71';
+const KEY='flappysqualo.beta1';const BETA='0.72';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1051,7 +1051,7 @@ function profOf(sp){if(sp._p)return sp._p;const b=sp.blunt,n=sp.noseY,be=sp.bell
   sp._p={top:sp.topP||[[0,n],[.03,n-.1-.3*b],[.1,-.47-.2*b],[.2,-.68-.12*b],[.3,-.83-.05*b],[.4,-.93],[.5,-.99],[.56,-1],[.66,-.88],[.78,-.64],[.9,-.38],[1,-sp.pd]],
     bot:sp.botP||[[0,n],[.03,n+.08+.22*b],[.1,.44+.12*b],[.2,.76*be],[.3,.93*be],[.4,.98*be],[.5,.92*be],[.6,.78*be],[.72,.57],[.86,.34],[1,sp.pd]]};return sp._p}
 const mBand=(sp,k)=>sp.h*.26*Math.pow(Math.sin(Math.PI*clamp(k,0,1)),.5);
-const idleJaw=sp=>sp.boss?0:(sp.head==='whale'||sp.basking)?.12:sp.head==='orca'?.15:.05;
+const idleJaw=sp=>sp.boss?0:(sp.head==='whale'||sp.basking)?.12:sp.head==='orca'?.15:.55;
 
 /* Draws the shark in local coords (nose +x). pass 'base' paints albedo + part-id map; pass 'over' paints teeth and eyes on top of the lit result. */
 function drawSharkPro(g,sp,pal,ph,o={}){
@@ -1059,7 +1059,8 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   const L=sp.L,h=sp.h,P=profOf(sp),orca=sp.head==='orca',amp=sp.amp,N=56;
   const wv=s=>amp*s*s*Math.sin(ph-s*2.4);
   const X=s=>L/2-s*L,TY=s=>wv(s)+h*cr(P.top,s),BY0=s=>wv(s)+h*cr(P.bot,s);
-  const M=sp.mouth,open=jaw>.06,drop=s=>(open&&s>=M.s0&&s<M.s1)?jaw*h*.75*Math.pow(1-(s-M.s0)/(M.s1-M.s0),.9):0,BY=s=>BY0(s)+drop(s);
+  const NM=!tex&&!orca&&!!(sp.teeth||!(sp.head==='whale'||sp.basking||sp.mouth.s0===0))&&jaw>.06;
+  const M=sp.mouth,open=jaw>.06,drop=s=>(open&&!NM&&s>=M.s0&&s<M.s1)?jaw*h*.75*Math.pow(1-(s-M.s0)/(M.s1-M.s0),.9):0,BY=s=>BY0(s)+drop(s);
   const pf=(s,f)=>({x:X(s),y:wv(s)+(f>=0?f*h*cr(P.bot,s):-f*h*cr(P.top,s))});
   const fs=orca?1:1-sp.beat*.36*(1-Math.abs(Math.cos(ph)));
   const R=rngf(sp.uid*131+7);
@@ -1071,6 +1072,10 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   let eye={x:X(sp.eye.s),y:wv(sp.eye.s)+h*sp.eye.y};
   const TKt=sp.teeth||(orca||sp.head==='whale'||sp.basking||M.s0===0?null:'norm');
   const mY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),u=1-k,yt=h*cr(P.top,s),yb=h*cr(P.bot,s),yc=(yt+yb)/2,a=(yb-yt)/2;return wv(s)+clamp(u*u*(m0.y-wv(M.s0))+2*u*k*(mc.y-wv((M.s0+M.s1)/2))+k*k*(m1.y-wv(M.s1))-h*(.3*u+.06*k*(1-k)*4),yc-a*.2,yb-a*.04)};
+  const nA=jaw*1.05,nS0=M.s0*.6,nC={x:X(M.s1+.01),y:wv(M.s1)+h*.2},nU0={x:X(nS0),y:BY0(nS0)-h*.07};
+  const nU=k=>({x:nU0.x+(nC.x-nU0.x)*k,y:nU0.y+(nC.y-nU0.y)*k+h*.07*Math.sin(Math.PI*k)});
+  const nR=p=>{const dx=p.x-nC.x,dy=p.y-nC.y,c=Math.cos(nA),sn=Math.sin(nA);return{x:nC.x+dx*c-dy*sn,y:nC.y+dx*sn+dy*c}};
+  const nL=k=>nR(nU(k));
   const MW=!tex&&!open&&!!TKt,mS=k=>M.s0+(M.s1-M.s0)*k,mLy=k=>BY0(mS(k))-h*(.05+.1*k*k),mGap=k=>h*.21*Math.pow(1-k,.7)*Math.min(1,k*6+.35),mC={x:X(M.s1),y:mLy(1)};
   const mLo=k=>({x:X(mS(k)),y:mLy(k)});
   const mUp=k=>({x:X(mS(k))+.15,y:mLy(k)-mGap(k)});
@@ -1080,8 +1085,12 @@ function drawSharkPro(g,sp,pal,ph,o={}){
         g.beginPath();g.moveTo(x-wd,y);g.quadraticCurveTo(x-wd*.3,y+dir*len*.6,x+(sp.teeth==='ragged'?(R()-.5)*.5:0),y+dir*len);g.quadraticCurveTo(x+wd*.3,y+dir*len*.6,x+wd,y);g.closePath();g.fill();g.strokeStyle='rgba(90,70,60,.35)';g.lineWidth=.1;g.stroke()};
       const ol=open?1:.55;
       if(MW){const nn=12;for(let i=0;i<nn;i++){const k=(i+.3)/nn,u=mUp(k),l=mLo(k),gp=l.y-u.y,wd=Math.abs(X(M.s0)-mC.x)/nn*.46;if(gp>.25)tooth(u.x,u.y-.05,1,gp*.82,wd);const k2=(i+.8)/nn,u2=mUp(k2),l2=mLo(k2),g2=l2.y-u2.y;if(g2>.25&&k2<.95)tooth(l2.x,l2.y+.05,-1,g2*.7,wd*.9)}}else
+      if(NM){for(let i=1;i<13;i++){const k=i/13;if(k>.9)break;const q=nU(k);tooth(q.x,q.y+.3,1,(.85+(1-k)*.75)*big*(T2==='ragged'&&i%2?1.25:1),.27*big)}
+        for(let i=1;i<11;i++){const k=i/11+.03;if(k>.88)break;const q=nL(k);tooth(q.x,q.y-.3,-1,(.75+(1-k)*.6)*big,.26*big)}}else
+      if(open&&!orca){const nU=13,nL=11;for(let i=1;i<nU;i++){const k=i/nU;if(k>.9)break;const q=upAt(k);tooth(q.x,q.y+.35,1,(.75+(1-k)*.6)*big*(T2==='ragged'&&i%2?1.25:1),.2*big)}
+        for(let i=1;i<nL;i++){const k=i/nL+.03;if(k>.88)break;const q=loAt(k);tooth(q.x,q.y-.35,-1,(.65+(1-k)*.5)*big,.19*big)}}else{
       for(let i=1;i<nT;i++){const k=i/nT;if(k>.85)break;const q=upAt(k);tooth(q.x,q.y-.1,1,(.7+(1-k)*.55)*big*ol,.36*big)}
-      if(open)for(let i=1;i<nT-1;i++){const k=i/nT+.06;if(k>.8)break;const q=loAt(k);tooth(q.x,q.y+.1,-1,(.6+(1-k)*.5)*big,.34*big)}}
+      if(open)for(let i=1;i<nT-1;i++){const k=i/nT+.06;if(k>.8)break;const q=loAt(k);tooth(q.x,q.y+.1,-1,(.6+(1-k)*.5)*big,.34*big)}}}
     if(sp.head!=='hammer'){const r=sp.eye.r*h;
       if(pal.eyeGlow){glowAt(g,eye.x,eye.y,r*5,pal.eyeGlow,.55)}
       if(!pal.eyeGlow){g.fillStyle='rgba(8,10,14,.85)';ell(g,eye.x-r*.15,eye.y,r*1.75,r*1.6);g.fillStyle='#f4f6f8';ell(g,eye.x-r*.15,eye.y,r*1.5,r*1.38)}
@@ -1117,7 +1126,7 @@ function drawSharkPro(g,sp,pal,ph,o={}){
     g.fillStyle=shade(pal.back,-.15);g.fill(p);if(gi){gi.save();gi.translate(c.x,c.y);gi.rotate(-.3);ID(p,7);gi.restore()}g.fillStyle='#07080a';ell(g,L*.012,-h*.58,.55,.5);g.restore()}
   // ---- body
   const body=new Path2D();body.moveTo(X(0),TY(0));for(let i=1;i<=N;i++){const s=i/N;body.lineTo(X(s),TY(s))}
-  for(let i=N;i>=0;i--){const s=i/N;body.lineTo(X(s),BY(s));if(open&&s>M.s0&&s-1/N<M.s0){body.lineTo(X(M.s0),BY(M.s0));body.lineTo(X(M.s0),BY0(M.s0))}}body.closePath();
+  for(let i=N;i>=0;i--){const s=i/N;body.lineTo(X(s),BY(s));if(open&&!NM&&s>M.s0&&s-1/N<M.s0){body.lineTo(X(M.s0),BY(M.s0));body.lineTo(X(M.s0),BY0(M.s0))}}body.closePath();
   const so=sp.so,jagN=s=>sp.jag?.06*Math.sin(s*37+1)+.04*Math.sin(s*71+2)+.025*Math.sin(s*131+3):.015*Math.sin(s*40),yB=s=>wv(s)+h*(so+jagN(s));
   const pos=v=>clamp((v+1)/(1+sp.belly),0,1);
   const g0=g.createLinearGradient(0,-h,0,h*sp.belly);g0.addColorStop(0,shade(pal.back,-.18));g0.addColorStop(pos(-.5),pal.back);g0.addColorStop(pos(Math.min(.95,so)),shade(pal.back,.12));g0.addColorStop(1,shade(pal.back,.05));
@@ -1167,16 +1176,28 @@ function drawSharkPro(g,sp,pal,ph,o={}){
     g.strokeStyle='rgba(20,8,10,.55)';g.lineWidth=.35;g.lineCap='round';g.beginPath();g.moveTo(mC.x+.2,mC.y);g.quadraticCurveTo(mC.x-L*.03,mC.y+h*.02,mC.x-L*.06,mC.y+h*.12);g.stroke()}
   if(tex&&TKt){const bp=new Path2D();for(let i=0;i<=30;i++){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;i?bp.lineTo(X(s2),mY(s2)-.25):bp.moveTo(X(s2),mY(s2)-.25)}for(let i=30;i>=0;i--){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;bp.lineTo(X(s2),mY(s2)+mBand(sp,k))}bp.closePath();
     g.fillStyle='#1d0608';g.fill(bp);g.strokeStyle='rgba(10,2,4,.9)';g.lineWidth=.35;g.stroke(bp)}
-  if(open){const ip=new Path2D();ip.moveTo(m0.x,m0.y);for(let k=.05;k<=1.001;k+=.05){const q=upAt(k);ip.lineTo(q.x,q.y)}for(let k=1;k>=-.001;k-=.05){const q=loAt(k);ip.lineTo(q.x,q.y)}ip.closePath();
-    const mg=g.createLinearGradient(m0.x,m0.y,m1.x,m1.y);mg.addColorStop(0,'#3a0c10');mg.addColorStop(1,'#0e0203');g.fillStyle=mg;g.fill(ip);ID(ip,6);
-    g.strokeStyle='rgba(120,40,45,.55)';g.lineWidth=.35;g.beginPath();for(let k=0;k<=1.001;k+=.05){const q=upAt(k);k?g.lineTo(q.x,q.y+.25):g.moveTo(q.x,q.y+.25)}g.stroke();
+  let nmDraw=null;if(NM)nmDraw=()=>{const bs=s2=>({x:X(s2),y:BY0(s2)}),S1=M.s1+.06;
+    const dk=new Path2D();for(let i=0;i<=20;i++){const q=nU(i/20);i?dk.lineTo(q.x,q.y):dk.moveTo(q.x,q.y)}for(let i=20;i>=0;i--){const q=nL(i/20);dk.lineTo(q.x,q.y)}
+    for(let i=0;i<=12;i++){const q=bs(nS0+(S1-nS0)*i/12);dk.lineTo(q.x,q.y)}dk.closePath();
+    const dk2=new Path2D();for(let i=0;i<=20;i++){const q=nU(i/20);i?dk2.lineTo(q.x,q.y):dk2.moveTo(q.x,q.y)}for(let i=12;i>=0;i--){const q=bs(nS0+(M.s1-nS0)*i/12);dk2.lineTo(q.x,q.y)}dk2.closePath();
+    const mg=g.createLinearGradient(nU0.x,nU0.y,nC.x,nC.y);mg.addColorStop(0,'#5a1520');mg.addColorStop(1,'#140306');g.fillStyle=mg;g.fill(dk2);
+    const iw=new Path2D();for(let i=0;i<=20;i++){const q=nU(i/20);i?iw.lineTo(q.x,q.y):iw.moveTo(q.x,q.y)}for(let i=20;i>=0;i--){const q=nL(i/20);iw.lineTo(q.x,q.y)}iw.closePath();g.fill(iw);ID(iw,6);
+    g.save();g.clip(iw);const tq=nL(.5);g.fillStyle='rgba(200,90,105,.6)';ell(g,tq.x-h*.1,tq.y-h*.1,(M.s1-M.s0)*L*.3,h*.13,nA*.6);g.restore();
+    const jw=new Path2D();const jp=[];for(let i=0;i<=20;i++)jp.push(nU(i/20));jp.push(bs(S1));for(let i=12;i>=0;i--)jp.push(bs(nS0+(S1-nS0)*i/12));jp.map(nR).forEach((q,i)=>i?jw.lineTo(q.x,q.y):jw.moveTo(q.x,q.y));jw.closePath();
+    const jg=g.createLinearGradient(0,nC.y,0,nC.y+h*1.1);jg.addColorStop(0,shade(pal.belly,-.05));jg.addColorStop(1,shade(pal.belly,-.22));g.fillStyle=jg;g.fill(jw);ID(jw,1);
+    g.strokeStyle='rgba(10,14,18,.55)';g.lineWidth=.35;g.beginPath();jp.slice(21).map(nR).forEach((q,i)=>i?g.lineTo(q.x,q.y):g.moveTo(q.x,q.y));g.stroke();
+    g.strokeStyle='rgba(225,135,148,.9)';g.lineWidth=.5;g.lineCap='round';g.beginPath();for(let i=0;i<=20;i++){const q=nU(i/20);i?g.lineTo(q.x,q.y+.25):g.moveTo(q.x,q.y+.25)}g.stroke();g.beginPath();for(let i=0;i<=20;i++){const q=nL(i/20);i?g.lineTo(q.x,q.y-.25):g.moveTo(q.x,q.y-.25)}g.stroke()};
+  if(NM){}else if(open){const ip=new Path2D();ip.moveTo(m0.x,m0.y);for(let k=.05;k<=1.001;k+=.05){const q=upAt(k);ip.lineTo(q.x,q.y)}for(let k=1;k>=-.001;k-=.05){const q=loAt(k);ip.lineTo(q.x,q.y)}ip.closePath();
+    const mg=g.createLinearGradient(m0.x,m0.y,m1.x,m1.y);mg.addColorStop(0,'#4a1218');mg.addColorStop(1,'#120305');g.fillStyle=mg;g.fill(ip);ID(ip,6);
+    if(!orca&&sp.head!=='whale'&&!sp.basking){g.save();g.clip(ip);const tq=loAt(.45);g.fillStyle='rgba(190,80,95,.55)';ell(g,tq.x,tq.y-h*.06,(M.s1-M.s0)*L*.32,h*.14,-.15);g.restore()}
+    g.strokeStyle=orca?'rgba(120,40,45,.55)':'#d77a86';g.lineWidth=orca?.35:.85;g.lineCap='round';g.beginPath();for(let k=0;k<=1.001;k+=.05){const q=upAt(k);k?g.lineTo(q.x,q.y+.25):g.moveTo(q.x,q.y+.25)}g.stroke();
     g.beginPath();for(let k=0;k<=1.001;k+=.05){const q=loAt(k);k?g.lineTo(q.x,q.y-.25):g.moveTo(q.x,q.y-.25)}g.stroke();
     if(!sp.teeth&&(sp.head==='whale'||sp.basking)){g.strokeStyle='rgba(210,200,190,.35)';g.lineWidth=.22;for(let k=.1;k<.95;k+=.07){const a=upAt(k),b=loAt(k);g.beginPath();g.moveTo(a.x,a.y+.6);g.lineTo(b.x,b.y-.6);g.stroke()}}}
-  if(!tex&&!MW){g.strokeStyle='rgba(25,8,8,.85)';g.lineWidth=sp.lips?1.1:.5;g.beginPath();g.moveTo(m0.x,m0.y);g.quadraticCurveTo(mc.x,mc.y,m1.x,m1.y);if(!orca)g.quadraticCurveTo(m1.x-.6,m1.y+.2,m1.x-1.2,m1.y+.9);g.stroke();}
+  if(!tex&&!MW&&!NM){g.strokeStyle='rgba(25,8,8,.85)';g.lineWidth=sp.lips?1.1:.5;g.beginPath();g.moveTo(m0.x,m0.y);g.quadraticCurveTo(mc.x,mc.y,m1.x,m1.y);if(!orca)g.quadraticCurveTo(m1.x-.6,m1.y+.2,m1.x-1.2,m1.y+.9);g.stroke();}
   if(sp.barbels){const a=pf(.022,.55);g.strokeStyle=shade(pal.belly,-.3);g.lineWidth=.45;g.beginPath();g.moveTo(a.x,a.y);g.quadraticCurveTo(a.x+.4,a.y+1.4,a.x-.3,a.y+2.8);g.stroke()}
   if(sp.tassels){g.strokeStyle=shade(pal.back,.18);g.lineWidth=.38;for(const s of [.01,.035,.06,.085,.11,.135]){const a=pf(s,.95);g.beginPath();g.moveTo(a.x,a.y);g.lineTo(a.x+.4,a.y+1.8);g.moveTo(a.x+.2,a.y+.9);g.lineTo(a.x-.6,a.y+1.6);g.stroke()}}
   if(sp.bigeye){g.strokeStyle='rgba(0,0,0,.3)';g.lineWidth=.4;const a=pf(.06,-.6),b=pf(.26,-.95);g.beginPath();g.moveTo(a.x,a.y);g.quadraticCurveTo((a.x+b.x)/2,a.y-1,b.x,b.y);g.stroke()}
-  g.restore();
+  g.restore();if(nmDraw)nmDraw();
   function drawCaudal(){const E={x:X(1),y:wv(1)+h*(cr(P.top,1)+cr(P.bot,1))/2};let bx=X(1)-X(.96),by=wv(1)-wv(.96);const bl=Math.hypot(bx,by)||1;bx/=bl;by/=bl;const nx=-by,ny=bx;
     const pdH=h*sp.pd,tl=sp.tail,uL=tl.u*L,lL=tl.l*L,Wp=(u,v)=>({x:E.x+bx*u*fs+nx*v,y:E.y+by*u*fs+ny*v});
     const Pt=Wp(-6,pdH*1.15),Pb=Wp(-6,-pdH*1.15);const p=new Path2D();p.moveTo(Pt.x,Pt.y);
