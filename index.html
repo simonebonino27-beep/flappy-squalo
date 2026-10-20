@@ -464,7 +464,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.69</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.70</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -560,7 +560,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.69</span>
+        <span class="beta big">BETA 0.70</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -1010,7 +1010,7 @@ const BLEN=25,biomeIdx=n=>Math.floor(n/BLEN)%BIOMES.length;
 const BIOBOSS={reef:['fugu','moray'],lagoon:['crab','medusa'],kelp:['grouper','marlin'],harbor:['trawler'],atlantis:['kraken'],wreck:['sub'],volcano:['eelking'],crystal:['spiderking','squid'],abyss:['angler','squid'],ice:['leopard','walrus','leviathan']};
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.69';
+const KEY='flappysqualo.beta1';const BETA='0.70';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1071,12 +1071,15 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   let eye={x:X(sp.eye.s),y:wv(sp.eye.s)+h*sp.eye.y};
   const TKt=sp.teeth||(orca||sp.head==='whale'||sp.basking||M.s0===0?null:'norm');
   const mY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),u=1-k,yt=h*cr(P.top,s),yb=h*cr(P.bot,s),yc=(yt+yb)/2,a=(yb-yt)/2;return wv(s)+clamp(u*u*(m0.y-wv(M.s0))+2*u*k*(mc.y-wv((M.s0+M.s1)/2))+k*k*(m1.y-wv(M.s1))-h*(.3*u+.06*k*(1-k)*4),yc-a*.2,yb-a*.04)};
+  const MW=!tex&&!open&&!!TKt,mC={x:X(M.s1),y:wv(M.s1)+h*Math.min(M.y,cr(P.bot,M.s1)*.55)};
+  const mUp=k=>{const a={x:X(M.s0)+.3,y:BY0(M.s0)-h*.24};return{x:a.x+(mC.x-a.x)*k,y:a.y+(mC.y-a.y)*k-h*.04*Math.sin(Math.PI*k)}};
+  const mLo=k=>{const s2=M.s0+(M.s1-M.s0)*k*.97,y=BY0(s2)-h*.07;return{x:X(s2),y:y+(mC.y-y)*Math.pow(k,2.2)}};
   if(over){
     const T2=sp.teeth||(orca||sp.head==='whale'||sp.mouth.s0===0?null:'norm');if(T2||(orca&&open)){const big=(T2==='ragged'?1.7:T2==='needle'?1.3:T2==='norm'?1.1:orca?.6:1.25)*(sp.h/8);const nT=T2==='ragged'?9:8;
       const tooth=(x,y,dir,len,wd)=>{const gr=g.createLinearGradient(x,y,x,y+dir*len);gr.addColorStop(0,'#d9d2c2');gr.addColorStop(.6,'#fbf8f0');gr.addColorStop(1,'#ffffff');g.fillStyle=gr;
         g.beginPath();g.moveTo(x-wd,y);g.quadraticCurveTo(x-wd*.3,y+dir*len*.6,x+(sp.teeth==='ragged'?(R()-.5)*.5:0),y+dir*len);g.quadraticCurveTo(x+wd*.3,y+dir*len*.6,x+wd,y);g.closePath();g.fill();g.strokeStyle='rgba(90,70,60,.35)';g.lineWidth=.1;g.stroke()};
       const ol=open?1:.55;
-      if(!open){const nn=10;for(let i=0;i<nn;i++){const k=(i+.5)/nn,s2=M.s0+(M.s1-M.s0)*k,bd=mBand(sp,k),x=X(s2),y=mY(s2),wd=(M.s1-M.s0)*L/nn*.5;if(bd<.3)continue;tooth(x,y-.1,1,bd*.92,wd);const k2=(i+1)/nn;if(k2<1){const s3=M.s0+(M.s1-M.s0)*k2,b2=mBand(sp,k2);if(b2>.3)tooth(X(s3),mY(s3)+b2+.1,-1,b2*.88,wd*.95)}}}else
+      if(MW){const nn=9;for(let i=0;i<nn;i++){const k=(i+.35)/nn,u=mUp(k),l=mLo(k),gp=l.y-u.y,wd=Math.abs(X(M.s0)-mC.x)/nn*.5;if(gp>.35)tooth(u.x,u.y-.05,1,gp*.78,wd);const k2=(i+.85)/nn,u2=mUp(k2),l2=mLo(k2),g2=l2.y-u2.y;if(g2>.35&&k2<.95)tooth(l2.x,l2.y+.05,-1,g2*.72,wd*.95)}}else
       for(let i=1;i<nT;i++){const k=i/nT;if(k>.85)break;const q=upAt(k);tooth(q.x,q.y-.1,1,(.7+(1-k)*.55)*big*ol,.36*big)}
       if(open)for(let i=1;i<nT-1;i++){const k=i/nT+.06;if(k>.8)break;const q=loAt(k);tooth(q.x,q.y+.1,-1,(.6+(1-k)*.5)*big,.34*big)}}
     if(sp.head!=='hammer'){const r=sp.eye.r*h;
@@ -1159,14 +1162,17 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   if(!orca&&!tex){g.fillStyle='rgba(10,10,10,.3)';for(let i=0;i<30;i++){const q=pf(.008+R()*.1,R()*1.1-.65);ell(g,q.x,q.y,.14,.14)}
     const ns=pf(.03,.5);g.fillStyle='rgba(15,10,10,.6)';ell(g,ns.x,ns.y,.6,.22,-.3)}
   // mouth
-  if((tex||!open)&&TKt){const bp=new Path2D();for(let i=0;i<=30;i++){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;i?bp.lineTo(X(s2),mY(s2)-.25):bp.moveTo(X(s2),mY(s2)-.25)}for(let i=30;i>=0;i--){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;bp.lineTo(X(s2),mY(s2)+mBand(sp,k))}bp.closePath();
+  if(MW){const mp=new Path2D();for(let i=0;i<=24;i++){const q=mUp(i/24);i?mp.lineTo(q.x,q.y):mp.moveTo(q.x,q.y)}for(let i=24;i>=0;i--){const q=mLo(i/24);mp.lineTo(q.x,q.y)}mp.closePath();
+    const mg=g.createLinearGradient(X(M.s0),0,mC.x,0);mg.addColorStop(0,'#3a0c10');mg.addColorStop(1,'#120304');g.fillStyle=mg;g.fill(mp);ID(mp,6);g.strokeStyle='rgba(20,6,8,.9)';g.lineWidth=.45;g.lineJoin='round';g.stroke(mp);
+    g.strokeStyle='rgba(20,8,10,.55)';g.lineWidth=.35;g.lineCap='round';g.beginPath();g.moveTo(mC.x+.2,mC.y);g.quadraticCurveTo(mC.x-L*.03,mC.y+h*.02,mC.x-L*.06,mC.y+h*.12);g.stroke()}
+  if(tex&&TKt){const bp=new Path2D();for(let i=0;i<=30;i++){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;i?bp.lineTo(X(s2),mY(s2)-.25):bp.moveTo(X(s2),mY(s2)-.25)}for(let i=30;i>=0;i--){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;bp.lineTo(X(s2),mY(s2)+mBand(sp,k))}bp.closePath();
     g.fillStyle='#1d0608';g.fill(bp);g.strokeStyle='rgba(10,2,4,.9)';g.lineWidth=.35;g.stroke(bp)}
   if(open){const ip=new Path2D();ip.moveTo(m0.x,m0.y);for(let k=.05;k<=1.001;k+=.05){const q=upAt(k);ip.lineTo(q.x,q.y)}for(let k=1;k>=-.001;k-=.05){const q=loAt(k);ip.lineTo(q.x,q.y)}ip.closePath();
     const mg=g.createLinearGradient(m0.x,m0.y,m1.x,m1.y);mg.addColorStop(0,'#3a0c10');mg.addColorStop(1,'#0e0203');g.fillStyle=mg;g.fill(ip);ID(ip,6);
     g.strokeStyle='rgba(120,40,45,.55)';g.lineWidth=.35;g.beginPath();for(let k=0;k<=1.001;k+=.05){const q=upAt(k);k?g.lineTo(q.x,q.y+.25):g.moveTo(q.x,q.y+.25)}g.stroke();
     g.beginPath();for(let k=0;k<=1.001;k+=.05){const q=loAt(k);k?g.lineTo(q.x,q.y-.25):g.moveTo(q.x,q.y-.25)}g.stroke();
     if(!sp.teeth&&(sp.head==='whale'||sp.basking)){g.strokeStyle='rgba(210,200,190,.35)';g.lineWidth=.22;for(let k=.1;k<.95;k+=.07){const a=upAt(k),b=loAt(k);g.beginPath();g.moveTo(a.x,a.y+.6);g.lineTo(b.x,b.y-.6);g.stroke()}}}
-  if(!tex){g.strokeStyle='rgba(25,8,8,.85)';g.lineWidth=sp.lips?1.1:.5;g.beginPath();g.moveTo(m0.x,m0.y);g.quadraticCurveTo(mc.x,mc.y,m1.x,m1.y);if(!orca)g.quadraticCurveTo(m1.x-.6,m1.y+.2,m1.x-1.2,m1.y+.9);g.stroke();}
+  if(!tex&&!MW){g.strokeStyle='rgba(25,8,8,.85)';g.lineWidth=sp.lips?1.1:.5;g.beginPath();g.moveTo(m0.x,m0.y);g.quadraticCurveTo(mc.x,mc.y,m1.x,m1.y);if(!orca)g.quadraticCurveTo(m1.x-.6,m1.y+.2,m1.x-1.2,m1.y+.9);g.stroke();}
   if(sp.barbels){const a=pf(.022,.55);g.strokeStyle=shade(pal.belly,-.3);g.lineWidth=.45;g.beginPath();g.moveTo(a.x,a.y);g.quadraticCurveTo(a.x+.4,a.y+1.4,a.x-.3,a.y+2.8);g.stroke()}
   if(sp.tassels){g.strokeStyle=shade(pal.back,.18);g.lineWidth=.38;for(const s of [.01,.035,.06,.085,.11,.135]){const a=pf(s,.95);g.beginPath();g.moveTo(a.x,a.y);g.lineTo(a.x+.4,a.y+1.8);g.moveTo(a.x+.2,a.y+.9);g.lineTo(a.x-.6,a.y+1.6);g.stroke()}}
   if(sp.bigeye){g.strokeStyle='rgba(0,0,0,.3)';g.lineWidth=.4;const a=pf(.06,-.6),b=pf(.26,-.95);g.beginPath();g.moveTo(a.x,a.y);g.quadraticCurveTo((a.x+b.x)/2,a.y-1,b.x,b.y);g.stroke()}
