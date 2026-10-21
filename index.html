@@ -464,7 +464,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
       <div class="mtop"><div class="wallets"><div class="wallet"><img class="fi" alt="Pesciolini"><b id="mFish">0</b></div><button class="wallet gemw" data-act="shop" data-tab="bonus" data-feat="gems">💎<b class="gemv">0</b></button></div><div class="mtop-r"><button class="btn sm inboxb" data-act="inbox" data-feat="inbox" aria-label="Posta">📬<span class="badge" id="ibBadge" hidden>0</span></button><button class="btn sm fbtop" data-act="feedback" aria-label="Feedback">💬</button><button class="btn sm mute" data-act="audio" id="audioBtn" aria-label="Opzioni">⚙️</button></div></div>
       <header class="logo">
         <span class="l1">FLAPPY</span>
-        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.75</span>
+        <span class="l2">SHARK</span><svg class="lwave" viewBox="0 0 120 10" aria-hidden="true"><path d="M0 5 Q7.5 0 15 5 T30 5 T45 5 T60 5 T75 5 T90 5 T105 5 T120 5" fill="none" stroke="#8fdbe8" stroke-width="2.2" stroke-linecap="round"/></svg><span class="beta">BETA 0.76</span>
       </header>
       <div class="mpanel">
         <div class="sharkcard"><div class="scl"><span class="rar" id="mRar"></span><b id="mName"></b><i id="mLatin"></i></div><button class="btn sm" data-act="shop" data-tab="sharks" data-feat="sharks">Cambia</button></div>
@@ -560,7 +560,7 @@ input[type=text],input:not([type]),textarea{font-size:16px!important}html,body{t
 
     <section id="welcome" class="screen full" hidden>
       <div class="list wel">
-        <span class="beta big">BETA 0.75</span>
+        <span class="beta big">BETA 0.76</span>
         <h2 class="welh">Benvenuto tra i betatester</h2>
         <p class="note">Flappy Shark è ancora in prova. Gioca normalmente e tieni d'occhio queste cose:</p>
         <ul class="welul">
@@ -1011,7 +1011,7 @@ const BLEN=25,biomeIdx=n=>Math.floor(n/BLEN)%BIOMES.length;
 const BIOBOSS={reef:['fugu','moray'],lagoon:['crab','medusa'],kelp:['grouper','marlin'],harbor:['trawler'],atlantis:['kraken'],wreck:['sub'],volcano:['eelking'],crystal:['spiderking','squid'],abyss:['angler','squid'],ice:['leopard','walrus','leviathan']};
 
 /* =============================================== SAVE */
-const KEY='flappysqualo.beta1';const BETA='0.75';
+const KEY='flappysqualo.beta1';const BETA='0.76';
 const DEF={fish:0,totalFish:0,best:0,xp:0,owned:['grigio'],sel:'grigio',skins:['naturale'],skin:'naturale',morphs:[],morph:{},up:{value:0,magnet:0,shield:0,gold:0,fins:0,charge:0,teeth:0,frenzy:0,combo:0,power:0,glide:0,revive:0,boss:0,xp:0},inv:{},invOff:{},tro:{},st:{runs:0,gold:0,zero:0,abil:0,claimed:0},mute:false,music:true,vol:{jump:50,music:50,fish:50,sfx:50},day:null,hist:[],kills:{},seen:{},bossRot:0,abAuto:false,gems:0,gfx:'auto',gfxLow:false,wheelDay:null,rvTok:0};
 /* ---- backup: mirror save in IndexedDB + exportable save code */
 function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('flappysqualo',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
@@ -1052,7 +1052,7 @@ function profOf(sp){if(sp._p)return sp._p;const b=sp.blunt,n=sp.noseY,be=sp.bell
   sp._p={top:sp.topP||[[0,n],[.03,n-.1-.3*b],[.1,-.47-.2*b],[.2,-.68-.12*b],[.3,-.83-.05*b],[.4,-.93],[.5,-.99],[.56,-1],[.66,-.88],[.78,-.64],[.9,-.38],[1,-sp.pd]],
     bot:sp.botP||[[0,n],[.03,n+.08+.22*b],[.1,.44+.12*b],[.2,.76*be],[.3,.93*be],[.4,.98*be],[.5,.92*be],[.6,.78*be],[.72,.57],[.86,.34],[1,sp.pd]]};return sp._p}
 const mBand=(sp,k)=>sp.h*.26*Math.pow(Math.sin(Math.PI*clamp(k,0,1)),.5);
-const idleJaw=sp=>sp.boss?0:(sp.head==='whale'||sp.basking)?.12:sp.head==='orca'?.15:.55;
+const idleJaw=sp=>sp.boss?0:(sp.head==='whale'||sp.basking)?.12:sp.head==='orca'?.15:.5;
 
 /* Draws the shark in local coords (nose +x). pass 'base' paints albedo + part-id map; pass 'over' paints teeth and eyes on top of the lit result. */
 function drawSharkPro(g,sp,pal,ph,o={}){
@@ -1072,7 +1072,7 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   const jt=h*.17,loAt=k=>{const s=M.s0+(M.s1-M.s0)*k,q={x:X(s)-.15,y:BY(s)-jt*(1-k*.5)},w=k*k*k;return{x:q.x+(m1.x-q.x)*w,y:q.y+(m1.y-q.y)*w}};
   let eye={x:X(sp.eye.s),y:wv(sp.eye.s)+h*sp.eye.y};
   const TKt=sp.teeth||(orca||sp.head==='whale'||sp.basking||M.s0===0?null:'norm');
-  const mY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),u=1-k,yt=h*cr(P.top,s),yb=h*cr(P.bot,s),yc=(yt+yb)/2,a=(yb-yt)/2;return wv(s)+clamp(u*u*(m0.y-wv(M.s0))+2*u*k*(mc.y-wv((M.s0+M.s1)/2))+k*k*(m1.y-wv(M.s1))-h*(.3*u+.06*k*(1-k)*4),yc-a*.2,yb-a*.04)};
+  const mY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),u=1-k,yt=h*cr(P.top,s),yb=h*cr(P.bot,s),yc=(yt+yb)/2,a=(yb-yt)/2;const A=m0.y-wv(M.s0)-h*.12,B=m1.y-wv(M.s1)+h*.12;return wv(s)+clamp(A+(B-A)*k+h*.03*Math.sin(Math.PI*k),yc-a*.2,yb-a*.04)};
   const nA=jaw*1.05,nS0=M.s0*.6,nC={x:X(M.s1+.01),y:wv(M.s1)+h*.2},nU0={x:X(nS0),y:BY0(nS0)-h*.07};
   const nU=k=>({x:nU0.x+(nC.x-nU0.x)*k,y:nU0.y+(nC.y-nU0.y)*k+h*.07*Math.sin(Math.PI*k)});
   const nR=p=>{const dx=p.x-nC.x,dy=p.y-nC.y,c=Math.cos(nA),sn=Math.sin(nA);return{x:nC.x+dx*c-dy*sn,y:nC.y+dx*sn+dy*c}};
@@ -1175,8 +1175,7 @@ function drawSharkPro(g,sp,pal,ph,o={}){
   if(MW){const mp=new Path2D();for(let i=0;i<=24;i++){const q=mUp(i/24);i?mp.lineTo(q.x,q.y):mp.moveTo(q.x,q.y)}for(let i=24;i>=0;i--){const q=mLo(i/24);mp.lineTo(q.x,q.y)}mp.closePath();
     const mg=g.createLinearGradient(X(M.s0),0,mC.x,0);mg.addColorStop(0,'#3a0c10');mg.addColorStop(1,'#120304');g.fillStyle=mg;g.fill(mp);ID(mp,6);g.strokeStyle='rgba(20,6,8,.9)';g.lineWidth=.45;g.lineJoin='round';g.stroke(mp);
     g.strokeStyle='rgba(20,8,10,.55)';g.lineWidth=.35;g.lineCap='round';g.beginPath();g.moveTo(mC.x+.2,mC.y);g.quadraticCurveTo(mC.x-L*.03,mC.y+h*.02,mC.x-L*.06,mC.y+h*.12);g.stroke()}
-  if(tex&&TKt){const bp=new Path2D();for(let i=0;i<=30;i++){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;i?bp.lineTo(X(s2),mY(s2)-.25):bp.moveTo(X(s2),mY(s2)-.25)}for(let i=30;i>=0;i--){const k=i/30,s2=M.s0+(M.s1-M.s0)*k;bp.lineTo(X(s2),mY(s2)+mBand(sp,k))}bp.closePath();
-    g.fillStyle='#1d0608';g.fill(bp);g.strokeStyle='rgba(10,2,4,.9)';g.lineWidth=.35;g.stroke(bp)}
+  if(tex&&TKt){const ln2=d=>{g.beginPath();for(let i=0;i<=30;i++){const s2=M.s0+(M.s1-M.s0)*i/30;i?g.lineTo(X(s2),mY(s2)+d):g.moveTo(X(s2),mY(s2)+d)}g.stroke()};g.lineCap='round';g.strokeStyle='#d9808c';g.lineWidth=h*.09;ln2(-h*.03);ln2(h*.03);g.strokeStyle='rgba(30,5,8,.9)';g.lineWidth=h*.03;ln2(0)}
   let nmDraw=null;if(NM)nmDraw=()=>{const bs=s2=>({x:X(s2),y:BY0(s2)}),S1=M.s1+.06;
     const dk=new Path2D();for(let i=0;i<=20;i++){const q=nU(i/20);i?dk.lineTo(q.x,q.y):dk.moveTo(q.x,q.y)}for(let i=20;i>=0;i--){const q=nL(i/20);dk.lineTo(q.x,q.y)}
     for(let i=0;i<=12;i++){const q=bs(nS0+(S1-nS0)*i/12);dk.lineTo(q.x,q.y)}dk.closePath();
@@ -1260,7 +1259,7 @@ const BBX={};function bossBB(k){if(BBX[k])return BBX[k];const c=document.createE
 function buildBossFrame(sp,ps,ph){const ex=sharkExtent(sp),Wl=ex.front+ex.back+4,Hl=ex.up+ex.down+4,c=document.createElement('canvas');c.width=Math.ceil(Wl*ps);c.height=Math.ceil(Hl*ps);const g=c.getContext('2d');
   const bb=bossBB(sp.boss),bw=bb.x1-bb.x0,bh=bb.y1-bb.y0,s=Math.min(sp.L*1.15/bw,sp.h*3.2/bh);g.scale(ps,ps);g.translate(ex.back+2,ex.up+2);g.rotate(Math.sin(ph)*.04);g.scale(-s,s);g.translate(-(bb.x0+bb.x1)/2,-(bb.y0+bb.y1)/2);
   try{if(BDRAW[sp.boss])BDRAW[sp.boss](g,ph);else drawBeastAt(g,'b_'+sp.boss,0,0,ph)}catch(e){}return{c,ox:ex.back+2,oy:ex.up+2,w:Wl,h:Hl,pal:{alpha:1,glow:null}}}
-function buildShark(sp,skin,ps,ph,jaw){if(sp.boss)return buildBossFrame(sp,ps,ph);return buildShark2D(sp,skin,ps,ph,jaw)}
+function buildShark(sp,skin,ps,ph,jaw){if(sp.boss)return buildBossFrame(sp,ps,ph);const r3=buildShark3D(sp,skin,ps,ph,jaw);if(r3)return r3;return buildShark2D(sp,skin,ps,ph,jaw)}
 function buildShark2D(sp,skin,ps,ph,jaw){const pal=palette(sp,skin),ex=sharkExtent(sp),Wl=ex.front+ex.back+4,Hl=ex.up+ex.down+4,cw=Math.ceil(Wl*ps),ch=Math.ceil(Hl*ps);
   const c=document.createElement('canvas');c.width=cw;c.height=ch;const g=c.getContext('2d');const ci=document.createElement('canvas');ci.width=cw;ci.height=ch;const gi=ci.getContext('2d');
   for(const q of [g,gi]){q.scale(ps,ps);q.translate(ex.back+2,ex.up+2)}
@@ -1299,7 +1298,7 @@ function buildRig(sp,skin){const T=THREE,G=glInit(),pal=palette(sp,skin),L=sp.L,
   const X=s=>L/2-s*L,TY=s=>h*cr(P.top,s),BY=s=>h*cr(P.bot,s),M=sp.mouth;
   const uvOf=(x,y2)=>[(x+ex.back+2)/Wl,1-(y2+ex.up+2)/Hl];
   const m0={x:X(M.s0),y:BY(M.s0)-.35},m1={x:X(M.s1),y:h*M.y},mc={x:X((M.s0+M.s1)/2),y:BY((M.s0+M.s1)/2)-.3};
-  const mouthY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),u=1-k;return u*u*m0.y+2*u*k*mc.y+k*k*m1.y-h*(.3*u+.06*k*(1-k)*4)};
+  const mouthY=s=>{const k=clamp((s-M.s0)/(M.s1-M.s0),0,1),A=m0.y-h*.12,B=m1.y+h*.12;return A+(B-A)*k+h*.03*Math.sin(Math.PI*k)};
   const canJaw=!!(sp.teeth||orca||sp.head==='whale'||sp.basking||true);
   const wF=sp.wF||(sp.belly<.8?1.35:sp.head==='whale'?1.05:.82);
   const group=new T.Group();const parts=[];
@@ -1322,7 +1321,7 @@ function buildRig(sp,skin){const T=THREE,G=glInit(),pal=palette(sp,skin),L=sp.L,
   {const ci=pos.length/3;pos.push(X(1),-(TY(1)+BY(1))/2,0);const t=uvOf(X(1),(TY(1)+BY(1))/2);uv.push(t[0],t[1]);low.push(0);const base=(NS-1)*RV;for(let j=0;j<RV-1;j++)idx.push(base+j,ci,base+j+1)}
   const bg=new T.BufferGeometry();bg.setAttribute('position',new T.Float32BufferAttribute(pos,3));bg.setAttribute('uv',new T.Float32BufferAttribute(uv,2));bg.setIndex(idx);bg.computeVertexNormals();
   const body=new T.Mesh(bg,bodyMat);group.add(body);parts.push({mesh:body,base:Float32Array.from(pos),low:Uint8Array.from(low),normals:true});
-  {const bb=new T.BufferGeometry();bb.setAttribute('position',bg.getAttribute('position'));bb.setIndex(bidx);const dk=new T.MeshBasicMaterial({color:0x1c0306,side:T.DoubleSide}),br=new T.Mesh(bb,bodyMat);br.userData.noOl=true;group.add(br);parts.push({mesh:br,shared:true,dk,lt:bodyMat})}
+  {const bb=new T.BufferGeometry();bb.setAttribute('position',bg.getAttribute('position'));bb.setIndex(bidx);const dk=new T.MeshBasicMaterial({color:0x2a0509,side:T.DoubleSide}),br=new T.Mesh(bb,bodyMat);br.userData.noOl=true;group.add(br);parts.push({mesh:br,shared:true,dk,lt:bodyMat})}
   const halfW=(s,y2)=>{const yt=TY(s),yb=BY(s),yc=(yt+yb)/2,a=Math.max(.001,(yb-yt)/2),w=a*wF;const k=clamp((y2-yc)/a,-1,1);return w*Math.sqrt(Math.max(0,1-k*k))};
   // ---- fins
   const ext=(pts,thick,mat,plane)=>{const sh=new T.Shape();pts.forEach((p,i)=>i?sh.lineTo(p[0],-p[1]):sh.moveTo(p[0],-p[1]));
@@ -1362,7 +1361,7 @@ function buildRig(sp,skin){const T=THREE,G=glInit(),pal=palette(sp,skin),L=sp.L,
   if(TK||orca){const tp=[],big=(TK==='ragged'?1.6:TK==='needle'?1.25:TK==='norm'?1.05:orca?.7:1.15)*(h/8),n=TK==='ragged'?10:10;
     const cone=(arr,bx,by,bz,dy,dz,r,len)=>{const seg=6,tipx=bx,tipy=by+dy*len,tipz=bz+dz*len;for(let k=0;k<seg;k++){const a1=k/seg*Math.PI*2,a2=(k+1)/seg*Math.PI*2;arr.push(bx+Math.cos(a1)*r,by,bz+Math.sin(a1)*r,bx+Math.cos(a2)*r,by,bz+Math.sin(a2)*r,tipx,tipy,tipz)}};
     const big2=big*1.75,up=[],lo=[],bj=bnd.filter(q=>q.s>M.s0+.004&&q.s<M.s1-.01);for(const side of [1,-1])for(let i=1;i<n;i++){const k=i/n;if(k>.9)break;const q=bj[Math.min(bj.length-1,Math.floor(k*bj.length))];if(!q)continue;const ln=(.75+(1-k)*.5)*big2,rr=bj.length>1?Math.abs(bj[0].x-bj[bj.length-1].x)/n*.52:.42*big2,z=side*q.z*.97;
-      const bdA=mBand(sp,(q.s-M.s0)/(M.s1-M.s0));cone(up,q.x,-q.y+.05,z,-1,0,rr,Math.min(ln,bdA*.95)*(sp.teeth==='ragged'?1+(i%2)*.2:1));const q2=bj[Math.min(bj.length-1,Math.floor((k+.5/n)*bj.length))]||q,bdB=mBand(sp,(q2.s-M.s0)/(M.s1-M.s0));if(bdB>.3)cone(lo,q2.x,-q2.y-bdB+.05,side*q2.z*.97,1,0,rr*.95,Math.min(ln*.9,bdB*.9))}
+      cone(up,q.x,-q.y-h*.03,z,-1,0,rr*.8,ln*.9*(sp.teeth==='ragged'?1+(i%2)*.2:1));const q2=bj[Math.min(bj.length-1,Math.floor((k+.5/n)*bj.length))]||q;cone(lo,q2.x,-q2.y+h*.03,side*q2.z*.97,1,0,rr*.75,ln*.75)}
     for(const [arr,isLow] of [[up,0],[lo,1]]){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(arr,3));g.computeVertexNormals();const m=new T.Mesh(g,toothMat);group.add(m);parts.push({mesh:m,base:Float32Array.from(arr),low:isLow?2:0,normals:true})}}
   // head specials
   if(sp.head==='hammer'){const cx=X(.03),cy=-(TY(.03)+BY(.03))/2+h*.05,span=h*2.3,dep=L*.07;const sh=new T.Shape();sh.moveTo(dep*.6,0);sh.quadraticCurveTo(dep*.9,span*.6,dep*.2,span);sh.quadraticCurveTo(-dep*.3,span*1.05,-dep*.5,span*.85);sh.quadraticCurveTo(-dep*.2,span*.3,-dep*.9,0);
@@ -1570,7 +1569,7 @@ function paintCrystal(g,R){const pl=rockPillar(g,R,['#151230','#2e2856','#3c3570
   for(let y=70;y<TEXH-20;y+=26+R()*30){const side=R()<.5?-1:1,e=pl.edge(y);cr(side<0?e[1]+2:e[2]-2,y,6+R()*10,2+R()*2.5,side*(.9+R()*.4),C[(R()*4)|0])}}
 const OBS={lagoon:{bot:paintLagoon,top:'flip'},atlantis:{bot:paintColumn,top:'flip'},volcano:{bot:paintLava,top:'flip'},crystal:{bot:paintCrystal,top:'flip'},reef:{bot:paintReef,top:'flip'},kelp:{bot:paintKelp,top:'flip'},harbor:{bot:paintPiling,top:paintNet},wreck:{bot:paintMast,top:paintHull},abyss:{bot:paintChimney,top:paintBasalt},ice:{bot:paintFrost,top:paintBerg}};
 let BAC=null;
-function paintedAt(g,k,x,y,PH,raw){const m=g.getTransform(),a=Math.max(1,Math.min(4,Math.hypot(m.a,m.b))),B=70,S=Math.ceil(B*2*a);if(!BAC){BAC=document.createElement('canvas')}if(BAC.width<S){BAC.width=BAC.height=S}
+function paintedAt(g,k,x,y,PH,raw){if(!PAINT_ON)return raw(g,k,x,y,PH);const m=g.getTransform(),a=Math.max(1,Math.min(4,Math.hypot(m.a,m.b))),B=70,S=Math.ceil(B*2*a);if(!BAC){BAC=document.createElement('canvas')}if(BAC.width<S){BAC.width=BAC.height=S}
   const x2=BAC.getContext('2d');x2.stroke=PFXG.stroke;x2.setTransform(1,0,0,1,0,0);x2.clearRect(0,0,S,S);x2.setTransform(a,0,0,a,B*a,B*a);try{raw(x2,k,0,0,PH)}catch(e){}
   x2.setTransform(a,0,0,a,B*a,B*a);x2.globalAlpha=1;const big=k.startsWith('b_');shadeAtop(x2,0,0,big?14:(FXSZ[k]||[34,9])[1],{box:B});g.drawImage(BAC,0,0,S,S,x-B,y-B,B*2,B*2)}
 /* =============================================== PAINTED STYLE: volume, light and soft outlines for animals, obstacles and scenery */
@@ -1592,7 +1591,8 @@ function shadeAtop(g,cx,cy,rb,o={}){g.save();g.globalCompositeOperation='source-
   const rg=g.createRadialGradient(cx-rb*.35,cy-rb*.55,0,cx-rb*.35,cy-rb*.55,rb*1.1);rg.addColorStop(0,`rgba(255,255,255,${o.spec??.2})`);rg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=rg;g.fillRect(cx-R,cy-R,R*2,R*2);
   if(o.tex!==false){g.globalAlpha=o.tex||.9;g.fillStyle=noisePat(g);g.fillRect(cx-R,cy-R,R*2,R*2)}
   g.restore()}
-function fxPaint(cx,cy,R,rb,draw,o){const k=Math.min(2.5,Math.max(1,RS)),S=Math.ceil(R*2*k);if(PFXC.width<S||PFXC.height<S){PFXC.width=PFXC.height=Math.max(S,PFXC.width)}
+const PAINT_ON=false;
+function fxPaint(cx,cy,R,rb,draw,o){if(!PAINT_ON){ctx.save();try{draw(ctx)}catch(e){}ctx.restore();return}const k=Math.min(2.5,Math.max(1,RS)),S=Math.ceil(R*2*k);if(PFXC.width<S||PFXC.height<S){PFXC.width=PFXC.height=Math.max(S,PFXC.width)}
   const g=PFXG;g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;g.globalCompositeOperation='source-over';g.clearRect(0,0,S,S);g.setTransform(k,0,0,k,(R-cx)*k,(R-cy)*k);
   try{draw(g)}catch(e){}g.setTransform(k,0,0,k,(R-cx)*k,(R-cy)*k);g.globalAlpha=1;shadeAtop(g,cx,cy,rb,Object.assign({box:R},o||{}));
   ctx.drawImage(PFXC,0,0,S,S,cx-R,cy-R,R*2,R*2)}
@@ -2433,7 +2433,7 @@ const B2={
   draw:(g,x,y,ph,h)=>{glowAt(g,x,y,80,'#a02040',.18);g.save();g.translate(x,y+22);g.scale(4,4);dOcto(g,0,0,ph,true);g.restore();hurtG(g,x,y,h)},refl:(g,ph)=>dBlueOct(g,0,0,ph,false),port:(g,x,y)=>{g.save();g.translate(x,y+11);g.scale(1.5,1.5);dOcto(g,0,0,1.2,true);g.restore()},
   b:{does:'Frusta tentacoli enormi in alto e in basso lungo le linee rosse, e ogni tanto spegne la luce con l\'inchiostro.',kill:'Tocca i <b>polpetti</b> col cerchio dorato per rispedirglieli addosso.'}},
  fugu:{name:'Re Fugu',pos:(b,en,fl)=>{b.px=W-36+(1-en)*110+fl*150;b.py=H*.5+Math.sin(b.t*.7)*80},
-  atk:b=>{if(Math.random()<.55){const a0=Math.atan2(shark.y-b.py,shark.x-b.px);for(let i=-2;i<=2;i++)b.atts.push({kind:'bullet',sp:'spine',x:b.px-20,y:b.py,vx:Math.cos(a0+i*.22)*165,vy:Math.sin(a0+i*.22)*165,t:0,state:'go'})}
+  atk:b=>{if(Math.random()<.55){const a0=Math.atan2(shark.y-b.py,shark.x-b.px);for(let i=-2;i<=2;i++)b.atts.push({kind:'bullet',sp:'spine',x:b.px-20,y:b.py,vx:Math.cos(a0+i*.34)*145,vy:Math.sin(a0+i*.34)*145,t:0,state:'go'})}
     else b.atts.push({kind:'net',sp:'bubbles',x:W+30,gy:clamp(shark.y+(Math.random()-.5)*120,90,GROUND-90),gap:Math.max(100,124-b.tier*4),state:'go',t:0})},
   draw:(g,x,y,ph,h)=>{const inf=.5+Math.sin(ph*1.5)*.5;g.save();g.translate(x,y);g.scale(3.6,3.6);dPuffer(g,0,0,inf,ph);crownAt(g,0,-6-inf*6.5,1);g.restore();hurtG(g,x,y,h)},refl:(g,ph)=>dPuffer(g,0,0,.4,ph),port:(g,x,y)=>{g.save();g.translate(x,y+2);g.scale(1.3,1.3);dPuffer(g,0,0,1,1.2);crownAt(g,0,-12,1);g.restore()},
   b:{does:'Spara raffiche di spine a ventaglio e manda muri di bolle con un solo varco.',kill:'Tocca i <b>pesci palla</b> col cerchio dorato: tornano a colpirlo.'}},
@@ -3206,12 +3206,12 @@ function bgWhale(g,ph){const OL='#0c1622',t=Math.sin(ph*1.4)*5;g.lineJoin='round
   g.strokeStyle=OL;g.lineWidth=1.2;g.beginPath();g.moveTo(-89,3);g.quadraticCurveTo(-70,7,-52,4);g.stroke();
   g.fillStyle='#0b0f14';g.beginPath();g.arc(-56,0,1.8,0,7);g.fill();g.fillStyle='#fff';g.beginPath();g.arc(-56.6,-.6,.6,0,7);g.fill()}
 function drawBig(){const c=bigCreature;if(!c)return;const b=BIOMES[c.bi],kind=({reef:'turtle',lagoon:'dolphin',kelp:'manta',harbor:'dolphin',atlantis:'grouper',wreck:'grouper',volcano:'angler',crystal:'manta',abyss:'angler',ice:'whale'})[b.id]||'turtle';
-  if(!BGC){BGC=document.createElement('canvas');BGG=BGC.getContext('2d');BGG.stroke=PFXG.stroke}
+  if(!BGC){BGC=document.createElement('canvas');BGG=BGC.getContext('2d');if(PAINT_ON)BGG.stroke=PFXG.stroke}
   const k=Math.min(3,RS),OW=280,OH=150;if(BGC.width!==Math.round(OW*k)){BGC.width=Math.round(OW*k);BGC.height=Math.round(OH*k)}
   const g=BGG;g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,BGC.width,BGC.height);g.setTransform(k,0,0,k,0,0);g.translate(OW/2,OH/2);g.scale(c.s,c.s);g.globalCompositeOperation='source-over';
   const ph=t+c.ph;if(kind==='turtle')bgTurtle(g,ph);else if(kind==='manta'){g.scale(2.6,2.6);dManta(g,0,0,ph*.6)}else if(kind==='dolphin'){bgDolphin(g,ph,-14);g.translate(30,26);g.scale(.85,.85);bgDolphin(g,ph+1.3,0)}
   else if(kind==='grouper')bgGrouper(g,ph);else if(kind==='angler')bgAngler(g,ph);else bgWhale(g,ph);
-  g.setTransform(k,0,0,k,0,0);shadeAtop(g,OW/2,OH/2,24*c.s,{box:150,hi:.3,lo:.55,spec:.18,tex:.9});
+  if(PAINT_ON){g.setTransform(k,0,0,k,0,0);shadeAtop(g,OW/2,OH/2,24*c.s,{box:150,hi:.3,lo:.55,spec:.18,tex:.9})}
   g.setTransform(1,0,0,1,0,0);g.globalCompositeOperation='source-atop';g.fillStyle=rgba(b.mid,.38);g.fillRect(0,0,BGC.width,BGC.height);g.globalCompositeOperation='source-over';
   ctx.save();ctx.globalAlpha=.88;ctx.drawImage(BGC,c.x-OW/2,c.y-OH/2+Math.sin(t*.8+c.ph)*4,OW,OH);ctx.restore()}
 
@@ -3671,7 +3671,7 @@ function fit(){const app=$('#app');const aw=app.clientWidth,ah=app.clientHeight-
   const dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);RS=cv.width/W;FX.size();
   if(!fit.done){TRS=Math.min(3,RS);fit.done=true}}
 window.addEventListener('resize',fit);fit();guideInit();
-FISH_N=makeFish(false);FISH_G=makeFish(true);for(const fc of [FISH_N,FISH_G]){try{const g=fc.getContext('2d'),sc=fc.width/18;g.setTransform(sc,0,0,sc,9*sc,5*sc);shadeAtop(g,0,0,3.6,{box:10,hi:.3,lo:.45,tex:.6})}catch(e){}}
+FISH_N=makeFish(false);FISH_G=makeFish(true);if(PAINT_ON)for(const fc of [FISH_N,FISH_G]){try{const g=fc.getContext('2d'),sc=fc.width/18;g.setTransform(sc,0,0,sc,9*sc,5*sc);shadeAtop(g,0,0,3.6,{box:10,hi:.3,lo:.45,tex:.6})}catch(e){}}
 ICON=(()=>{const[c,g]=texCanvas(36,20,2);g.drawImage(FISH_N,0,0,36,20);return c.toDataURL()})();
 document.querySelectorAll('img.fi').forEach(i=>i.src=ICON);
 queueBiome(0);while(texQueue.length){const q=texQueue.shift();getTex(q[0],q[1],q[2])}getLayer(0,'far');getLayer(0,'mid');getBed(0);queueBiome(1);
